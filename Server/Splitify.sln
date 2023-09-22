@@ -11,6 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splitify.BuildingBlocks.Domain", "src\BuildingBlocks\Splitify.BuildingBlocks.Domain\Splitify.BuildingBlocks.Domain.csproj", "{D2B8ED19-65CB-4826-831A-B78A22E67A7B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Redirect", "Redirect", "{E92869A2-9657-4FA9-AD58-E24F051B7D01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splitify.Redirect.Domain", "src\Services\Redirect\Splitify.Redirect.Domain\Splitify.Redirect.Domain.csproj", "{376150E7-F105-4C62-91DD-7D848CD92AB5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,10 @@ Global
 		{D2B8ED19-65CB-4826-831A-B78A22E67A7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2B8ED19-65CB-4826-831A-B78A22E67A7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2B8ED19-65CB-4826-831A-B78A22E67A7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{376150E7-F105-4C62-91DD-7D848CD92AB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{376150E7-F105-4C62-91DD-7D848CD92AB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{376150E7-F105-4C62-91DD-7D848CD92AB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{376150E7-F105-4C62-91DD-7D848CD92AB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -29,6 +37,8 @@ Global
 		{ADD715CE-B84A-4182-89BE-800AF6D143A8} = {E815BD78-837E-4F3F-AE59-91AFBFE2A897}
 		{573AB0FC-414B-477E-A97A-22AE0B191520} = {E815BD78-837E-4F3F-AE59-91AFBFE2A897}
 		{D2B8ED19-65CB-4826-831A-B78A22E67A7B} = {573AB0FC-414B-477E-A97A-22AE0B191520}
+		{E92869A2-9657-4FA9-AD58-E24F051B7D01} = {ADD715CE-B84A-4182-89BE-800AF6D143A8}
+		{376150E7-F105-4C62-91DD-7D848CD92AB5} = {E92869A2-9657-4FA9-AD58-E24F051B7D01}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {026026E1-C7D3-43B3-AFE1-C6A8D16549C1}

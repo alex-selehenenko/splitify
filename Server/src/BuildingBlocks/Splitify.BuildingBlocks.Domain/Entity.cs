@@ -8,12 +8,19 @@ namespace Splitify.BuildingBlocks.Domain
 
         public string Id { get; }
 
+        public DateTime Created { get; }
+
+        public DateTime Updated { get; protected set; }
+
         public IReadOnlyCollection<IDomainEvent> Events => _events;
 
-        public Entity(string id)
+        public Entity(string id, DateTime created, DateTime updated)
         {
             EnsureIdIsValid(id);
+            
             Id = id;
+            Created = created;
+            Updated = updated;
         }
 
         public void AddDomainEvent(IDomainEvent ev)
@@ -33,14 +40,9 @@ namespace Splitify.BuildingBlocks.Domain
 
         private static void EnsureIdIsValid(string id)
         {
-            if (string.IsNullOrEmpty(id))
+            if (string.IsNullOrWhiteSpace(id))
             {
                 throw new ArgumentNullException(nameof(id));
-            }
-
-            if (id.Length < 1)
-            {
-                throw new ArgumentException("length was less than 1", nameof(id));
             }
         }
     }
