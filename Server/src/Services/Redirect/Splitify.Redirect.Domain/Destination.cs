@@ -8,7 +8,7 @@ namespace Splitify.Redirect.Domain
 
         public int UniqueVisitors { get; private set; }
 
-        public Destination(
+        internal Destination(
             string id,
             DateTime created,
             DateTime updated,
@@ -23,5 +23,8 @@ namespace Splitify.Redirect.Domain
         {
             UniqueVisitors++;
         }
+
+        public static Destination Instance(string url, DateTime now) =>
+            new(Guid.NewGuid().ToString(), now, now, url, 0);
     }
 }

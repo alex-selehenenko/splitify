@@ -10,17 +10,14 @@ namespace Splitify.Redirect.Domain
 
         public IReadOnlyCollection<Destination> Destinations { get; }
 
-        public Redirection(
+        internal Redirection(
             string id,
-            DateTime created,
-            DateTime updated,
+            DateTime createdAt,
+            DateTime updatedAt,
             string campaignId,
             List<Destination> destinations)
-            : base(id, created, updated)
+            : base(id, createdAt, updatedAt)
         {
-            EnsureDestinationsAreValid(destinations);
-            EnsureCampaignIdIsValid(campaignId);
-
             Destinations = destinations;
             CampaignId = campaignId;
         }
@@ -29,27 +26,6 @@ namespace Splitify.Redirect.Domain
         {
             return Destinations.MinBy(d => d.UniqueVisitors)
                 ?? throw new InvalidOperationException();
-        }
-
-        private static void EnsureDestinationsAreValid(List<Destination> destinations)
-        {
-            if (destinations == null)
-            {
-                throw new ArgumentNullException(nameof(destinations));
-            }
-
-            if (destinations.Count < MinimalDestinations)
-            {
-                throw new ArgumentException("Count was less than 2", nameof(destinations));
-            }
-        }
-
-        private static void EnsureCampaignIdIsValid(string campaignId)
-        {
-            if(string.IsNullOrWhiteSpace(campaignId))
-            {
-                throw new ArgumentNullException(nameof(campaignId));
-            }
         }
     }
 }

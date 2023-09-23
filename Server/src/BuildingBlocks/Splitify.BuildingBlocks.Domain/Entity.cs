@@ -8,19 +8,19 @@ namespace Splitify.BuildingBlocks.Domain
 
         public string Id { get; }
 
-        public DateTime Created { get; }
+        public DateTime CreatedAt { get; }
 
-        public DateTime Updated { get; protected set; }
+        public DateTime UpdatedAt { get; protected set; }
 
         public IReadOnlyCollection<IDomainEvent> Events => _events;
 
-        public Entity(string id, DateTime created, DateTime updated)
+        public Entity(string id, DateTime createdAt, DateTime updatedAt)
         {
             EnsureIdIsValid(id);
             
             Id = id;
-            Created = created;
-            Updated = updated;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
         }
 
         public void AddDomainEvent(IDomainEvent ev)
