@@ -14,8 +14,20 @@ namespace Splitify.Redirect.Domain.Errors
             };
         }
 
+        public static Error InvalidOperationError(string title = "Invalid Operation Error", string? detail = null)
+        {
+            return new Error()
+            {
+                Type = Type.InvalidOperationError,
+                Title = title,
+                Detail = detail
+            };
+        }
+
         public static class Type
         {
+            public const string InvalidOperationError = "Invalid Operation";
+
             public const string ValidationError = "Validation Error";
         }
     }

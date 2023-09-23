@@ -24,14 +24,14 @@ namespace Splitify.Redirect.Domain.Factories
             return Result.Success(redirection);
         }
 
-        private Result ValidateCampaignId(string campaignId)
+        private static Result ValidateCampaignId(string campaignId)
         {
             return !string.IsNullOrWhiteSpace(campaignId)
                 ? Result.Success()
                 : Result.Failure(DomainError.ValidationError("CampaignId was null or whitespace"));
         }
 
-        private Result ValidateDestinations(Result result, List<Destination> destinations)
+        private static Result ValidateDestinations(Result result, List<Destination> destinations)
         {
             return destinations.Count >= Redirection.MinimalDestinations
                 ? result

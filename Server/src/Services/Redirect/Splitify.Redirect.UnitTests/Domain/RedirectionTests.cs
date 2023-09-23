@@ -9,9 +9,9 @@ namespace Splitify.Redirect.UnitTests.Domain
         {
             var destinationFactory = new DestinationFactory();
 
-            var firstDestination = destinationFactory.Create("first", "https://google.com", DateTime.UtcNow).Value;
-            var secondDestination = destinationFactory.Create("second", "https://google.com", DateTime.UtcNow).Value;
-            var thirdDestination = destinationFactory.Create("third", "https://google.com", DateTime.UtcNow).Value;
+            var firstDestination = destinationFactory.Create("first", "https://google.com/1", DateTime.UtcNow).Value;
+            var secondDestination = destinationFactory.Create("second", "https://google.com/2", DateTime.UtcNow).Value;
+            var thirdDestination = destinationFactory.Create("third", "https://google.com/3", DateTime.UtcNow).Value;
 
             firstDestination.RegisterUniqueVisitor();
             thirdDestination.RegisterUniqueVisitor();
@@ -23,9 +23,9 @@ namespace Splitify.Redirect.UnitTests.Domain
                 new[] { firstDestination, secondDestination, thirdDestination },
                 DateTime.UtcNow).Value;
 
-            var actual = redirection.GetLeastVisitedDestination();
+            var actual = redirection.GetUrlForUniqueVisitor();
 
-            Assert.That(actual.Id, Is.EqualTo(secondDestination.Id));
+            Assert.That(actual.Value, Is.EqualTo(secondDestination.Url));
         }
 
         [Test]
@@ -33,9 +33,9 @@ namespace Splitify.Redirect.UnitTests.Domain
         {
             var destinationFactory = new DestinationFactory();
 
-            var firstDestination = destinationFactory.Create("first", "https://google.com", DateTime.UtcNow).Value;
-            var secondDestination = destinationFactory.Create("second", "https://google.com", DateTime.UtcNow).Value;
-            var thirdDestination = destinationFactory.Create("third", "https://google.com", DateTime.UtcNow).Value;
+            var firstDestination = destinationFactory.Create("first", "https://google.com/1", DateTime.UtcNow).Value;
+            var secondDestination = destinationFactory.Create("second", "https://google.com/2", DateTime.UtcNow).Value;
+            var thirdDestination = destinationFactory.Create("third", "https://google.com/3", DateTime.UtcNow).Value;
 
             firstDestination.RegisterUniqueVisitor();
             secondDestination.RegisterUniqueVisitor();
@@ -48,9 +48,9 @@ namespace Splitify.Redirect.UnitTests.Domain
                 new[] { firstDestination, secondDestination, thirdDestination },
                 DateTime.UtcNow).Value;
 
-            var actual = redirection.GetLeastVisitedDestination();
+            var actual = redirection.GetUrlForUniqueVisitor();
 
-            Assert.That(actual.Id, Is.EqualTo(firstDestination.Id));
+            Assert.That(actual.Value, Is.EqualTo(firstDestination.Url));
         }
     }
 }

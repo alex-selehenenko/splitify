@@ -1,4 +1,6 @@
-﻿using Splitify.BuildingBlocks.Domain;
+﻿using Resulty;
+using Splitify.BuildingBlocks.Domain;
+using Splitify.Redirect.Domain.Errors;
 
 namespace Splitify.Redirect.Domain
 {
@@ -22,10 +24,17 @@ namespace Splitify.Redirect.Domain
             CampaignId = campaignId;
         }
 
-        public Destination GetLeastVisitedDestination()
+        public Result<string> GetUrlForUniqueVisitor()
         {
-            return Destinations.MinBy(d => d.UniqueVisitors)
-                ?? throw new InvalidOperationException();
+            var destination = Destinations.MinBy(d => d.UniqueVisitors);
+
+            if (destination is null)
+            {
+                return Result.Failure<string>(DomainError.InvalidOperationError(detail: $"Destinations was not found for Redirection: {Id}"));
+            }
+
+            destination.RegisterUniqueVisitor();
+            return Result.Success(destination.Url);
         }
     }
 }
