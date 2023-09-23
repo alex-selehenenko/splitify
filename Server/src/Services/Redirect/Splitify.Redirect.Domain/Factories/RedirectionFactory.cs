@@ -8,6 +8,11 @@ namespace Splitify.Redirect.Domain.Factories
     {
         public Result<Redirection> Create(string campaignId, IEnumerable<Destination> destinations, DateTime now)
         {
+            if (destinations == null)
+            {
+                return Result.Failure<Redirection>(DomainError.InvalidOperationError(detail: "Destinations was null"));
+            }
+
             var destinationList = destinations.ToList();
             
             var validationResult = ValidateCampaignId(campaignId)
@@ -15,7 +20,7 @@ namespace Splitify.Redirect.Domain.Factories
 
             if (validationResult.IsFailure)
             {
-                Result.Failure<Redirection>(validationResult.Error);
+                return Result.Failure<Redirection>(validationResult.Error);
             }
             
             var redirection = new Redirection(Guid.NewGuid().ToString(), now, now, campaignId, destinationList);
