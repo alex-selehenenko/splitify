@@ -31,7 +31,11 @@ jobs:
         echo "Current directory content"
         ls
     - name: Restore dependencies
-      run: dotnet restore
+      run: |
+        echo "Curren directory"
+        pwd
+        echo "Start restoring dependencies"
+        dotnet restore
     - name: Build
       run: dotnet build --no-restore
     - name: Test
