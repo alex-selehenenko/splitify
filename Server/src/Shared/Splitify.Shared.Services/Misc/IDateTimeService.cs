@@ -1,6 +1,6 @@
 ﻿namespace Splitify.Shared.Services.Misc
 {
-    public interface IServiceClock
+    public interface IDateTimeService
     {
         DateTime UtcNow { get; }
     }
