@@ -20,8 +20,15 @@ jobs:
         dotnet-version: 6.0.x
     - name: Change Directory
       run: |
+        echo "Current directory path"
+        pwd
+        echo "Current directory content"
         ls
+        echo "Change directory"
         cd Server
+        echo "Current directory path"
+        pwd
+        echo "Current directory content"
         ls
     - name: Restore dependencies
       run: dotnet restore
