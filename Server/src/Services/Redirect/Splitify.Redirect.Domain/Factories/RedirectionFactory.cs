@@ -1,5 +1,6 @@
 ﻿using Resulty;
 using Splitify.Redirect.Domain.Errors;
+using Splitify.Redirect.Domain.Events;
 
 namespace Splitify.Redirect.Domain.Factories
 {
@@ -12,9 +13,15 @@ namespace Splitify.Redirect.Domain.Factories
             var validationResult = ValidateCampaignId(campaignId)
                 .Then(res => ValidateDestinations(res, destinationList));
 
-            return validationResult.IsSuccess
-                ? Result.Success(new Redirection(Guid.NewGuid().ToString(), now, now, campaignId, destinationList))
-                : Result.Failure<Redirection>(validationResult.Error);
+            if (validationResult.IsFailure)
+            {
+                Result.Failure<Redirection>(validationResult.Error);
+            }
+            
+            var redirection = new Redirection(Guid.NewGuid().ToString(), now, now, campaignId, destinationList);
+            redirection.AddDomainEvent(new RedirectionCreatedDomainEvent(campaignId, now));
+
+            return Result.Success(redirection);
         }
 
         private Result ValidateCampaignId(string campaignId)
