@@ -42,6 +42,7 @@ namespace Splitify.Redirect.UnitTests.Domain
         }
 
         [Test]
+        [TestCase(null)]
         [TestCase("")]
         [TestCase(" ")]
         [TestCase("\n")]

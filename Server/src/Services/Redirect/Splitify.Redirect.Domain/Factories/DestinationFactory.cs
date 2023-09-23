@@ -7,12 +7,11 @@ namespace Splitify.Redirect.Domain.Factories
     {
         public Result<Destination> Create(string id, string url, DateTime now)
         {
-            var trimmedUrl = url.Trim();
             var validationResult = ValidateId(id)
-                .Then(res => ValidateUrl(res, trimmedUrl));
+                .Then(res => ValidateUrl(res, url));
             
             return validationResult.IsSuccess
-                ? Result.Success(new Destination(id, now, now, trimmedUrl, 0))
+                ? Result.Success(new Destination(id, now, now, url.Trim(), 0))
                 : Result.Failure<Destination>(validationResult.Error);
         }
 
