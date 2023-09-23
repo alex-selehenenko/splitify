@@ -18,25 +18,24 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
-    - name: Change Directory
-      run: |
-        echo "Current directory path"
-        pwd
-        echo "Current directory content"
-        ls
-        echo "Change directory"
-        cd Server
-        echo "Current directory path"
-        pwd
-        echo "Current directory content"
-        ls
     - name: Restore dependencies
       run: |
-        echo "Curren directory"
         pwd
+        echo "Change directory"
+        cd Server
         echo "Start restoring dependencies"
         dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: |
+        pwd
+        echo "Change directory"
+        cd Server
+        echo "Start building"
+        dotnet build --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: |
+        pwd
+        echo "Change directory"
+        cd Server
+        echo "Start running tests"
+        dotnet test --no-build --verbosity normal
