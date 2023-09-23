@@ -34,6 +34,7 @@ namespace Splitify.Redirect.Domain
             }
 
             destination.RegisterUniqueVisitor();
+
             return Result.Success(destination.Url);
         }
     }
