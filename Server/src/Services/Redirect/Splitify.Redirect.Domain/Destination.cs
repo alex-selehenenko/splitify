@@ -19,7 +19,7 @@ namespace Splitify.Redirect.Domain
             UniqueVisitors = uniqueVisitors;
         }
 
-        public void RegisterUniqueVisitor()
+        internal void RegisterUniqueVisitor()
         {
             UniqueVisitors++;
         }

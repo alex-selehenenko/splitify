@@ -23,9 +23,9 @@ namespace Splitify.Redirect.UnitTests.Domain
                 new[] { firstDestination, secondDestination, thirdDestination },
                 DateTime.UtcNow).Value;
 
-            var actual = redirection.GetUrlForUniqueVisitor();
+            var actual = redirection.GetDestinationForUniqueVisitor();
 
-            Assert.That(actual.Value, Is.EqualTo(secondDestination.Url));
+            Assert.That(actual.Value.Id, Is.EqualTo(secondDestination.Id));
         }
 
         [Test]
@@ -48,9 +48,9 @@ namespace Splitify.Redirect.UnitTests.Domain
                 new[] { firstDestination, secondDestination, thirdDestination },
                 DateTime.UtcNow).Value;
 
-            var actual = redirection.GetUrlForUniqueVisitor();
+            var actual = redirection.GetDestinationForUniqueVisitor();
 
-            Assert.That(actual.Value, Is.EqualTo(firstDestination.Url));
+            Assert.That(actual.Value.Id, Is.EqualTo(firstDestination.Id));
         }
     }
 }

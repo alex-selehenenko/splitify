@@ -24,18 +24,18 @@ namespace Splitify.Redirect.Domain
             CampaignId = campaignId;
         }
 
-        public Result<string> GetUrlForUniqueVisitor()
+        public Result<Destination> GetDestinationForUniqueVisitor()
         {
             var destination = Destinations.MinBy(d => d.UniqueVisitors);
 
             if (destination is null)
             {
-                return Result.Failure<string>(DomainError.InvalidOperationError(detail: $"Destinations was not found for Redirection: {Id}"));
+                return Result.Failure<Destination>(DomainError.InvalidOperationError(detail: $"Destinations was not found for Redirection: {Id}"));
             }
 
             destination.RegisterUniqueVisitor();
 
-            return Result.Success(destination.Url);
+            return Result.Success(destination);
         }
     }
 }
