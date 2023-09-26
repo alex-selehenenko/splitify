@@ -1,6 +1,9 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Resulty;
 using Splitify.Redirect.Application.Commands;
+using Splitify.Redirect.Application.Models;
+using Splitify.Shared.AspDotNet.Results;
 
 namespace Splitify.Redirect.Api.Controllers
 {
@@ -9,11 +12,10 @@ namespace Splitify.Redirect.Api.Controllers
     public class RedirectController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly ILogger<RedirectController> _logger;
 
-        public RedirectController(ILogger<RedirectController> logger)
+        public RedirectController(IMediator mediator)
         {
-            _logger = logger;
+            _mediator = mediator;
         }
 
         [HttpGet("[id]")]
@@ -28,14 +30,30 @@ namespace Splitify.Redirect.Api.Controllers
 
         private async Task<IActionResult> RedirectUniqueVisitorAsync(string redirectionId)
         {
-            var result = await _mediator.Send(new RedirectUniqueVisitorCommand(redirectionId));
-            return Ok();
+            return await _mediator.Send(new RedirectUniqueVisitorCommand(redirectionId))
+                .MapAsync(
+                    data => CreateRedirectResponseForUniqueVisitor(redirectionId, data),
+                    error => CreateProblemResponse(error));
+        }
+
+        private IActionResult CreateRedirectResponseForUniqueVisitor(string redirectionId, RedirectModel model)
+        {
+            HttpContext.Response.Cookies.Append(redirectionId, model.Token, new() { HttpOnly = true });
+            IActionResult response = Redirect(model.Url);
+
+            return response;
         }
 
         private async Task<IActionResult> RedirectExistingVisitorAsync()
         {
             await Task.CompletedTask;
             return Redirect("https://google.com");
+        }
+
+        private IActionResult CreateProblemResponse(Error error)
+        {
+            var problemDetails = error.ToProblemDetails();
+            return StatusCode(problemDetails.Status ?? 500, problemDetails);
         }
     }
 }

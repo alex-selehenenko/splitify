@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Splitify.Shared.AspDotNet\Splitify.Shared.AspDotNet.csproj" />
     <ProjectReference Include="..\Splitify.Redirect.Application\Splitify.Redirect.Application.csproj" />
   </ItemGroup>
 
