@@ -1,6 +1,7 @@
 ﻿using Resulty;
 using Splitify.BuildingBlocks.Domain;
 using Splitify.Redirect.Domain.Errors;
+using Splitify.Shared.Services.Misc;
 
 namespace Splitify.Redirect.Domain
 {
@@ -8,23 +9,19 @@ namespace Splitify.Redirect.Domain
     {
         public const int MinimalDestinations = 2;
 
-        public string CampaignId { get; }
-
         public IReadOnlyCollection<Destination> Destinations { get; }
 
         internal Redirection(
             string id,
             DateTime createdAt,
             DateTime updatedAt,
-            string campaignId,
             List<Destination> destinations)
             : base(id, createdAt, updatedAt)
         {
             Destinations = destinations;
-            CampaignId = campaignId;
         }
 
-        public Result<Destination> GetDestinationForUniqueVisitor()
+        public Result<Destination> GetDestinationForUniqueVisitor(IDateTimeService dateTimeService)
         {
             var destination = Destinations.MinBy(d => d.UniqueVisitors);
 
@@ -33,7 +30,7 @@ namespace Splitify.Redirect.Domain
                 return Result.Failure<Destination>(DomainError.InvalidOperationError(detail: $"Destinations was not found for Redirection: {Id}"));
             }
 
-            destination.RegisterUniqueVisitor();
+            destination.RegisterUniqueVisitor(dateTimeService);
 
             return Result.Success(destination);
         }

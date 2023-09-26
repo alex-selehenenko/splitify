@@ -6,7 +6,7 @@ namespace Splitify.Redirect.Domain.Factories
 {
     public sealed class RedirectionFactory
     {
-        public Result<Redirection> Create(string campaignId, IEnumerable<Destination> destinations, DateTime now)
+        public Result<Redirection> Create(string id, IEnumerable<Destination> destinations, DateTime now)
         {
             if (destinations == null)
             {
@@ -15,7 +15,7 @@ namespace Splitify.Redirect.Domain.Factories
 
             var destinationList = destinations.ToList();
             
-            var validationResult = ValidateCampaignId(campaignId)
+            var validationResult = ValidateCampaignId(id)
                 .Then(res => ValidateDestinations(res, destinationList));
 
             if (validationResult.IsFailure)
@@ -23,8 +23,8 @@ namespace Splitify.Redirect.Domain.Factories
                 return Result.Failure<Redirection>(validationResult.Error);
             }
             
-            var redirection = new Redirection(Guid.NewGuid().ToString(), now, now, campaignId, destinationList);
-            redirection.AddDomainEvent(new RedirectionCreatedDomainEvent(campaignId, now));
+            var redirection = new Redirection(id, now, now, destinationList);
+            redirection.AddDomainEvent(new RedirectionCreatedDomainEvent(id, now));
 
             return Result.Success(redirection);
         }

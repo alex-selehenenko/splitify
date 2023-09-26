@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\BuildingBlocks\Splitify.BuildingBlocks.Domain\Splitify.BuildingBlocks.Domain.csproj" />
+    <ProjectReference Include="..\..\..\Shared\Splitify.Shared.Services\Splitify.Shared.Services.csproj" />
   </ItemGroup>
 
 </Project>

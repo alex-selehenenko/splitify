@@ -1,4 +1,5 @@
 ﻿using Splitify.BuildingBlocks.Domain;
+using Splitify.Shared.Services.Misc;
 
 namespace Splitify.Redirect.Domain
 {
@@ -19,8 +20,9 @@ namespace Splitify.Redirect.Domain
             UniqueVisitors = uniqueVisitors;
         }
 
-        internal void RegisterUniqueVisitor()
+        internal void RegisterUniqueVisitor(IDateTimeService dateTimeService)
         {
+            UpdatedAt = dateTimeService.UtcNow;
             UniqueVisitors++;
         }
     }
