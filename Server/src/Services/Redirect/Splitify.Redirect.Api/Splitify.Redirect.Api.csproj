@@ -15,8 +15,4 @@
     <ProjectReference Include="..\Splitify.Redirect.Application\Splitify.Redirect.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Extensions\" />
-  </ItemGroup>
-
 </Project>
