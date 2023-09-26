@@ -1,9 +1,5 @@
 ﻿using Resulty;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Splitify.BuildingBlocks.Domain.Errors;
 
 namespace Splitify.Redirect.Application.Errors
 {
@@ -13,15 +9,10 @@ namespace Splitify.Redirect.Application.Errors
         {
             return new()
             {
-                Type = Type.ResourceNotFound,
+                Type = ErrorType.ResourceNotFound,
                 Title = title,
                 Detail = detail
             };
-        }
-
-        public static class Type
-        {
-            public const string ResourceNotFound = "Resource Not Found";
         }
     }
 }

@@ -6,8 +6,6 @@ using Splitify.Redirect.Application.Models;
 using Splitify.Redirect.Application.Services;
 using Splitify.Redirect.Domain;
 using Splitify.Shared.Services.Misc;
-using System.ComponentModel.DataAnnotations;
-using System.Threading;
 
 namespace Splitify.Redirect.Application.Commands
 {

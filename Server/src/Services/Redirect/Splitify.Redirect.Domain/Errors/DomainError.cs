@@ -1,4 +1,5 @@
 ﻿using Resulty;
+using Splitify.BuildingBlocks.Domain.Errors;
 
 namespace Splitify.Redirect.Domain.Errors
 {
@@ -8,7 +9,7 @@ namespace Splitify.Redirect.Domain.Errors
         {
             return new Error()
             {
-                Type = Type.ValidationError,
+                Type = ErrorType.ValidationError,
                 Title = title,
                 Detail = detail
             };
@@ -18,17 +19,10 @@ namespace Splitify.Redirect.Domain.Errors
         {
             return new Error()
             {
-                Type = Type.InvalidOperationError,
+                Type = ErrorType.InvalidOperationError,
                 Title = title,
                 Detail = detail
             };
-        }
-
-        public static class Type
-        {
-            public const string InvalidOperationError = "Invalid Operation";
-
-            public const string ValidationError = "Validation Error";
         }
     }
 }
