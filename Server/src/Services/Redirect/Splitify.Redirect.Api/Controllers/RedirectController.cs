@@ -18,7 +18,7 @@ namespace Splitify.Redirect.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("[id]")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetAsync(string id)
         {
             var isUniqueVisitor = HttpContext.Request.Cookies.ContainsKey(id);

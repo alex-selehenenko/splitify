@@ -1,3 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using Splitify.Redirect.Application;
+using Splitify.Redirect.Application.Services;
+using Splitify.Redirect.Application.Services.Implementation;
+using Splitify.Redirect.Domain;
+using Splitify.Redirect.Infrastructure;
+using Splitify.Redirect.Infrastructure.Repositories;
+using Splitify.Shared.Services.Misc;
+using Splitify.Shared.Services.Misc.Implementation;
+
 namespace Splitify.Redirect.Api
 {
     public class Program
@@ -12,6 +22,21 @@ namespace Splitify.Redirect.Api
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddSingleton<IDateTimeService, DateTimeService>();
+
+            // application dependencies
+            builder.Services.AddSingleton<IRedirectTokenService, RedirectTokenService>();
+            builder.Services.AddMediatR(cfg =>
+                cfg.RegisterServicesFromAssemblyContaining<ApplicationMarker>());
+
+            // infrastructure dependencies
+            builder.Services.AddScoped<IRedirectionRepository, RedirectionRepository>();
+            builder.Services.AddDbContext<ApplicationDbContext>(cfg =>
+            { 
+                var connectionString = builder.Configuration.GetConnectionString("LocalDb");
+                cfg.UseSqlServer(connectionString);
+            });
 
             var app = builder.Build();
 

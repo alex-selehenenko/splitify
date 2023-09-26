@@ -11,10 +11,10 @@ namespace Splitify.Redirect.Domain
 
         internal Destination(
             string id,
-            DateTime created,
-            DateTime updated,
+            DateTime createdAt,
+            DateTime updatedAt,
             string url,
-            int uniqueVisitors) : base(id, created, updated)
+            int uniqueVisitors) : base(id, createdAt, updatedAt)
         {
             Url = url;
             UniqueVisitors = uniqueVisitors;

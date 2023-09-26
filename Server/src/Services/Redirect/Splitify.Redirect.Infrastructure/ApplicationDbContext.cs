@@ -16,7 +16,8 @@ namespace Splitify.Redirect.Infrastructure
 
         public DbSet<Destination> Destinations { get; set; }
 
-        public ApplicationDbContext(IPublisher domainEventsPulisher)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IPublisher domainEventsPulisher)
+            : base(options)
         {
             _domainEventsPublisher = domainEventsPulisher;            
         }

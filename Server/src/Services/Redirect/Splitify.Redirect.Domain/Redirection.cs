@@ -9,16 +9,19 @@ namespace Splitify.Redirect.Domain
     {
         public const int MinimalDestinations = 2;
 
-        public IReadOnlyCollection<Destination> Destinations { get; }
+        private readonly List<Destination> _destinations;
+        public IReadOnlyCollection<Destination> Destinations => _destinations;
 
-        internal Redirection(
-            string id,
-            DateTime createdAt,
-            DateTime updatedAt,
-            List<Destination> destinations)
+        internal Redirection(string id, DateTime createdAt, DateTime updatedAt, List<Destination> destinations)
+            : this(id, createdAt, updatedAt)
+        {
+            _destinations = destinations;
+        }
+
+        internal Redirection(string id, DateTime createdAt, DateTime updatedAt)
             : base(id, createdAt, updatedAt)
         {
-            Destinations = destinations;
+            _destinations = new();
         }
 
         public Result<Destination> GetDestinationForUniqueVisitor(IDateTimeService dateTimeService)
