@@ -10,9 +10,7 @@ namespace Splitify.Redirect.Infrastructure.EntityConfiguration.Abstractions
         public virtual void Configure(EntityTypeBuilder<TEntity> builder)
         {
             builder.HasKey(e => e.Id);
-
             builder.Property(e => e.Id);
-
             builder.Ignore(entity => entity.Events);
         }
     }
