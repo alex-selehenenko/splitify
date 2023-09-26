@@ -11,6 +11,17 @@ namespace Splitify.Redirect.Application.Commands
         private readonly IRedirectionRepository _redirectionRepository;
         private readonly IDateTimeService _dateTimeService;
 
+        public CreatedRedirectCommandHandler(
+            IRedirectionRepository redirectionRepository,
+            IDateTimeService dateTimeService)
+        {
+            _redirectionRepository = redirectionRepository
+                ?? throw new ArgumentNullException(nameof(redirectionRepository));
+
+            _dateTimeService = dateTimeService
+                ?? throw new ArgumentNullException(nameof(dateTimeService));
+        }
+
         public async Task<Result> Handle(CreateRedirectionCommand request, CancellationToken cancellationToken)
         {
             var destinationFactory = new DestinationFactory();
