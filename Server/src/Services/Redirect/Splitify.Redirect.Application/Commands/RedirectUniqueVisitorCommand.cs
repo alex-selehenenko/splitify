@@ -1,12 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
+using Resulty;
+using Splitify.Redirect.Application.Models;
 
 namespace Splitify.Redirect.Application.Commands
 {
-    internal class RedirectUniqueVisitorCommand
+    public class RedirectUniqueVisitorCommand : IRequest<Result<RedirectModel>>
     {
+        public string RedirectionId { get; }
+
+        public RedirectUniqueVisitorCommand(string redirectionId)
+        {
+            if (string.IsNullOrWhiteSpace(redirectionId))
+            {
+                throw new ArgumentNullException(nameof(redirectionId));
+            }
+
+            RedirectionId = redirectionId;
+        }
     }
 }
