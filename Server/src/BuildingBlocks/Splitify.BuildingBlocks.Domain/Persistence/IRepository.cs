@@ -8,6 +8,6 @@
 
         void Add(TEntity entity);
 
-        void Remove(TEntity etity);
+        void Remove(TEntity entity);
     }
 }
