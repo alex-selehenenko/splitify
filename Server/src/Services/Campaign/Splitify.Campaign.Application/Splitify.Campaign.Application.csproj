@@ -11,4 +11,9 @@
     <PackageReference Include="Resulty" Version="2.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Splitify.Shared.Services\Splitify.Shared.Services.csproj" />
+    <ProjectReference Include="..\Splitify.Campaign.Domain\Splitify.Campaign.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
