@@ -8,7 +8,7 @@ using Splitify.Shared.Services.Misc;
 
 namespace Splitify.Redirect.Application.Commands
 {
-    public class RedirectUniqueVisitorCommandHandler : IRequestHandler<RedirectUniqueVisitorCommand, Result<RedirectModel>>
+    public class RedirectUniqueVisitorCommandHandler : IRequestHandler<RedirectUniqueVisitorCommand, Result<DestinationModel>>
     {
         private readonly IRedirectionRepository _redirectionRepository;
         private readonly IDateTimeService _dateTimeService;
@@ -24,20 +24,18 @@ namespace Splitify.Redirect.Application.Commands
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public async Task<Result<RedirectModel>> Handle(RedirectUniqueVisitorCommand request, CancellationToken cancellationToken)
+        public async Task<Result<DestinationModel>> Handle(RedirectUniqueVisitorCommand request, CancellationToken cancellationToken)
         {
             var result = await FindRedirectionAsync(request.RedirectionId)
                 .ThenWithTransformAsync(GetDestinationForUniqueVisitorAsync);
 
             if (result.IsFailure)
             {
-                return Result.Failure<RedirectModel>(result.Error);
+                return Result.Failure<DestinationModel>(result.Error);
             }
 
             var destination = result.Value;
-            var token = destination.Id;
-
-            return Result.Success(new RedirectModel(destination.Url, token));
+            return Result.Success(new DestinationModel(destination.Url, destination.Id));
         }
 
         private async Task<Result<Redirection>> FindRedirectionAsync(string id)

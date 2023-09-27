@@ -36,10 +36,10 @@ namespace Splitify.Redirect.Api.Controllers
                     error => CreateProblemResponse(error));
         }
 
-        private IActionResult CreateRedirectResponseForUniqueVisitor(string redirectionId, RedirectModel model)
+        private IActionResult CreateRedirectResponseForUniqueVisitor(string redirectionId, DestinationModel destination)
         {
-            HttpContext.Response.Cookies.Append(redirectionId, model.Token, new() { HttpOnly = true });
-            IActionResult response = Redirect(model.Url);
+            HttpContext.Response.Cookies.Append(redirectionId, destination.Id, new() { HttpOnly = true });
+            IActionResult response = Redirect(destination.Url);
 
             return response;
         }

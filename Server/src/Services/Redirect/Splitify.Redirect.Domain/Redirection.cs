@@ -24,6 +24,18 @@ namespace Splitify.Redirect.Domain
             _destinations = new();
         }
 
+        public Result<Destination> GetDestinationForExistingUser(string destinationId, IDateTimeService dateTimeService)
+        {
+            var destination = _destinations.FirstOrDefault(x => x.Id == destinationId);
+
+            if (destination == null)
+            {
+                return GetDestinationForUniqueVisitor(dateTimeService);
+            }
+
+            return Result.Success(destination);
+        }
+
         public Result<Destination> GetDestinationForUniqueVisitor(IDateTimeService dateTimeService)
         {
             var destination = Destinations.MinBy(d => d.UniqueVisitors);
