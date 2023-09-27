@@ -1,6 +1,6 @@
 ﻿using Resulty;
 using Splitify.BuildingBlocks.Domain;
-using Splitify.Redirect.Domain.Errors;
+using Splitify.BuildingBlocks.Domain.Errors;
 using Splitify.Redirect.Domain.Events;
 using Splitify.Shared.Services.Misc;
 

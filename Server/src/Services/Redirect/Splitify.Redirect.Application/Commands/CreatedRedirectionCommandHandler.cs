@@ -24,13 +24,10 @@ namespace Splitify.Redirect.Application.Commands
 
         public async Task<Result> Handle(CreateRedirectionCommand request, CancellationToken cancellationToken)
         {
-            var destinationFactory = new DestinationFactory();
-            var redirectionFactory = new RedirectionFactory();
-
             var destinations = new List<Destination>();
             foreach (var url in request.DestinationUrls)
             {
-                var creationResult = destinationFactory.Create(Guid.NewGuid().ToString(), url, _dateTimeService.UtcNow);
+                var creationResult = DestinationFactory.Create(Guid.NewGuid().ToString(), url, _dateTimeService.UtcNow);
                 if (creationResult.IsFailure)
                 {
                     return Result.Failure(creationResult.Error);
@@ -39,7 +36,7 @@ namespace Splitify.Redirect.Application.Commands
                 destinations.Add(creationResult.Value);
             }
 
-            var redirectionCreationResult = redirectionFactory.Create(request.RedirectId, destinations, _dateTimeService.UtcNow);
+            var redirectionCreationResult = RedirectionFactory.Create(request.RedirectId, destinations, _dateTimeService.UtcNow);
 
             if (redirectionCreationResult.IsFailure)
             {

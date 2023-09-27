@@ -4,7 +4,7 @@ using Splitify.Shared.Services.Misc;
 
 namespace Splitify.Campaign.Domain.Factories
 {
-    public sealed class CampaignFactory
+    public abstract class CampaignFactory
     {
         public static Result<Campaign> Create(string id, List<Link> links, IDateTimeService dateTimeService)
         {

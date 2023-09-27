@@ -18,16 +18,5 @@ namespace Splitify.Campaign.Domain
         {
             Url = url;
         }
-
-        public static Result<Link> Instance(string url, IDateTimeService dateTimeService)
-        {
-            var isValidUrl = Uri.TryCreate(url, UriKind.Absolute, out var uri)
-                && (uri?.Scheme == Uri.UriSchemeHttp || uri?.Scheme == Uri.UriSchemeHttps);
-
-            var now = dateTimeService.UtcNow;
-            return isValidUrl
-                ? Result.Success(new Link(Guid.NewGuid().ToString(), url, now, now))
-                : Result.Failure<Link>(DomainError.ValidationError(detail: "url was invalid"));
-        }
     }
 }

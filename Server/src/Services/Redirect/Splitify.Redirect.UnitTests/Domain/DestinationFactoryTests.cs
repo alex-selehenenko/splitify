@@ -9,9 +9,7 @@ namespace Splitify.Redirect.UnitTests.Domain
         [TestCase("https://google.com")]
         public void Create_ValidUrl_Success(string url)
         {
-            var destinationFactory = new DestinationFactory();
-
-            var actual = destinationFactory.Create("dest", url, DateTime.Now);
+            var actual = DestinationFactory.Create("dest", url, DateTime.Now);
 
             Assert.Multiple(() =>
             {
@@ -28,9 +26,8 @@ namespace Splitify.Redirect.UnitTests.Domain
         public void Create_ValidUrlWithLeadingTrailingSpaces_UrlsAreTrimmed(string url)
         {
             var expectedUrl = url.Trim();
-            var destinationFactory = new DestinationFactory();
 
-            var actual = destinationFactory.Create("dest", url, DateTime.Now);
+            var actual = DestinationFactory.Create("dest", url, DateTime.Now);
             
             Assert.Multiple(() =>
             {
@@ -49,9 +46,7 @@ namespace Splitify.Redirect.UnitTests.Domain
         [TestCase("https:/google.")]
         public void Create_InvalidUrl_Failed(string url)
         {
-            var destinationFactory = new DestinationFactory();
-
-            var actual = destinationFactory.Create("dest", url, DateTime.Now);
+            var actual = DestinationFactory.Create("dest", url, DateTime.Now);
 
             Assert.Multiple(() =>
             {

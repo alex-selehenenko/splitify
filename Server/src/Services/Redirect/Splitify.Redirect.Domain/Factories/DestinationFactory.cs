@@ -3,9 +3,9 @@ using Splitify.Redirect.Domain.Errors;
 
 namespace Splitify.Redirect.Domain.Factories
 {
-    public sealed class DestinationFactory
+    public abstract class DestinationFactory
     {
-        public Result<Destination> Create(string id, string url, DateTime now)
+        public static Result<Destination> Create(string id, string url, DateTime now)
         {
             var validationResult = ValidateId(id)
                 .Then(res => ValidateUrl(res, url));

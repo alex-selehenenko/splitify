@@ -4,9 +4,9 @@ using Splitify.Redirect.Domain.Events;
 
 namespace Splitify.Redirect.Domain.Factories
 {
-    public sealed class RedirectionFactory
+    public abstract class RedirectionFactory
     {
-        public Result<Redirection> Create(string id, IEnumerable<Destination> destinations, DateTime now)
+        public static Result<Redirection> Create(string id, IEnumerable<Destination> destinations, DateTime now)
         {
             if (destinations == null)
             {

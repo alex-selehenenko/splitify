@@ -11,18 +11,14 @@ namespace Splitify.Redirect.UnitTests.Domain
         [Test]
         public void GetLeastVisitedDestination_TwoIsMoreVisited_ReturnsLeastVisited()
         {
-            var destinationFactory = new DestinationFactory();
-
-            var firstDestination = destinationFactory.Create("first", "https://google.com/1", DateTime.UtcNow).Value;
-            var secondDestination = destinationFactory.Create("second", "https://google.com/2", DateTime.UtcNow).Value;
-            var thirdDestination = destinationFactory.Create("third", "https://google.com/3", DateTime.UtcNow).Value;
+            var firstDestination = DestinationFactory.Create("first", "https://google.com/1", DateTime.UtcNow).Value;
+            var secondDestination = DestinationFactory.Create("second", "https://google.com/2", DateTime.UtcNow).Value;
+            var thirdDestination = DestinationFactory.Create("third", "https://google.com/3", DateTime.UtcNow).Value;
 
             firstDestination.RegisterUniqueVisitor(_dt);
             thirdDestination.RegisterUniqueVisitor(_dt);
 
-            var redirectionFactory = new RedirectionFactory();
-
-            var redirection = redirectionFactory.Create(
+            var redirection = RedirectionFactory.Create(
                 "campaign",
                 new[] { firstDestination, secondDestination, thirdDestination },
                 DateTime.UtcNow).Value;
@@ -35,19 +31,15 @@ namespace Splitify.Redirect.UnitTests.Domain
         [Test]
         public void GetLeastVisitedDestination_SameUniqueVisitors_ReturnsFirst()
         {
-            var destinationFactory = new DestinationFactory();
-
-            var firstDestination = destinationFactory.Create("first", "https://google.com/1", DateTime.UtcNow).Value;
-            var secondDestination = destinationFactory.Create("second", "https://google.com/2", DateTime.UtcNow).Value;
-            var thirdDestination = destinationFactory.Create("third", "https://google.com/3", DateTime.UtcNow).Value;
+            var firstDestination = DestinationFactory.Create("first", "https://google.com/1", DateTime.UtcNow).Value;
+            var secondDestination = DestinationFactory.Create("second", "https://google.com/2", DateTime.UtcNow).Value;
+            var thirdDestination = DestinationFactory.Create("third", "https://google.com/3", DateTime.UtcNow).Value;
 
             firstDestination.RegisterUniqueVisitor(_dt);
             secondDestination.RegisterUniqueVisitor(_dt);
             thirdDestination.RegisterUniqueVisitor(_dt);
 
-            var redirectionFactory = new RedirectionFactory();
-
-            var redirection = redirectionFactory.Create(
+            var redirection = RedirectionFactory.Create(
                 "campaign",
                 new[] { firstDestination, secondDestination, thirdDestination },
                 DateTime.UtcNow).Value;
