@@ -25,7 +25,7 @@ namespace Splitify.Redirect.Api.Controllers
 
             return !isUniqueVisitor
                 ? await RedirectUniqueVisitorAsync(id)
-                : await RedirectExistingVisitorAsync();
+                : await RedirectExistingVisitorAsync(id);
         }
 
         private async Task<IActionResult> RedirectUniqueVisitorAsync(string redirectionId)
@@ -38,22 +38,39 @@ namespace Splitify.Redirect.Api.Controllers
 
         private IActionResult CreateRedirectResponseForUniqueVisitor(string redirectionId, DestinationModel destination)
         {
-            HttpContext.Response.Cookies.Append(redirectionId, destination.Id, new() { HttpOnly = true });
+            SetCookies(redirectionId, destination.Id);
             IActionResult response = Redirect(destination.Url);
 
             return response;
         }
 
-        private async Task<IActionResult> RedirectExistingVisitorAsync()
+        private async Task<IActionResult> RedirectExistingVisitorAsync(string redirectionId)
         {
-            await Task.CompletedTask;
-            return Redirect("https://google.com");
+            var destinationId = HttpContext.Request.Cookies[redirectionId];
+            var destinationResult = await _mediator.Send(new RedirectExistingVisitorCommand(redirectionId, destinationId));
+
+            if (destinationResult.IsFailure)
+            {
+                return CreateProblemResponse(destinationResult.Error);
+            }
+
+            if (destinationId != destinationResult.Value.Id)
+            {
+                SetCookies(destinationId, redirectionId);
+            }
+
+            return Redirect(destinationResult.Value.Url);
         }
 
         private IActionResult CreateProblemResponse(Error error)
         {
             var problemDetails = error.ToProblemDetails();
             return StatusCode(problemDetails.Status ?? 500, problemDetails);
+        }
+
+        private void SetCookies(string key, string value)
+        {
+            HttpContext.Response.Cookies.Append(key, value, new() { HttpOnly = true });
         }
     }
 }
