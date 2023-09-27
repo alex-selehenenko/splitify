@@ -1,6 +1,7 @@
 ﻿using Resulty;
 using Splitify.BuildingBlocks.Domain;
 using Splitify.Redirect.Domain.Errors;
+using Splitify.Redirect.Domain.Events;
 using Splitify.Shared.Services.Misc;
 
 namespace Splitify.Redirect.Domain
@@ -17,7 +18,7 @@ namespace Splitify.Redirect.Domain
         {
             _destinations = destinations;
 
-            // TODO: add domain event.
+            AddDomainEvent(new RedirectionCreatedDomainEvent(id, createdAt));
         }
 
         internal Redirection(string id, DateTime createdAt, DateTime updatedAt)

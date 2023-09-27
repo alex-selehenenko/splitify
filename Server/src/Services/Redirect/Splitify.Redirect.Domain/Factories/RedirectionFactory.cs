@@ -24,7 +24,6 @@ namespace Splitify.Redirect.Domain.Factories
             }
             
             var redirection = new Redirection(id, now, now, destinationList);
-            redirection.AddDomainEvent(new RedirectionCreatedDomainEvent(id, now));
 
             return Result.Success(redirection);
         }
