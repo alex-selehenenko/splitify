@@ -4,7 +4,7 @@ using Splitify.Redirect.Application.Models;
 
 namespace Splitify.Redirect.Application.Commands
 {
-    public class RedirectUniqueVisitorCommand : IRequest<Result<RedirectModel>>
+    public class RedirectUniqueVisitorCommand : IRequest<Result<DestinationModel>>
     {
         public string RedirectionId { get; }
 
