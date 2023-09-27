@@ -1,5 +1,5 @@
 ﻿using Resulty;
-using Splitify.Redirect.Domain.Errors;
+using Splitify.BuildingBlocks.Domain.Errors;
 
 namespace Splitify.Redirect.Domain.Factories
 {

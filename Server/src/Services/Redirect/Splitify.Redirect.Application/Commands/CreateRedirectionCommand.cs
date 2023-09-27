@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Resulty;
+using Splitify.Redirect.Application.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +13,12 @@ namespace Splitify.Redirect.Application.Commands
     {
         public string RedirectId { get; }
 
-        public IEnumerable<string> DestinationUrls { get; }
+        public IEnumerable<DestinationModel> Destinations { get; }
 
-        public CreateRedirectionCommand(string redirectId, IEnumerable<string> destinationUrls)
+        public CreateRedirectionCommand(string redirectId, IEnumerable<DestinationModel> destinations)
         {
             RedirectId = redirectId ?? throw new ArgumentNullException(nameof(redirectId));
-            DestinationUrls = destinationUrls ?? throw new ArgumentNullException(nameof(destinationUrls));
+            Destinations = destinations ?? throw new ArgumentNullException(nameof(destinations));
         }
     }
 }

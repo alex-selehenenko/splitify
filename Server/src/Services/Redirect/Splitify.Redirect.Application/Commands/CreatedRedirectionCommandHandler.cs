@@ -25,9 +25,9 @@ namespace Splitify.Redirect.Application.Commands
         public async Task<Result> Handle(CreateRedirectionCommand request, CancellationToken cancellationToken)
         {
             var destinations = new List<Destination>();
-            foreach (var url in request.DestinationUrls)
+            foreach (var destination in request.Destinations)
             {
-                var creationResult = DestinationFactory.Create(Guid.NewGuid().ToString(), url, _dateTimeService.UtcNow);
+                var creationResult = DestinationFactory.Create(destination.Id, destination.Url, _dateTimeService.UtcNow);
                 if (creationResult.IsFailure)
                 {
                     return Result.Failure(creationResult.Error);
