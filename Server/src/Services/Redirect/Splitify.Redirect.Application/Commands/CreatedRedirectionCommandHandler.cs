@@ -6,12 +6,12 @@ using Splitify.Shared.Services.Misc;
 
 namespace Splitify.Redirect.Application.Commands
 {
-    public class CreatedRedirectCommandHandler : IRequestHandler<CreateRedirectionCommand, Result>
+    public class CreatedRedirectionCommandHandler : IRequestHandler<CreateRedirectionCommand, Result>
     {
         private readonly IRedirectionRepository _redirectionRepository;
         private readonly IDateTimeService _dateTimeService;
 
-        public CreatedRedirectCommandHandler(
+        public CreatedRedirectionCommandHandler(
             IRedirectionRepository redirectionRepository,
             IDateTimeService dateTimeService)
         {

@@ -3,7 +3,6 @@ using Microsoft.Extensions.Logging;
 using Resulty;
 using Splitify.Redirect.Application.Errors;
 using Splitify.Redirect.Application.Models;
-using Splitify.Redirect.Application.Services;
 using Splitify.Redirect.Domain;
 using Splitify.Shared.Services.Misc;
 
@@ -13,18 +12,15 @@ namespace Splitify.Redirect.Application.Commands
     {
         private readonly IRedirectionRepository _redirectionRepository;
         private readonly IDateTimeService _dateTimeService;
-        private readonly IRedirectTokenService _redirectTokenService;
         private readonly ILogger<RedirectUniqueVisitorCommandHandler> _logger;
 
         public RedirectUniqueVisitorCommandHandler(
             IRedirectionRepository redirectionRepository,
             IDateTimeService dateTimeService,
-            IRedirectTokenService redirectTokenService,
             ILogger<RedirectUniqueVisitorCommandHandler> logger)
         {
             _redirectionRepository = redirectionRepository ?? throw new ArgumentNullException(nameof(redirectionRepository));
             _dateTimeService = dateTimeService ?? throw new ArgumentNullException(nameof(dateTimeService));
-            _redirectTokenService = redirectTokenService ?? throw new ArgumentNullException(nameof(redirectTokenService));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
@@ -39,7 +35,7 @@ namespace Splitify.Redirect.Application.Commands
             }
 
             var destination = result.Value;
-            var token = _redirectTokenService.CreateToken(request.RedirectionId, destination.Id);
+            var token = destination.Id;
 
             return Result.Success(new RedirectModel(destination.Url, token));
         }

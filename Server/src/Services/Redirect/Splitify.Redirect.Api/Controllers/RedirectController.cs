@@ -23,7 +23,7 @@ namespace Splitify.Redirect.Api.Controllers
         {
             var isUniqueVisitor = HttpContext.Request.Cookies.ContainsKey(id);
 
-            return isUniqueVisitor
+            return !isUniqueVisitor
                 ? await RedirectUniqueVisitorAsync(id)
                 : await RedirectExistingVisitorAsync();
         }

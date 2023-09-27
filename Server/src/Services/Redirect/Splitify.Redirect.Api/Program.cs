@@ -1,7 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Splitify.Redirect.Application;
-using Splitify.Redirect.Application.Services;
-using Splitify.Redirect.Application.Services.Implementation;
 using Splitify.Redirect.Domain;
 using Splitify.Redirect.Infrastructure;
 using Splitify.Redirect.Infrastructure.Repositories;
@@ -26,7 +24,6 @@ namespace Splitify.Redirect.Api
             builder.Services.AddSingleton<IDateTimeService, DateTimeService>();
 
             // application dependencies
-            builder.Services.AddSingleton<IRedirectTokenService, RedirectTokenService>();
             builder.Services.AddMediatR(cfg =>
                 cfg.RegisterServicesFromAssemblyContaining<ApplicationMarker>());
 
