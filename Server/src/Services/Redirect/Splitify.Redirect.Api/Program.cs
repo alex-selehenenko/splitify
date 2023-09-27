@@ -29,7 +29,7 @@ namespace Splitify.Redirect.Api
                 cfg.RegisterServicesFromAssemblyContaining<CreateRedirectionCommand>());
 
             // infrastructure dependencies
-            builder.Services.AddScoped<IRedirectionRepository, RedirectionRepository>();
+            builder.Services.AddScoped<IRedirectRepository, RedirectionRepository>();
             builder.Services.AddDbContext<ApplicationDbContext>(cfg =>
             { 
                 var connectionString = builder.Configuration.GetConnectionString("ApplicationDb");

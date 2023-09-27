@@ -5,11 +5,11 @@ namespace Splitify.Redirect.Domain.Factories
 {
     public abstract class RedirectionFactory
     {
-        public static Result<Redirection> Create(string id, IEnumerable<Destination> destinations, DateTime now)
+        public static Result<RedirectAggregate> Create(string id, IEnumerable<Destination> destinations, DateTime now)
         {
             if (destinations == null)
             {
-                return Result.Failure<Redirection>(DomainError.InvalidOperationError(detail: "Destinations was null"));
+                return Result.Failure<RedirectAggregate>(DomainError.InvalidOperationError(detail: "Destinations was null"));
             }
 
             var destinationList = destinations.ToList();
@@ -19,10 +19,10 @@ namespace Splitify.Redirect.Domain.Factories
 
             if (validationResult.IsFailure)
             {
-                return Result.Failure<Redirection>(validationResult.Error);
+                return Result.Failure<RedirectAggregate>(validationResult.Error);
             }
             
-            var redirection = new Redirection(id, now, now, destinationList);
+            var redirection = new RedirectAggregate(id, now, now, destinationList);
 
             return Result.Success(redirection);
         }
@@ -36,9 +36,9 @@ namespace Splitify.Redirect.Domain.Factories
 
         private static Result ValidateDestinations(Result result, List<Destination> destinations)
         {
-            return destinations.Count >= Redirection.MinimalDestinations
+            return destinations.Count >= RedirectAggregate.MinimalDestinations
                 ? result
-                : Result.Failure(DomainError.ValidationError($"Destinations count was less than {Redirection.MinimalDestinations}"));
+                : Result.Failure(DomainError.ValidationError($"Destinations count was less than {RedirectAggregate.MinimalDestinations}"));
         }
     }
 }

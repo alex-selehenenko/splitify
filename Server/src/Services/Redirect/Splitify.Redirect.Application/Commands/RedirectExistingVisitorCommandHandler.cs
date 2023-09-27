@@ -10,11 +10,11 @@ namespace Splitify.Redirect.Application.Commands
     public class RedirectExistingVisitorCommandHandler
         : IRequestHandler<RedirectExistingVisitorCommand, Result<DestinationModel>>
     {
-        private readonly IRedirectionRepository _redirectionRepository;
+        private readonly IRedirectRepository _redirectionRepository;
         private readonly IDateTimeService _dateTimeService;
 
         public RedirectExistingVisitorCommandHandler(
-            IRedirectionRepository redirectionRepository,
+            IRedirectRepository redirectionRepository,
             IDateTimeService dateTimeService)
         {
             _redirectionRepository = redirectionRepository;

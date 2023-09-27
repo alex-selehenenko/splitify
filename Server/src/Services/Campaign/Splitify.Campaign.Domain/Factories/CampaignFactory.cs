@@ -6,14 +6,14 @@ namespace Splitify.Campaign.Domain.Factories
 {
     public abstract class CampaignFactory
     {
-        public static Result<Campaign> Create(string id, List<Link> links, IDateTimeService dateTimeService)
+        public static Result<CampaignAggregate> Create(string id, List<Link> links, IDateTimeService dateTimeService)
         {
             var validationResult = ValidateId(id)
                 .Then(res => ValidateLinks(res, links));
 
             return validationResult.IsSuccess
-                ? Result.Success(new Campaign(id, dateTimeService.UtcNow, links))
-                : Result.Failure<Campaign>(validationResult.Error);
+                ? Result.Success(new CampaignAggregate(id, dateTimeService.UtcNow, links))
+                : Result.Failure<CampaignAggregate>(validationResult.Error);
         }
 
         private static Result ValidateId(string id)
@@ -25,9 +25,9 @@ namespace Splitify.Campaign.Domain.Factories
 
         private static Result ValidateLinks(Result result, List<Link> links)
         {
-            if (links == null || links.Count < Campaign.MinLinksCount)
+            if (links == null || links.Count < CampaignAggregate.MinLinksCount)
             {
-                return Result.Failure(DomainError.ValidationError(detail: $"Links count was less than { Campaign.MinLinksCount }"));
+                return Result.Failure(DomainError.ValidationError(detail: $"Links count was less than { CampaignAggregate.MinLinksCount }"));
             }
 
             return result;

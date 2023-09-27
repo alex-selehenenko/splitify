@@ -6,7 +6,7 @@ using Splitify.Shared.Services.Misc;
 
 namespace Splitify.Campaign.Domain
 {
-    public class Campaign : Entity, IAggregateRoot
+    public class CampaignAggregate : Entity, IAggregateRoot
     {
         public const int MinLinksCount = 2;
 
@@ -15,33 +15,33 @@ namespace Splitify.Campaign.Domain
         private readonly List<Link> _links;
         public IReadOnlyCollection<Link> Links => _links;
 
-        internal Campaign(string id, DateTime createdAt, List<Link> links)
+        internal CampaignAggregate(string id, DateTime createdAt, List<Link> links)
             : this(id, false, createdAt, createdAt)
         {
             _links = links;
             AddDomainEvent(new CampaignCreatedDomainEvent(id, createdAt, links));
         }
 
-        internal Campaign(string id, bool isActive, DateTime createdAt, DateTime updatedAt) : base(id, createdAt, updatedAt)
+        internal CampaignAggregate(string id, bool isActive, DateTime createdAt, DateTime updatedAt) : base(id, createdAt, updatedAt)
         {
             IsActive = isActive;
             _links = new();
         }
 
-        public static Result<Campaign> Instance(string id, List<Link> links, IDateTimeService dateTimeService)
+        public static Result<CampaignAggregate> Instance(string id, List<Link> links, IDateTimeService dateTimeService)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
-                return Result.Failure<Campaign>(DomainError.ValidationError(detail: "Campaign id was null or whitespace"));
+                return Result.Failure<CampaignAggregate>(DomainError.ValidationError(detail: "Campaign id was null or whitespace"));
             }
 
             if (links == null || links.Count < MinLinksCount)
             {
-                return Result.Failure<Campaign>(DomainError.ValidationError(detail: $"Links count was less than {MinLinksCount}"));
+                return Result.Failure<CampaignAggregate>(DomainError.ValidationError(detail: $"Links count was less than {MinLinksCount}"));
             }
 
             var now = dateTimeService.UtcNow;
-            return Result.Success(new Campaign(id, now, links));
+            return Result.Success(new CampaignAggregate(id, now, links));
         }
 
         public Result Activate(IDateTimeService dateTimeService)

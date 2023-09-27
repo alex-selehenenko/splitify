@@ -6,4 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\Splitify.BuildingBlocks.Domain\Splitify.BuildingBlocks.Domain.csproj" />
+    <ProjectReference Include="..\..\..\Shared\Splitify.Shared.AspDotNet\Splitify.Shared.AspDotNet.csproj" />
+    <ProjectReference Include="..\Splitify.Campaign.Domain\Splitify.Campaign.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

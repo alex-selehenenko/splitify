@@ -6,14 +6,14 @@ using Splitify.Shared.Services.Misc;
 
 namespace Splitify.Redirect.Domain
 {
-    public class Redirection : Entity, IAggregateRoot
+    public class RedirectAggregate : Entity, IAggregateRoot
     {
         public const int MinimalDestinations = 2;
 
         private readonly List<Destination> _destinations;
         public IReadOnlyCollection<Destination> Destinations => _destinations;
 
-        internal Redirection(string id, DateTime createdAt, DateTime updatedAt, List<Destination> destinations)
+        internal RedirectAggregate(string id, DateTime createdAt, DateTime updatedAt, List<Destination> destinations)
             : this(id, createdAt, updatedAt)
         {
             _destinations = destinations;
@@ -21,7 +21,7 @@ namespace Splitify.Redirect.Domain
             AddDomainEvent(new RedirectionCreatedDomainEvent(id, createdAt));
         }
 
-        internal Redirection(string id, DateTime createdAt, DateTime updatedAt)
+        internal RedirectAggregate(string id, DateTime createdAt, DateTime updatedAt)
             : base(id, createdAt, updatedAt)
         {
             _destinations = new();

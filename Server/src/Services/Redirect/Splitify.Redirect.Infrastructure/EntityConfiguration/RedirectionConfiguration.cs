@@ -4,9 +4,9 @@ using Splitify.Redirect.Infrastructure.EntityConfiguration.Abstractions;
 
 namespace Splitify.Redirect.Infrastructure.EntityConfiguration
 {
-    internal class RedirectionConfiguration : EntityConfigurationBase<Redirection>
+    internal class RedirectionConfiguration : EntityConfigurationBase<RedirectAggregate>
     {
-        public override void Configure(EntityTypeBuilder<Redirection> builder)
+        public override void Configure(EntityTypeBuilder<RedirectAggregate> builder)
         {
             base.Configure(builder);
             

@@ -8,11 +8,11 @@ namespace Splitify.Redirect.Application.Commands
 {
     public class CreatedRedirectionCommandHandler : IRequestHandler<CreateRedirectionCommand, Result>
     {
-        private readonly IRedirectionRepository _redirectionRepository;
+        private readonly IRedirectRepository _redirectionRepository;
         private readonly IDateTimeService _dateTimeService;
 
         public CreatedRedirectionCommandHandler(
-            IRedirectionRepository redirectionRepository,
+            IRedirectRepository redirectionRepository,
             IDateTimeService dateTimeService)
         {
             _redirectionRepository = redirectionRepository

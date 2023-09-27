@@ -10,12 +10,12 @@ namespace Splitify.Redirect.Application.Commands
 {
     public class RedirectUniqueVisitorCommandHandler : IRequestHandler<RedirectUniqueVisitorCommand, Result<DestinationModel>>
     {
-        private readonly IRedirectionRepository _redirectionRepository;
+        private readonly IRedirectRepository _redirectionRepository;
         private readonly IDateTimeService _dateTimeService;
         private readonly ILogger<RedirectUniqueVisitorCommandHandler> _logger;
 
         public RedirectUniqueVisitorCommandHandler(
-            IRedirectionRepository redirectionRepository,
+            IRedirectRepository redirectionRepository,
             IDateTimeService dateTimeService,
             ILogger<RedirectUniqueVisitorCommandHandler> logger)
         {
@@ -38,16 +38,16 @@ namespace Splitify.Redirect.Application.Commands
             return Result.Success(new DestinationModel(destination.Url, destination.Id));
         }
 
-        private async Task<Result<Redirection>> FindRedirectionAsync(string id)
+        private async Task<Result<RedirectAggregate>> FindRedirectionAsync(string id)
         {
             var redirection = await _redirectionRepository.FindAsync(id);
 
             return redirection is not null
                 ? Result.Success(redirection)
-                : Result.Failure<Redirection>(ApplicationError.ResourceNotFoundError(detail: $"Redirection doesn't exist - {id}"));
+                : Result.Failure<RedirectAggregate>(ApplicationError.ResourceNotFoundError(detail: $"Redirection doesn't exist - {id}"));
         }
 
-        private async Task<Result<Destination>> GetDestinationForUniqueVisitorAsync(Result<Redirection> result)
+        private async Task<Result<Destination>> GetDestinationForUniqueVisitorAsync(Result<RedirectAggregate> result)
         {
             var destinationResult = result.Value.GetDestinationForUniqueVisitor(_dateTimeService);
 

@@ -2,7 +2,7 @@
 
 namespace Splitify.Campaign.Domain
 {
-    public interface ICampaignRepository : IRepository<Campaign>
+    public interface ICampaignRepository : IRepository<CampaignAggregate>
     {
         Task<bool> ExistsAsync(string id, CancellationToken cancellationToken = default);
     }

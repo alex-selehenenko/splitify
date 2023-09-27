@@ -37,6 +37,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splitify.Campaign.Domain", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splitify.Campaign.Application", "src\Services\Campaign\Splitify.Campaign.Application\Splitify.Campaign.Application.csproj", "{D12AF827-D80B-405D-8744-06FD3DB340F4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splitify.Campaign.Infrastructure", "src\Services\Campaign\Splitify.Campaign.Infrastructure\Splitify.Campaign.Infrastructure.csproj", "{5781C164-AFF5-47A0-A4F3-82AD24517067}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{D12AF827-D80B-405D-8744-06FD3DB340F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D12AF827-D80B-405D-8744-06FD3DB340F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D12AF827-D80B-405D-8744-06FD3DB340F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5781C164-AFF5-47A0-A4F3-82AD24517067}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5781C164-AFF5-47A0-A4F3-82AD24517067}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5781C164-AFF5-47A0-A4F3-82AD24517067}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5781C164-AFF5-47A0-A4F3-82AD24517067}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -108,6 +114,7 @@ Global
 		{81F68E31-CDBD-4D6C-8482-F1A556BECF57} = {ADD715CE-B84A-4182-89BE-800AF6D143A8}
 		{1325A594-F73D-44A4-BB7D-F9261A638F00} = {81F68E31-CDBD-4D6C-8482-F1A556BECF57}
 		{D12AF827-D80B-405D-8744-06FD3DB340F4} = {81F68E31-CDBD-4D6C-8482-F1A556BECF57}
+		{5781C164-AFF5-47A0-A4F3-82AD24517067} = {81F68E31-CDBD-4D6C-8482-F1A556BECF57}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {026026E1-C7D3-43B3-AFE1-C6A8D16549C1}

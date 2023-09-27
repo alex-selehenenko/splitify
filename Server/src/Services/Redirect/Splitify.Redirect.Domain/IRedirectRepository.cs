@@ -2,7 +2,7 @@
 
 namespace Splitify.Redirect.Domain
 {
-    public interface IRedirectionRepository : IRepository<Redirection>
+    public interface IRedirectRepository : IRepository<RedirectAggregate>
     {
     }
 }

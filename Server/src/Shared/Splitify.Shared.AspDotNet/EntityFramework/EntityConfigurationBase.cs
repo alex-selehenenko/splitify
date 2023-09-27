@@ -1,8 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using Splitify.BuildingBlocks.Domain;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Splitify.Redirect.Infrastructure.EntityConfiguration.Abstractions
+namespace Splitify.Shared.AspDotNet.EntityFramework
 {
     public abstract class EntityConfigurationBase<TEntity> : IEntityTypeConfiguration<TEntity>
         where TEntity : Entity

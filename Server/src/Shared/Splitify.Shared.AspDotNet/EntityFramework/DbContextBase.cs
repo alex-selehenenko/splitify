@@ -26,7 +26,7 @@ namespace Splitify.Shared.AspDotNet.EntityFramework
             return await base.SaveChangesAsync(cancellationToken);
         }
 
-        private async Task PublishDomainEventsAsync()
+        protected virtual async Task PublishDomainEventsAsync()
         {
             var tasks = new List<Task>();
             var entities = ChangeTracker.Entries<Entity>()
