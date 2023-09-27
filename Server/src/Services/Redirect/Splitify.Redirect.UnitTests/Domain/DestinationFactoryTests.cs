@@ -46,9 +46,7 @@ namespace Splitify.Redirect.UnitTests.Domain
         [TestCase("")]
         [TestCase(" ")]
         [TestCase("\n")]
-        [TestCase("https:/google.com")]
-        [TestCase("https://google")]
-        [TestCase("https://google.")]
+        [TestCase("https:/google.")]
         public void Create_InvalidUrl_Failed(string url)
         {
             var destinationFactory = new DestinationFactory();

@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Splitify.Redirect.Application;
+using Splitify.Redirect.Application.Commands;
 using Splitify.Redirect.Domain;
 using Splitify.Redirect.Infrastructure;
 using Splitify.Redirect.Infrastructure.Repositories;
@@ -25,13 +26,13 @@ namespace Splitify.Redirect.Api
 
             // application dependencies
             builder.Services.AddMediatR(cfg =>
-                cfg.RegisterServicesFromAssemblyContaining<ApplicationMarker>());
+                cfg.RegisterServicesFromAssemblyContaining<CreateRedirectionCommand>());
 
             // infrastructure dependencies
             builder.Services.AddScoped<IRedirectionRepository, RedirectionRepository>();
             builder.Services.AddDbContext<ApplicationDbContext>(cfg =>
             { 
-                var connectionString = builder.Configuration.GetConnectionString("LocalDb");
+                var connectionString = builder.Configuration.GetConnectionString("ApplicationDb");
                 cfg.UseSqlServer(connectionString);
             });
 

@@ -16,6 +16,8 @@ namespace Splitify.Redirect.Domain
             : this(id, createdAt, updatedAt)
         {
             _destinations = destinations;
+
+            // TODO: add domain event.
         }
 
         internal Redirection(string id, DateTime createdAt, DateTime updatedAt)

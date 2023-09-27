@@ -31,6 +31,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Splitify.Shared.AspDotNet",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splitify.Redirect.Infrastructure", "src\Services\Redirect\Splitify.Redirect.Infrastructure\Splitify.Redirect.Infrastructure.csproj", "{9EA1965F-BC90-4ADE-9D90-F4C26EEC09AF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Campaign", "Campaign", "{81F68E31-CDBD-4D6C-8482-F1A556BECF57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splitify.Campaign.Domain", "src\Services\Campaign\Splitify.Campaign.Domain\Splitify.Campaign.Domain.csproj", "{1325A594-F73D-44A4-BB7D-F9261A638F00}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +77,10 @@ Global
 		{9EA1965F-BC90-4ADE-9D90-F4C26EEC09AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EA1965F-BC90-4ADE-9D90-F4C26EEC09AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EA1965F-BC90-4ADE-9D90-F4C26EEC09AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1325A594-F73D-44A4-BB7D-F9261A638F00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1325A594-F73D-44A4-BB7D-F9261A638F00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1325A594-F73D-44A4-BB7D-F9261A638F00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1325A594-F73D-44A4-BB7D-F9261A638F00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -91,6 +99,8 @@ Global
 		{20E1B506-A063-48DA-B520-4885F75C1FBB} = {E92869A2-9657-4FA9-AD58-E24F051B7D01}
 		{74736343-522F-4B7E-8328-A4551AA301B4} = {833A4ED3-CF04-41AB-A9A3-2620B41A25F7}
 		{9EA1965F-BC90-4ADE-9D90-F4C26EEC09AF} = {E92869A2-9657-4FA9-AD58-E24F051B7D01}
+		{81F68E31-CDBD-4D6C-8482-F1A556BECF57} = {ADD715CE-B84A-4182-89BE-800AF6D143A8}
+		{1325A594-F73D-44A4-BB7D-F9261A638F00} = {81F68E31-CDBD-4D6C-8482-F1A556BECF57}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {026026E1-C7D3-43B3-AFE1-C6A8D16549C1}

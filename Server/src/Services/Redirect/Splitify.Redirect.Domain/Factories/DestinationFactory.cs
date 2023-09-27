@@ -25,10 +25,9 @@ namespace Splitify.Redirect.Domain.Factories
         private static Result ValidateUrl(Result result, string url)
         {
             var isValidUrl = Uri.TryCreate(url, UriKind.Absolute, out var uri)
-                & (uri?.Scheme == Uri.UriSchemeHttp || uri?.Scheme == Uri.UriSchemeHttps)
-                & uri?.Host.Contains('.');
+                & (uri?.Scheme == Uri.UriSchemeHttp || uri?.Scheme == Uri.UriSchemeHttps);
 
-            return isValidUrl.HasValue && isValidUrl.Value
+            return isValidUrl
                 ? result
                 : Result.Failure(DomainError.ValidationError(detail: $"Invalid url - {url}"));
         }

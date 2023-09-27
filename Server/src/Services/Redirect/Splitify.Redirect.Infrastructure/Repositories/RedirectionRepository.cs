@@ -28,9 +28,9 @@ namespace Splitify.Redirect.Infrastructure.Repositories
                 .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
 
-        public void Remove(Redirection etity)
+        public void Remove(Redirection entity)
         {
-            _dbContext.Remove(etity);
+            _dbContext.Remove(entity);
         }
     }
 }
