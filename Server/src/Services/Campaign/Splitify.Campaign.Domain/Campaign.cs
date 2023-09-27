@@ -17,7 +17,7 @@ namespace Splitify.Campaign.Domain
             : this(id, createdAt, createdAt)
         {
             _links = links;
-            AddDomainEvent(new CampaignCreatedDomainEvent());
+            AddDomainEvent(new CampaignCreatedDomainEvent(id, createdAt, links));
         }
 
         internal Campaign(string id, DateTime createdAt, DateTime updatedAt) : base(id, createdAt, updatedAt)

@@ -14,7 +14,7 @@ namespace Splitify.Campaign.Domain.Factories
             var now = dateTimeService.UtcNow;
             return isValidUrl
                 ? Result.Success(new Link(Guid.NewGuid().ToString(), url, now, now))
-                : Result.Failure<Link>(DomainError.ValidationError(detail: "url was invalid"));
+                : Result.Failure<Link>(DomainError.ValidationError(detail: "Url was invalid"));
         }
     }
 }
