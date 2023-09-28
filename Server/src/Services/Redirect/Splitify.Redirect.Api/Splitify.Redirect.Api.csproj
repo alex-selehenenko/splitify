@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MassTransit" Version="8.1.0" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.1.0" />
     <PackageReference Include="MediatR" Version="12.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.11">
       <PrivateAssets>all</PrivateAssets>
@@ -17,6 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\Splitify.BuildingBlocks.EventBus\Splitify.BuildingBlocks.EventBus.csproj" />
+    <ProjectReference Include="..\..\..\EventBus\Splitify.EventBus.Contracts\Splitify.EventBus.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\EventBus\Splitify.EventBus.MassTransit\Splitify.EventBus.MassTransit.csproj" />
     <ProjectReference Include="..\..\..\Shared\Splitify.Shared.AspDotNet\Splitify.Shared.AspDotNet.csproj" />
     <ProjectReference Include="..\Splitify.Redirect.Application\Splitify.Redirect.Application.csproj" />
     <ProjectReference Include="..\Splitify.Redirect.Infrastructure\Splitify.Redirect.Infrastructure.csproj" />

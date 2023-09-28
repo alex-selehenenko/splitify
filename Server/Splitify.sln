@@ -29,25 +29,25 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Splitify.Redirect.Api", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Splitify.Shared.AspDotNet", "src\Shared\Splitify.Shared.AspDotNet\Splitify.Shared.AspDotNet.csproj", "{74736343-522F-4B7E-8328-A4551AA301B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splitify.Redirect.Infrastructure", "src\Services\Redirect\Splitify.Redirect.Infrastructure\Splitify.Redirect.Infrastructure.csproj", "{9EA1965F-BC90-4ADE-9D90-F4C26EEC09AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Splitify.Redirect.Infrastructure", "src\Services\Redirect\Splitify.Redirect.Infrastructure\Splitify.Redirect.Infrastructure.csproj", "{9EA1965F-BC90-4ADE-9D90-F4C26EEC09AF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Campaign", "Campaign", "{81F68E31-CDBD-4D6C-8482-F1A556BECF57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splitify.Campaign.Domain", "src\Services\Campaign\Splitify.Campaign.Domain\Splitify.Campaign.Domain.csproj", "{1325A594-F73D-44A4-BB7D-F9261A638F00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Splitify.Campaign.Domain", "src\Services\Campaign\Splitify.Campaign.Domain\Splitify.Campaign.Domain.csproj", "{1325A594-F73D-44A4-BB7D-F9261A638F00}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splitify.Campaign.Application", "src\Services\Campaign\Splitify.Campaign.Application\Splitify.Campaign.Application.csproj", "{D12AF827-D80B-405D-8744-06FD3DB340F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Splitify.Campaign.Application", "src\Services\Campaign\Splitify.Campaign.Application\Splitify.Campaign.Application.csproj", "{D12AF827-D80B-405D-8744-06FD3DB340F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splitify.Campaign.Infrastructure", "src\Services\Campaign\Splitify.Campaign.Infrastructure\Splitify.Campaign.Infrastructure.csproj", "{5781C164-AFF5-47A0-A4F3-82AD24517067}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Splitify.Campaign.Infrastructure", "src\Services\Campaign\Splitify.Campaign.Infrastructure\Splitify.Campaign.Infrastructure.csproj", "{5781C164-AFF5-47A0-A4F3-82AD24517067}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splitify.Campaign.Api", "src\Services\Campaign\Splitify.Campaign.Api\Splitify.Campaign.Api.csproj", "{6F6883A4-6D61-4F90-B6DB-9A3386232030}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Splitify.Campaign.Api", "src\Services\Campaign\Splitify.Campaign.Api\Splitify.Campaign.Api.csproj", "{6F6883A4-6D61-4F90-B6DB-9A3386232030}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EventBus", "EventBus", "{67C0B27C-CE2F-4971-8A6A-AE59A9926BAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splitify.EventBus.Dto", "src\EventBus\Splitify.EventBus.Dto\Splitify.EventBus.Dto.csproj", "{3C25C8C3-1215-44DB-8F44-12CBDE8038B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Splitify.EventBus.MassTransit", "src\EventBus\Splitify.EventBus.MassTransit\Splitify.EventBus.MassTransit.csproj", "{48B66D7C-18D6-4AAE-BD80-7CB06BF625A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splitify.EventBus.MassTransit", "src\EventBus\Splitify.EventBus.MassTransit\Splitify.EventBus.MassTransit.csproj", "{48B66D7C-18D6-4AAE-BD80-7CB06BF625A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Splitify.BuildingBlocks.EventBus", "src\BuildingBlocks\Splitify.BuildingBlocks.EventBus\Splitify.BuildingBlocks.EventBus.csproj", "{49E5F7A0-8CF4-4BDA-9573-EB03E560640F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splitify.BuildingBlocks.EventBus", "src\BuildingBlocks\Splitify.BuildingBlocks.EventBus\Splitify.BuildingBlocks.EventBus.csproj", "{49E5F7A0-8CF4-4BDA-9573-EB03E560640F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Splitify.EventBus.Contracts", "src\EventBus\Splitify.EventBus.Contracts\Splitify.EventBus.Contracts.csproj", "{49A3290E-E322-4CF0-B6E2-0F7B5DBE362B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -107,10 +107,6 @@ Global
 		{6F6883A4-6D61-4F90-B6DB-9A3386232030}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F6883A4-6D61-4F90-B6DB-9A3386232030}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F6883A4-6D61-4F90-B6DB-9A3386232030}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3C25C8C3-1215-44DB-8F44-12CBDE8038B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3C25C8C3-1215-44DB-8F44-12CBDE8038B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3C25C8C3-1215-44DB-8F44-12CBDE8038B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3C25C8C3-1215-44DB-8F44-12CBDE8038B2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{48B66D7C-18D6-4AAE-BD80-7CB06BF625A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{48B66D7C-18D6-4AAE-BD80-7CB06BF625A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48B66D7C-18D6-4AAE-BD80-7CB06BF625A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -119,6 +115,10 @@ Global
 		{49E5F7A0-8CF4-4BDA-9573-EB03E560640F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49E5F7A0-8CF4-4BDA-9573-EB03E560640F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49E5F7A0-8CF4-4BDA-9573-EB03E560640F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49A3290E-E322-4CF0-B6E2-0F7B5DBE362B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49A3290E-E322-4CF0-B6E2-0F7B5DBE362B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49A3290E-E322-4CF0-B6E2-0F7B5DBE362B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49A3290E-E322-4CF0-B6E2-0F7B5DBE362B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -143,9 +143,9 @@ Global
 		{5781C164-AFF5-47A0-A4F3-82AD24517067} = {81F68E31-CDBD-4D6C-8482-F1A556BECF57}
 		{6F6883A4-6D61-4F90-B6DB-9A3386232030} = {81F68E31-CDBD-4D6C-8482-F1A556BECF57}
 		{67C0B27C-CE2F-4971-8A6A-AE59A9926BAD} = {E815BD78-837E-4F3F-AE59-91AFBFE2A897}
-		{3C25C8C3-1215-44DB-8F44-12CBDE8038B2} = {67C0B27C-CE2F-4971-8A6A-AE59A9926BAD}
 		{48B66D7C-18D6-4AAE-BD80-7CB06BF625A0} = {67C0B27C-CE2F-4971-8A6A-AE59A9926BAD}
 		{49E5F7A0-8CF4-4BDA-9573-EB03E560640F} = {573AB0FC-414B-477E-A97A-22AE0B191520}
+		{49A3290E-E322-4CF0-B6E2-0F7B5DBE362B} = {67C0B27C-CE2F-4971-8A6A-AE59A9926BAD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {026026E1-C7D3-43B3-AFE1-C6A8D16549C1}

@@ -1,7 +1,10 @@
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
+using Splitify.BuildingBlocks.EventBus;
 using Splitify.Campaign.Application.Commands;
 using Splitify.Campaign.Domain;
 using Splitify.Campaign.Infrastructure;
+using Splitify.EventBus.MassTransit;
 using Splitify.Shared.AspDotNet.Identity;
 using Splitify.Shared.Services.Identity;
 using Splitify.Shared.Services.Misc;
@@ -38,6 +41,21 @@ namespace Splitify.Campaign.Api
             builder.Services.AddDbContext<ApplicationDbContext>(cfg =>
             {
                 cfg.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationDbContext"));
+            });
+
+            // inject event bus
+            builder.Services.AddScoped<IEventBus, MassTransitEventBus>();
+            builder.Services.AddMassTransit(c =>
+            {
+                c.UsingRabbitMq((ctx, cfg) =>
+                {
+                    cfg.Host("localhost", "/", h => {
+                        h.Username("guest");
+                        h.Password("guest");
+                    });
+
+                    cfg.ConfigureEndpoints(ctx);
+                });
             });
 
             var app = builder.Build();

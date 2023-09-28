@@ -12,6 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\Splitify.BuildingBlocks.EventBus\Splitify.BuildingBlocks.EventBus.csproj" />
+    <ProjectReference Include="..\..\..\EventBus\Splitify.EventBus.Contracts\Splitify.EventBus.Contracts.csproj" />
     <ProjectReference Include="..\..\..\Shared\Splitify.Shared.Services\Splitify.Shared.Services.csproj" />
     <ProjectReference Include="..\Splitify.Campaign.Domain\Splitify.Campaign.Domain.csproj" />
   </ItemGroup>

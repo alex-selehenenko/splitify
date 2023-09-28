@@ -31,7 +31,9 @@ namespace Splitify.Shared.AspDotNet.EntityFramework
                 {
                     var publisherTasks = entry.Entity.Events
                         .Select(ev => DomainEventsPublisher.Publish(ev));
-
+                    
+                    tasks.AddRange(publisherTasks);
+                    
                     return entry.Entity;
                 }).ToList();
 

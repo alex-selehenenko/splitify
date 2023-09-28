@@ -1,4 +1,8 @@
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
+using Splitify.BuildingBlocks.EventBus;
+using Splitify.EventBus.MassTransit;
+using Splitify.Redirect.Api.Consumers;
 using Splitify.Redirect.Application;
 using Splitify.Redirect.Application.Commands;
 using Splitify.Redirect.Domain;
@@ -34,6 +38,23 @@ namespace Splitify.Redirect.Api
             { 
                 var connectionString = builder.Configuration.GetConnectionString("ApplicationDb");
                 cfg.UseSqlServer(connectionString);
+            });
+
+            // event bus dependencies
+            builder.Services.AddScoped<IEventBus, MassTransitEventBus>();
+            builder.Services.AddMassTransit(c =>
+            {
+                c.UsingRabbitMq((ctx, cfg) =>
+                {
+                    cfg.Host("localhost", "/", h => {
+                        h.Username("guest");
+                        h.Password("guest");
+                    });
+
+                    cfg.ConfigureEndpoints(ctx);
+                });
+
+                c.AddConsumer<CampaignCreatedConsumer>();
             });
 
             var app = builder.Build();
