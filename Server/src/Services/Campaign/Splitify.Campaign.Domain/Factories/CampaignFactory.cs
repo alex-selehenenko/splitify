@@ -18,7 +18,7 @@ namespace Splitify.Campaign.Domain.Factories
 
         private static Result ValidateId(string id)
         {
-            return string.IsNullOrWhiteSpace(id)
+            return !string.IsNullOrWhiteSpace(id)
                 ? Result.Success()
                 : Result.Failure(DomainError.ValidationError(detail: "Campaign id was null or whitesapce"));
         }
