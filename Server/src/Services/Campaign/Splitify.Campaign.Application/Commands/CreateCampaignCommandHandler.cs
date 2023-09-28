@@ -3,6 +3,7 @@ using Resulty;
 using Splitify.Campaign.Application.Models;
 using Splitify.Campaign.Domain;
 using Splitify.Campaign.Domain.Factories;
+using Splitify.Shared.Services.Identity;
 using Splitify.Shared.Services.Misc;
 
 namespace Splitify.Campaign.Application.Commands
@@ -13,15 +14,18 @@ namespace Splitify.Campaign.Application.Commands
 
         private readonly IRandomStringService _randomStringService;
         private readonly ICampaignRepository _campaignRepository;
+        private readonly IUserService _userService;
         private readonly IDateTimeService _dateTimeService;
 
         public CreateCampaignCommandHandler(
             IRandomStringService randomStringService,
             ICampaignRepository campaignRepository,
+            IUserService userService,
             IDateTimeService dateTimeService)
         {
             _randomStringService = randomStringService;
             _campaignRepository = campaignRepository;
+            _userService = userService;
             _dateTimeService = dateTimeService;
         }
 
@@ -46,7 +50,7 @@ namespace Splitify.Campaign.Application.Commands
             }
             while (await _campaignRepository.ExistsAsync(campaignId, cancellationToken));
 
-            var campaignCreationResult = CampaignFactory.Create(campaignId, links, _dateTimeService);
+            var campaignCreationResult = CampaignFactory.Create(campaignId, _userService.GetUserId(), links, _dateTimeService);
 
             if (campaignCreationResult.IsFailure)
             {

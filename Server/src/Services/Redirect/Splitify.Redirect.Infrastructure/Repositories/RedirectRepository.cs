@@ -4,13 +4,13 @@ using Splitify.Redirect.Domain;
 
 namespace Splitify.Redirect.Infrastructure.Repositories
 {
-    public class RedirectionRepository : IRedirectRepository
+    public class RedirectRepository : IRedirectRepository
     {
         private readonly ApplicationDbContext _dbContext;
 
         public IUnitOfWork UnitOfWork => _dbContext;
 
-        public RedirectionRepository(ApplicationDbContext dbContext)
+        public RedirectRepository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -23,7 +23,7 @@ namespace Splitify.Redirect.Infrastructure.Repositories
         public async Task<RedirectAggregate?> FindAsync(string id, CancellationToken cancellationToken = default)
         {
             return await _dbContext
-                .Redirections
+                .Redirects
                 .Include(x => x.Destinations)
                 .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }

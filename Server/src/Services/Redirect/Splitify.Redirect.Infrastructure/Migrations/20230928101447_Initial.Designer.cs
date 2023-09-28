@@ -12,7 +12,7 @@ using Splitify.Redirect.Infrastructure;
 namespace Splitify.Redirect.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230926165729_Initial")]
+    [Migration("20230928101447_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -33,7 +33,7 @@ namespace Splitify.Redirect.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("RedirectionId")
+                    b.Property<string>("RedirectId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("UniqueVisitors")
@@ -48,12 +48,12 @@ namespace Splitify.Redirect.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RedirectionId");
+                    b.HasIndex("RedirectId");
 
                     b.ToTable("Destinations");
                 });
 
-            modelBuilder.Entity("Splitify.Redirect.Domain.Redirection", b =>
+            modelBuilder.Entity("Splitify.Redirect.Domain.RedirectAggregate", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -66,17 +66,17 @@ namespace Splitify.Redirect.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Redirections");
+                    b.ToTable("Redirects");
                 });
 
             modelBuilder.Entity("Splitify.Redirect.Domain.Destination", b =>
                 {
-                    b.HasOne("Splitify.Redirect.Domain.Redirection", null)
+                    b.HasOne("Splitify.Redirect.Domain.RedirectAggregate", null)
                         .WithMany("Destinations")
-                        .HasForeignKey("RedirectionId");
+                        .HasForeignKey("RedirectId");
                 });
 
-            modelBuilder.Entity("Splitify.Redirect.Domain.Redirection", b =>
+            modelBuilder.Entity("Splitify.Redirect.Domain.RedirectAggregate", b =>
                 {
                     b.Navigation("Destinations");
                 });

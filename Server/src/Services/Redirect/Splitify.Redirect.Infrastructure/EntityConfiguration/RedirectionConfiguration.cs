@@ -12,7 +12,7 @@ namespace Splitify.Redirect.Infrastructure.EntityConfiguration
             
             builder.HasMany(e => e.Destinations)
                 .WithOne()
-                .HasForeignKey("RedirectionId");
+                .HasForeignKey("RedirectId");
         }
     }
 }

@@ -26,10 +26,10 @@ namespace Splitify.Redirect.Api
 
             // application dependencies
             builder.Services.AddMediatR(cfg =>
-                cfg.RegisterServicesFromAssemblyContaining<CreateRedirectionCommand>());
+                cfg.RegisterServicesFromAssemblyContaining<CreateRedirectCommand>());
 
             // infrastructure dependencies
-            builder.Services.AddScoped<IRedirectRepository, RedirectionRepository>();
+            builder.Services.AddScoped<IRedirectRepository, RedirectRepository>();
             builder.Services.AddDbContext<ApplicationDbContext>(cfg =>
             { 
                 var connectionString = builder.Configuration.GetConnectionString("ApplicationDb");

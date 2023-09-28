@@ -18,7 +18,7 @@ namespace Splitify.Redirect.UnitTests.Domain
             firstDestination.RegisterUniqueVisitor(_dt);
             thirdDestination.RegisterUniqueVisitor(_dt);
 
-            var redirection = RedirectionFactory.Create(
+            var redirection = RedirectFactory.Create(
                 "campaign",
                 new[] { firstDestination, secondDestination, thirdDestination },
                 DateTime.UtcNow).Value;
@@ -39,7 +39,7 @@ namespace Splitify.Redirect.UnitTests.Domain
             secondDestination.RegisterUniqueVisitor(_dt);
             thirdDestination.RegisterUniqueVisitor(_dt);
 
-            var redirection = RedirectionFactory.Create(
+            var redirection = RedirectFactory.Create(
                 "campaign",
                 new[] { firstDestination, secondDestination, thirdDestination },
                 DateTime.UtcNow).Value;

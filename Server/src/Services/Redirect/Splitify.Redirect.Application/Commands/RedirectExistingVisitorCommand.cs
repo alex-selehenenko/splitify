@@ -1,11 +1,6 @@
 ﻿using MediatR;
 using Resulty;
 using Splitify.Redirect.Application.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Splitify.Redirect.Application.Commands
 {

@@ -10,7 +10,7 @@ namespace Splitify.Redirect.UnitTests.Domain
             var firstDest = DestinationFactory.Create("1", "https://google.com", DateTime.Now).Value;
             var secondDest = DestinationFactory.Create("2", "https://google.com", DateTime.Now).Value;
 
-            var redirectionResult = RedirectionFactory.Create("camp_1", new[] { firstDest, secondDest }, DateTime.Now);
+            var redirectionResult = RedirectFactory.Create("camp_1", new[] { firstDest, secondDest }, DateTime.Now);
 
             Assert.That(redirectionResult.IsSuccess, Is.True);
         }
@@ -25,7 +25,7 @@ namespace Splitify.Redirect.UnitTests.Domain
             var firstDest = DestinationFactory.Create("1", "https://google.com", DateTime.Now).Value;
             var secondDest = DestinationFactory.Create("2", "https://google.com", DateTime.Now).Value;
 
-            var redirectionResult = RedirectionFactory.Create(campaignId, new[] { firstDest, secondDest }, DateTime.Now);
+            var redirectionResult = RedirectFactory.Create(campaignId, new[] { firstDest, secondDest }, DateTime.Now);
 
             Assert.That(redirectionResult.IsSuccess, Is.False);
         }
@@ -35,7 +35,7 @@ namespace Splitify.Redirect.UnitTests.Domain
         {
             var firstDest = DestinationFactory.Create("1", "https://google.com", DateTime.Now).Value;
 
-            var redirectionResult = RedirectionFactory.Create("camp_1", new[] { firstDest }, DateTime.Now);
+            var redirectionResult = RedirectFactory.Create("camp_1", new[] { firstDest }, DateTime.Now);
 
             Assert.That(redirectionResult.IsSuccess, Is.False);
         }
@@ -43,7 +43,7 @@ namespace Splitify.Redirect.UnitTests.Domain
         [Test]
         public void Create_DestinationsAreNull_Failed()
         {
-            var redirectionResult = RedirectionFactory.Create("camp_1", null, DateTime.Now);
+            var redirectionResult = RedirectFactory.Create("camp_1", null, DateTime.Now);
 
             Assert.That(redirectionResult.IsSuccess, Is.False);
         }

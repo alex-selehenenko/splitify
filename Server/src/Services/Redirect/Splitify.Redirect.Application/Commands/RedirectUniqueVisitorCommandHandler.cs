@@ -10,23 +10,20 @@ namespace Splitify.Redirect.Application.Commands
 {
     public class RedirectUniqueVisitorCommandHandler : IRequestHandler<RedirectUniqueVisitorCommand, Result<DestinationModel>>
     {
-        private readonly IRedirectRepository _redirectionRepository;
+        private readonly IRedirectRepository _redirectRepository;
         private readonly IDateTimeService _dateTimeService;
-        private readonly ILogger<RedirectUniqueVisitorCommandHandler> _logger;
 
         public RedirectUniqueVisitorCommandHandler(
-            IRedirectRepository redirectionRepository,
-            IDateTimeService dateTimeService,
-            ILogger<RedirectUniqueVisitorCommandHandler> logger)
+            IRedirectRepository redirectRepository,
+            IDateTimeService dateTimeService)
         {
-            _redirectionRepository = redirectionRepository ?? throw new ArgumentNullException(nameof(redirectionRepository));
+            _redirectRepository = redirectRepository ?? throw new ArgumentNullException(nameof(redirectRepository));
             _dateTimeService = dateTimeService ?? throw new ArgumentNullException(nameof(dateTimeService));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public async Task<Result<DestinationModel>> Handle(RedirectUniqueVisitorCommand request, CancellationToken cancellationToken)
         {
-            var result = await FindRedirectionAsync(request.RedirectionId)
+            var result = await FindRedirectionAsync(request.RedirectId)
                 .ThenWithTransformAsync(GetDestinationForUniqueVisitorAsync);
 
             if (result.IsFailure)
@@ -40,10 +37,10 @@ namespace Splitify.Redirect.Application.Commands
 
         private async Task<Result<RedirectAggregate>> FindRedirectionAsync(string id)
         {
-            var redirection = await _redirectionRepository.FindAsync(id);
+            var redirect = await _redirectRepository.FindAsync(id);
 
-            return redirection is not null
-                ? Result.Success(redirection)
+            return redirect is not null
+                ? Result.Success(redirect)
                 : Result.Failure<RedirectAggregate>(ApplicationError.ResourceNotFoundError(detail: $"Redirection doesn't exist - {id}"));
         }
 
@@ -56,7 +53,7 @@ namespace Splitify.Redirect.Application.Commands
                 return Result.Failure<Destination>(destinationResult.Error);
             }
 
-            await _redirectionRepository.UnitOfWork.SaveChangesAsync();
+            await _redirectRepository.UnitOfWork.SaveChangesAsync();
             
             return destinationResult;
         }

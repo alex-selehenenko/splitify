@@ -10,38 +10,25 @@ namespace Splitify.Campaign.Domain
     {
         public const int MinLinksCount = 2;
 
+        public string? UserId { get; }
+
         public bool IsActive { get; private set; }
 
         private readonly List<Link> _links;
         public IReadOnlyCollection<Link> Links => _links;
 
-        internal CampaignAggregate(string id, DateTime createdAt, List<Link> links)
-            : this(id, false, createdAt, createdAt)
+        internal CampaignAggregate(string id, string? userId, DateTime createdAt, List<Link> links)
+            : this(id, userId, false, createdAt, createdAt)
         {
             _links = links;
             AddDomainEvent(new CampaignCreatedDomainEvent(id, createdAt, links));
         }
 
-        internal CampaignAggregate(string id, bool isActive, DateTime createdAt, DateTime updatedAt) : base(id, createdAt, updatedAt)
+        internal CampaignAggregate(string id, string? userId, bool isActive, DateTime createdAt, DateTime updatedAt) : base(id, createdAt, updatedAt)
         {
             IsActive = isActive;
+            UserId = userId;
             _links = new();
-        }
-
-        public static Result<CampaignAggregate> Instance(string id, List<Link> links, IDateTimeService dateTimeService)
-        {
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                return Result.Failure<CampaignAggregate>(DomainError.ValidationError(detail: "Campaign id was null or whitespace"));
-            }
-
-            if (links == null || links.Count < MinLinksCount)
-            {
-                return Result.Failure<CampaignAggregate>(DomainError.ValidationError(detail: $"Links count was less than {MinLinksCount}"));
-            }
-
-            var now = dateTimeService.UtcNow;
-            return Result.Success(new CampaignAggregate(id, now, links));
         }
 
         public Result Activate(IDateTimeService dateTimeService)

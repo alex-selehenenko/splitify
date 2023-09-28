@@ -12,7 +12,7 @@ namespace Splitify.Redirect.Infrastructure
     {
         private readonly IPublisher _domainEventsPublisher;
 
-        public DbSet<RedirectAggregate> Redirections { get; set; }
+        public DbSet<RedirectAggregate> Redirects { get; set; }
 
         public DbSet<Destination> Destinations { get; set; }
 

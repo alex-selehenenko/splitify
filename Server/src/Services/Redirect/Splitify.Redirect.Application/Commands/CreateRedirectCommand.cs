@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace Splitify.Redirect.Application.Commands
 {
-    public class CreateRedirectionCommand : IRequest<Result>
+    public class CreateRedirectCommand : IRequest<Result>
     {
         public string RedirectId { get; }
 
         public IEnumerable<DestinationModel> Destinations { get; }
 
-        public CreateRedirectionCommand(string redirectId, IEnumerable<DestinationModel> destinations)
+        public CreateRedirectCommand(string redirectId, IEnumerable<DestinationModel> destinations)
         {
             RedirectId = redirectId ?? throw new ArgumentNullException(nameof(redirectId));
             Destinations = destinations ?? throw new ArgumentNullException(nameof(destinations));

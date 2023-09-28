@@ -3,7 +3,7 @@ using Splitify.BuildingBlocks.Domain.Errors;
 
 namespace Splitify.Redirect.Domain.Factories
 {
-    public abstract class RedirectionFactory
+    public abstract class RedirectFactory
     {
         public static Result<RedirectAggregate> Create(string id, IEnumerable<Destination> destinations, DateTime now)
         {

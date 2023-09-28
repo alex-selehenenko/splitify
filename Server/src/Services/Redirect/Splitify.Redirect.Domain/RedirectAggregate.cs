@@ -18,7 +18,7 @@ namespace Splitify.Redirect.Domain
         {
             _destinations = destinations;
 
-            AddDomainEvent(new RedirectionCreatedDomainEvent(id, createdAt));
+            AddDomainEvent(new RedirectCreatedDomainEvent(id, createdAt));
         }
 
         internal RedirectAggregate(string id, DateTime createdAt, DateTime updatedAt)

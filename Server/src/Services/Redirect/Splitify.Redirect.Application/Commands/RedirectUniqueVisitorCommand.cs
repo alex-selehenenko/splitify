@@ -6,16 +6,16 @@ namespace Splitify.Redirect.Application.Commands
 {
     public class RedirectUniqueVisitorCommand : IRequest<Result<DestinationModel>>
     {
-        public string RedirectionId { get; }
+        public string RedirectId { get; }
 
-        public RedirectUniqueVisitorCommand(string redirectionId)
+        public RedirectUniqueVisitorCommand(string redirectId)
         {
-            if (string.IsNullOrWhiteSpace(redirectionId))
+            if (string.IsNullOrWhiteSpace(redirectId))
             {
-                throw new ArgumentNullException(nameof(redirectionId));
+                throw new ArgumentNullException(nameof(redirectId));
             }
 
-            RedirectionId = redirectionId;
+            RedirectId = redirectId;
         }
     }
 }
