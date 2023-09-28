@@ -27,7 +27,7 @@ namespace Splitify.Campaign.Infrastructure
 
         public async Task<CampaignAggregate?> FindAsync(string id, CancellationToken cancellationToken = default)
         {
-            return await _context.Campaigns.FindAsync(id, cancellationToken);
+            return await _context.Campaigns.FindAsync(id);
         }
 
         public void Remove(CampaignAggregate entity)
