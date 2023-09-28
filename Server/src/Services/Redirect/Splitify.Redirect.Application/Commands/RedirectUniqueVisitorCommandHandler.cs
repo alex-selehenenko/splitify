@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.Extensions.Logging;
 using Resulty;
 using Splitify.Redirect.Application.Errors;
 using Splitify.Redirect.Application.Models;

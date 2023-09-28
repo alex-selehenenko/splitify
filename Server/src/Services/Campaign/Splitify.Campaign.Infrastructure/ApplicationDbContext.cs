@@ -6,13 +6,13 @@ using Splitify.Shared.AspDotNet.EntityFramework;
 
 namespace Splitify.Campaign.Infrastructure
 {
-    public class ApplicationDbContext : DbContextBase
+    public class ApplicationDbContext : DbContextBase<ApplicationDbContext>
     {
         public DbSet<Link> Links { get; set; }
 
         public DbSet<CampaignAggregate> Campaigns { get; set; }
 
-        public ApplicationDbContext(DbContextOptions<DbContextBase> options, IPublisher publisher)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IPublisher publisher)
             : base(options, publisher)
         {
         }

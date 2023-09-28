@@ -2,19 +2,15 @@
 using Microsoft.EntityFrameworkCore;
 using Splitify.BuildingBlocks.Domain;
 using Splitify.BuildingBlocks.Domain.Persistence;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Splitify.Shared.AspDotNet.EntityFramework
 {
-    public class DbContextBase : DbContext, IUnitOfWork
+    public class DbContextBase<TContext> : DbContext, IUnitOfWork
+        where TContext : DbContext
     {
         protected IPublisher DomainEventsPublisher { get; }
 
-        public DbContextBase(DbContextOptions<DbContextBase> options, IPublisher publisher)
+        public DbContextBase(DbContextOptions<TContext> options, IPublisher publisher)
             : base(options)
         {
             DomainEventsPublisher = publisher;
