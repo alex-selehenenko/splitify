@@ -11,8 +11,9 @@ namespace Splitify.Campaign.Application.Commands
         private readonly ICampaignRepository _campaignRepository;
         private readonly IDateTimeService _dateTimeService;
 
-        public ActivateCampaignCommandHandler(ICampaignRepository campaignRepository)
+        public ActivateCampaignCommandHandler(IDateTimeService dateTimeService, ICampaignRepository campaignRepository)
         {
+            _dateTimeService = dateTimeService;
             _campaignRepository = campaignRepository;
         }
 

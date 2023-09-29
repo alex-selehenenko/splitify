@@ -8,15 +8,18 @@ namespace Splitify.Campaign.Api.Consumers
     public class RedirectCreatedConsumer : IConsumer<RedirectCreatedMessage>
     {
         private readonly IMediator _mediator;
+        private readonly ILogger<RedirectCreatedConsumer> _logger;
 
-        public RedirectCreatedConsumer(IMediator mediator)
+        public RedirectCreatedConsumer(IMediator mediator, ILogger<RedirectCreatedConsumer> logger)
         {
             _mediator = mediator;
+            _logger = logger;
         }
 
         public async Task Consume(ConsumeContext<RedirectCreatedMessage> context)
         {
-            await _mediator.Send(new ActivateCampaignCommand(context.Message.CampaignId));
+            _logger.LogInformation("Start consuming {name}. Redirect Id: {id}", nameof(RedirectCreatedMessage), context.Message.RedirectId);
+            await _mediator.Send(new ActivateCampaignCommand(context.Message.RedirectId));
         }
     }
 }

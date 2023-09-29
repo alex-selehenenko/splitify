@@ -1,4 +1,4 @@
 ﻿namespace Splitify.EventBus.Contracts
 {
-    public record RedirectCreatedMessage(string CampaignId);
+    public record RedirectCreatedMessage(string RedirectId);
 }
