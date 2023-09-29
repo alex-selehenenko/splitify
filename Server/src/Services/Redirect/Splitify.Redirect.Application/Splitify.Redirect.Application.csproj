@@ -13,6 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\Splitify.BuildingBlocks.EventBus\Splitify.BuildingBlocks.EventBus.csproj" />
+    <ProjectReference Include="..\..\..\EventBus\Splitify.EventBus.Contracts\Splitify.EventBus.Contracts.csproj" />
     <ProjectReference Include="..\Splitify.Redirect.Domain\Splitify.Redirect.Domain.csproj" />
   </ItemGroup>
 

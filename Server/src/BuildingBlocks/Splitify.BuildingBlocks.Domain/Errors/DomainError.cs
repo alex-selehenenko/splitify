@@ -28,5 +28,12 @@ namespace Splitify.BuildingBlocks.Domain.Errors
                 Detail = detail
             };
         }
+
+        public static Error ResourceNotFound(string title = "Resource Not Found", string? detail = null) => new()
+        {
+            Type = ErrorType.ResourceNotFound,
+            Title = title,
+            Detail = detail
+        };
     }
 }
