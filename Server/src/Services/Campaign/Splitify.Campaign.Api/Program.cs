@@ -1,6 +1,7 @@
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Splitify.BuildingBlocks.EventBus;
+using Splitify.Campaign.Api.Consumers;
 using Splitify.Campaign.Application.Commands;
 using Splitify.Campaign.Domain;
 using Splitify.Campaign.Infrastructure;
@@ -56,6 +57,8 @@ namespace Splitify.Campaign.Api
 
                     cfg.ConfigureEndpoints(ctx);
                 });
+
+                c.AddConsumer<RedirectCreatedConsumer>();
             });
 
             var app = builder.Build();
