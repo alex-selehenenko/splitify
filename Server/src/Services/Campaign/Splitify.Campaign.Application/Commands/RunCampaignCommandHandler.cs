@@ -6,18 +6,18 @@ using Splitify.Shared.Services.Misc;
 
 namespace Splitify.Campaign.Application.Commands
 {
-    public class ActivateCampaignCommandHandler : IRequestHandler<ActivateCampaignCommand, Result>
+    public class RunCampaignCommandHandler : IRequestHandler<RunCampaignCommand, Result>
     {
         private readonly ICampaignRepository _campaignRepository;
         private readonly IDateTimeService _dateTimeService;
 
-        public ActivateCampaignCommandHandler(IDateTimeService dateTimeService, ICampaignRepository campaignRepository)
+        public RunCampaignCommandHandler(IDateTimeService dateTimeService, ICampaignRepository campaignRepository)
         {
             _dateTimeService = dateTimeService;
             _campaignRepository = campaignRepository;
         }
 
-        public async Task<Result> Handle(ActivateCampaignCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(RunCampaignCommand request, CancellationToken cancellationToken)
         {
             var campaign = await _campaignRepository.FindAsync(request.CampaignId);
             if (campaign is null)

@@ -12,7 +12,7 @@ namespace Splitify.Campaign.Domain
 
         public string? UserId { get; }
 
-        public bool IsActive { get; private set; }
+        public bool IsRunning { get; private set; }
 
         private readonly List<Link> _links;
         public IReadOnlyCollection<Link> Links => _links;
@@ -24,21 +24,21 @@ namespace Splitify.Campaign.Domain
             AddDomainEvent(new CampaignCreatedDomainEvent(id, createdAt, links));
         }
 
-        internal CampaignAggregate(string id, string? userId, bool isActive, DateTime createdAt, DateTime updatedAt) : base(id, createdAt, updatedAt)
+        internal CampaignAggregate(string id, string? userId, bool isRunning, DateTime createdAt, DateTime updatedAt) : base(id, createdAt, updatedAt)
         {
-            IsActive = isActive;
+            IsRunning = isRunning;
             UserId = userId;
             _links = new();
         }
 
         public Result Activate(IDateTimeService dateTimeService)
         {
-            if (IsActive)
+            if (IsRunning)
             {
                 return Result.Failure(DomainError.ValidationError(detail: "Campaign is already active"));
             }
 
-            IsActive = true;
+            IsRunning = true;
             UpdatedAt = dateTimeService.UtcNow;
 
             return Result.Success();
@@ -46,14 +46,14 @@ namespace Splitify.Campaign.Domain
 
         public Result Deactivate(IDateTimeService dateTimeService)
         {
-            if (!IsActive)
+            if (!IsRunning)
             {
                 return Result.Failure(DomainError.ValidationError(detail: "Campaign is already not active"));
             }
 
             var now = dateTimeService.UtcNow;
 
-            IsActive = false;
+            IsRunning = false;
             UpdatedAt = now;
 
             AddDomainEvent(new CampaignDeactivatedDomainEvent(now, Id));
