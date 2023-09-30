@@ -11,7 +11,8 @@
 
 html{
     color: var(--color-black);
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
 }
 
 html, body, h1, h2, h3, ul, ol{
@@ -123,4 +124,17 @@ input{
     padding: 2rem;
     background-color: var(--color-white);
     min-width: 30%;
+}
+
+/* Colors */
+.color-gray{
+    color: var(--color-gray);
+}
+
+.color-danger{
+    color: var(--color-danger);
+}
+
+.color-success{
+    color: var(--color-success);
 }

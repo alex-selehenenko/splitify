@@ -1,4 +1,23 @@
 const campaignsPath = 'https://localhost:7042/api/v1/campaigns';
+const redirectPath = 'https://localhost:5656/'
+
+function formatDateTime(inputDateTime) {
+    const dateTime = new Date(inputDateTime);
+    
+    const day = String(dateTime.getDate()).padStart(2, '0');
+    const month = String(dateTime.getMonth() + 1).padStart(2, '0');
+    const year = dateTime.getFullYear();
+    
+    const hours = String(dateTime.getHours()).padStart(2, '0');
+    const minutes = String(dateTime.getMinutes()).padStart(2, '0');
+    const seconds = String(dateTime.getSeconds()).padStart(2, '0');
+    
+    return `${day}.${month}.${year} ${hours}:${minutes}:${seconds}`;
+}
+
+function getRedirectUrl(id){
+    return redirectPath + id;
+}
 
 class Application{
     

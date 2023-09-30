@@ -6,7 +6,7 @@
     <title>Splitify | Campaigns</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../main.css">
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
@@ -77,10 +77,15 @@
                     .then(content => {
                         content = content.replace('{{title}}', campaign.title);
                         content = content.replace('{{status}}', campaign.isRunning ? 'Runnung' : 'Stopped');
-                        content = content.replace('{{link}}', campaign.link);
+                        content = content.replace('{{link}}', getRedirectUrl(campaign.id));
                         content = content.replace('{{destinationA}}', campaign.links[0]);
                         content = content.replace('{{destinationB}}', campaign.links[1]);
-                        content = content.replace('{{createdAt}}', campaign.createdAt);
+                        content = content.replace('{{createdAt}}', formatDateTime(campaign.createdAt));
+                        content = content.replace(
+                            '{{controlButton}}',
+                            campaign.isRunning
+                                ? '<i class="fa-solid fa-stop color-danger"></i>'
+                                : '<i class="fa-solid fa-play color-success"></i>');
 
                         let item = document.createElement('li');
                         
