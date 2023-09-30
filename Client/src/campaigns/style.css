@@ -38,7 +38,6 @@ main li input[type="checkbox"]:first-child{
 }
 
 mark{
-    background-color: var(--color-success);
     border-radius: 2rem;
     color: var(--color-white);
     font-size: 0.8rem;

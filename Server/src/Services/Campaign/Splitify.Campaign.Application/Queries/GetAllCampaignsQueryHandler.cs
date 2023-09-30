@@ -30,7 +30,8 @@ namespace Splitify.Campaign.Application.Queries
                 new CampaignResponseModel(
                     x.Id,
                     x.IsRunning,
-                    x.Links.Select(l => l.Url).ToArray())
+                    x.Links.Select(l => l.Url).ToArray(),
+                    x.CreatedAt)
                 );
         }
     }
