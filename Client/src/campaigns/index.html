@@ -69,9 +69,9 @@
                     .style.display = 'none';
             });
         
-        document.addEventListener(app.campaignsLoadedEventType, () => {
+        app.fetchCampaigns().then(data => {
             let list = document.getElementById('campaigns-list')
-            app.campaigns.forEach(campaign => {
+            data.forEach(campaign => {
                 fetch('components/_campaign.html')
                     .then(response => response.text())
                     .then(content => {
@@ -96,7 +96,7 @@
 
                         list.appendChild(item);
                     });
-            });
+                });
         });
     </script>
 </body>

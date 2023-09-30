@@ -61,26 +61,22 @@ nav :first-child{
 }
 
 /* Buttons */
-.btn-pill-secodary{
-    background-color: var(--color-secondary);
+.btn-pill-secodary, .btn-pill-danger{
     color: var(--color-white);
 
     border: none;
     border-radius: 2rem;
 
-    width: 75px;
-    padding: 0.5rem 0;
+    width: 100px;
+    padding: 0.6rem 0;
+}
+
+.btn-pill-secodary{
+    background-color: var(--color-secondary);
 }
 
 .btn-pill-danger{
     background-color: var(--color-danger);
-    color: var(--color-white);
-
-    border: none;
-    border-radius: 2rem;
-
-    width: 75px;
-    padding: 0.5rem 0;
 }
 
 .btn-link{
