@@ -30,6 +30,14 @@ namespace Splitify.Campaign.Infrastructure
             return await _context.Campaigns.FindAsync(id);
         }
 
+        public async Task<IEnumerable<CampaignAggregate>> GetAllAsync(string? userId, CancellationToken cancellationToken = default)
+        {
+            return await _context.Campaigns
+                .Include(x => x.Links)
+                .Where(x => x.UserId == userId)
+                .ToListAsync(cancellationToken);
+        }
+
         public void Remove(CampaignAggregate entity)
         {
             _context.Campaigns.Remove(entity);

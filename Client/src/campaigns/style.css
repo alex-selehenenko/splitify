@@ -1,3 +1,7 @@
+html{
+    background-color: var(--color-light);
+}
+
 header{
     margin-top: 4rem !important;
     padding-bottom: 1rem !important;

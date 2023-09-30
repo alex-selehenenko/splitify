@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Resulty;
 using Splitify.Campaign.Application.Commands;
+using Splitify.Campaign.Application.Queries;
 using Splitify.Shared.AspDotNet.Results;
 
 namespace Splitify.Campaign.Api.Controllers
@@ -24,6 +25,14 @@ namespace Splitify.Campaign.Api.Controllers
                 .MapAsync(
                     result => Created(result.CampaignId, result),
                     error => CreateProblemResponse(error));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAsync()
+        {
+            var campaigns = await _mediator.Send(new GetAllCampaignsQuery());
+            
+            return Ok(campaigns);
         }
 
         private IActionResult CreateProblemResponse(Error error)

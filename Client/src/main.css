@@ -10,7 +10,6 @@
 }
 
 html{
-    background-color: var(--color-light);
     color: var(--color-black);
     font-family: 'Open Sans', sans-serif;
 }

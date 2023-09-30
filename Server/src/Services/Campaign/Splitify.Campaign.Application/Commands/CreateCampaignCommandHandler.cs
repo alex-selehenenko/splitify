@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Resulty;
-using Splitify.Campaign.Application.Models;
+using Splitify.Campaign.Application.Commands.Models;
 using Splitify.Campaign.Domain;
 using Splitify.Campaign.Domain.Factories;
 using Splitify.Shared.Services.Identity;
