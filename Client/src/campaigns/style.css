@@ -1,0 +1,57 @@
+header{
+    margin-top: 4rem !important;
+    padding-bottom: 1rem !important;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 2px solid var(--color-gray) !important;
+}
+
+/* Campaign item */
+main li{
+    background-color: var(--color-white);
+    padding: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+main li:not(:first-child){
+    display: grid;
+    justify-items: start;
+    align-items: start;
+    grid-template-columns: 0.1fr 0.5fr 1fr 0.1fr 0.1fr;
+    row-gap: 2rem;
+}
+
+main li:hover:not(:first-child){
+    box-shadow: 0 0 0.3rem rgba(0, 0, 0, 0.2);
+}
+
+main li input[type="checkbox"]:first-child{
+    grid-row: 1/3;
+}
+
+mark{
+    background-color: var(--color-success);
+    border-radius: 2rem;
+    color: var(--color-white);
+    font-size: 0.8rem;
+    text-align: center;
+    width: 4rem;
+    padding: 0.2rem 0;
+}
+
+#create-campaign-modal{
+    display: none;
+}
+
+.modal form > *{
+    display: block;
+    margin: 1rem 0;
+}
+
+.modal input{
+    width: 100%;
+}

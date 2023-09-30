@@ -56,7 +56,7 @@ namespace Splitify.Campaign.Domain
             IsRunning = false;
             UpdatedAt = now;
 
-            AddDomainEvent(new CampaignDeactivatedDomainEvent(now, Id));
+            AddDomainEvent(new CampaignStoppedDomainEvent(now, Id));
 
             return Result.Success();
         }

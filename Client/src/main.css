@@ -1,0 +1,127 @@
+:root{
+    --color-primary: #EA9633;
+    --color-secondary: #298CE8;
+    --color-success: #5bd333;
+    --color-danger: #d33333;
+    --color-gray: #858585;
+    --color-black: #000;
+    --color-white: #fff;
+    --color-light: #efefef;
+}
+
+html{
+    background-color: var(--color-light);
+    color: var(--color-black);
+    font-family: 'Open Sans', sans-serif;
+}
+
+html, body, h1, h2, h3, ul, ol{
+    padding: 0;
+    margin: 0;
+}
+
+header, main, nav, .container{
+    margin: 0 auto;
+    width: 80%;
+}
+
+ul{
+    list-style-type: none;
+}
+
+a{
+    color: var(--color-black);
+    text-decoration: none;
+}
+
+/* Navigation */
+nav{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    padding: 1rem 0;
+}
+
+nav ul{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav :last-child{
+    justify-self: end;
+}
+
+nav :first-child{
+    justify-self: start;
+}
+
+.active{
+    border-bottom: 2px solid var(--color-primary);
+}
+
+/* Buttons */
+.btn-pill-secodary{
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+
+    border: none;
+    border-radius: 2rem;
+
+    width: 75px;
+    padding: 0.5rem 0;
+}
+
+.btn-pill-danger{
+    background-color: var(--color-danger);
+    color: var(--color-white);
+
+    border: none;
+    border-radius: 2rem;
+
+    width: 75px;
+    padding: 0.5rem 0;
+}
+
+.btn-link{
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+/* Forms */
+button[type="submit"]{
+    width: 150px !important;
+}
+
+input{
+    box-sizing: border-box;
+    padding: 0.5rem 0.5rem;
+}
+
+/* Modal windows */
+.modal{
+    position: absolute;
+    
+    z-index: 999;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal .modal-content{
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: var(--color-white);
+    min-width: 30%;
+}

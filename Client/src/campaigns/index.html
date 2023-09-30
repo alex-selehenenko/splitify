@@ -4,18 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Splitify | Campaigns</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../main.css">
 </head>
 <body>
-    <header></header>
-    <main>
-        <h2>Campaigns</h2>
+    <nav>
+        <a href="#">SPLITIFY</a>
         <ul>
-            <li></li>
-            <li>
-                <input type="checkbox">
-            </li>
+            <li><a href="/">Home</a></li>
+            <li><a href="" class="active">Campaigns</a></li>
+            <li><a href="">About</a></li>
+        </ul>
+        <button class="btn-link">Logout</button>
+    </nav>
+    <header>
+        <h1>Campaigns</h1>
+        <button id="btn-create-campaign" class="btn-pill-secodary">Create</button>
+    </header>
+    <main>
+        <ul>
+            <li><input type="checkbox"></li>
         </ul>
     </main>
     <footer></footer>
+    <aside id="create-campaign-modal" class="modal">
+        <div class="modal-content">
+            <form>
+                <label>
+                    Title<br>
+                    <input type="text" placeholder="Campaign title">
+                </label>        
+                <label>
+                    Destination A<br>
+                    <input type="url" placeholder="https://">
+                </label>        
+                <label>
+                    Destination B<br>
+                    <input type="url" placeholder="https://">
+                </label>    
+                <div>
+                    <button type="submit" id="btn-create-campaign-submit" class="btn-pill-secodary">Create campaign</button>
+                    <button id="btn-create-campaign-decline" class="btn-pill-danger">Decline</button>
+                </div>
+            </form>
+        </div>
+    </aside>
+    <script>
+        document.getElementById('btn-create-campaign')
+            .addEventListener('click', () => {
+                event.preventDefault();
+                document.getElementById('create-campaign-modal')
+                    .style.display = 'flex';
+            });
+
+        document.getElementById('btn-create-campaign-decline')
+            .addEventListener('click', () => {
+                event.preventDefault();
+                document.getElementById('create-campaign-modal')
+                    .style.display = 'none';
+            });
+    </script>
 </body>
 </html>
