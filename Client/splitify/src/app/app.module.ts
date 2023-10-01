@@ -3,16 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { CampaignsComponent } from './campaigns/campaigns.component';
-import { CampaignItemComponent } from './campaigns/campaign-item/campaign-item.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CampaignsComponent,
-    CampaignItemComponent
+    CampaignsComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

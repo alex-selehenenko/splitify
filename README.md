@@ -21,3 +21,4 @@ Splitify is a link builder and redirection service for A/B testing. It's designe
 ### Frontend
 - HTML & CSS
 - JavaScript
+- Angular & TypeScript

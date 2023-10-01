@@ -10,16 +10,44 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th></th>
+                    <th>On/Off</th>
                     <th>Status</th>
                     <th>Redirect</th>
                     <th>Destination A</th>
                     <th>Destination B</th>
                     <th>Created</th>
-                    <th></th>
+                    <th>Manage</th>
                 </tr>
             </thead>
-            
+            <tbody>
+                <tr *ngFor="let campaign of campaigns">
+                    <td>{{ campaign.name }}</td>
+                    <td>
+                        <label class="switch">
+                            <input type="checkbox" [checked]="resolveCheckboxStatus(campaign)">
+                            <span class="slider round"></span>
+                        </label>
+                    </td>
+                    <td>
+                        <span><i class="fa-solid fa-circle {{ resolveStatusClass(campaign) }}"></i>{{ resolveStatusName(campaign) }}</span>
+                    </td>
+                    <td>
+                        <a title="{{ resolveRedirectUrl(campaign) }}">{{ resolveRedirectUrl(campaign) }}</a>
+                    </td>
+                    <td>
+                        <a title="{{ campaign.links[0] }}">{{ campaign.links[0] }}</a>
+                    </td>
+                    <td>
+                        <a title="{{ campaign.links[1] }}">{{ campaign.links[1] }}</a>
+                    </td>
+                    <td>
+                        <time>{{ campaign.createdAt }}</time>
+                    </td>
+                    <td>
+                        <button><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </section>
 </main>
