@@ -1,4 +1,5 @@
 :root{
+    --color-orange: #EA9633;
     --color-blue: #2196F3;
     --color-green: #07a20b;
     --color-red: #d33333;
@@ -24,17 +25,12 @@ html{
     font-size: 14px;
 }
 
-main, header, nav ul, .container{
-    margin: 0 auto;
-    width: 80%;
-}
-
 a{
     color: var(--color-black);
     text-decoration: none;
 }
 
-/* controls */
+/* Controls */
 input, button{
     border-radius: 5px;
 }
@@ -115,71 +111,8 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 
-/* nav */
-nav{
-    background-color: var(--color-blue-dark);
-    color: var(--color-white);
-    padding: 0.7rem 0;
-}
-
-nav ul{
-    list-style-type: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-nav a{
-    display: block;
-    width: 1.5rem;
-    height: 1.5rem;
-    border-radius: 2px;
-    background-color: var(--color-white);
-    color: var(--color-blue-dark);
-    font-weight: 700;
-    text-align: center;
-    font-size: 1.3rem;
-}
-
-/* header */
-header{
-    padding: 2rem 0 0.5rem 0;
-}
-
-h1{
-    font-size: 1.5rem;
-}
-
-/* main */
-main > input{
-    width: 100%;
-}
-
-section{
-    background-color: var(--color-white);
-    border-radius: 5px;
-    margin-top: 3rem;
-    padding: 0.7rem;
-}
-
-caption{
-    border-bottom: 1px solid var(--color-light);
-    padding: 0 0.4rem 0.7rem 0.4rem;
-    text-align: left;
-}
-
-table{
-    border-collapse: collapse;
-}
-th, td{
-    padding: 0.7rem 0.4rem;
-}
-
-thead tr{
-    border-bottom: 2px solid var(--color-light);
-    text-align: left;
-}
-
-thead th{
-    padding: 1.2rem 0.4rem;
+/* Layout */
+header, main, footer, .container{
+    margin: 0 auto;
+    width: 90%;
 }

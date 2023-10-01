@@ -1,0 +1,62 @@
+/* header */
+header{
+    padding: 2rem 0 0.5rem 0;
+}
+
+h1{
+    font-size: 1.5rem;
+}
+
+/* main */
+main > input{
+    width: 100%;
+}
+
+section{
+    background-color: var(--color-white);
+    border-radius: 5px;
+    margin-top: 3rem;
+    padding: 0.7rem;
+}
+
+/* table */
+table{
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+}
+
+caption{
+    border-bottom: 1px solid var(--color-light);
+    padding: 0 0.4rem 0.7rem 0.4rem;
+    text-align: left;
+}
+
+th, td{
+    padding: 0.7rem 0.4rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+thead tr{
+    border-bottom: 2px solid var(--color-light);
+    text-align: left;
+}
+
+thead th{
+    padding: 1.2rem 0.4rem;
+}
+
+th:nth-child(2),
+td:nth-child(2),
+th:nth-child(7),
+td:nth-child(7),
+th:nth-child(8),
+td:nth-child(8){
+  width: 7%;
+}
+
+tbody tr:hover{
+    background-color: var(--color-lighter);
+}

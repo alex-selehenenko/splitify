@@ -1,0 +1,17 @@
+<tr>
+    <td>{{ campaign.name }}</td>
+    <td>
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+        </label>
+    </td>
+    <td>
+        <span><i class="fa-solid fa-circle {{ resolveStatusClass() }}"></i>{{ resolveStatusName() }}</span>
+    </td>
+    <td><a title="{{ resolveRedirectUrl() }}">{{ resolveRedirectUrl() }}</a></td>
+    <td><a title="{{ campaign.links[0] }}">{{ campaign.links[0] }}</a></td>
+    <td><a title="{{ campaign.links[0] }}">{{ campaign.links[0] }}</a></td>
+    <td><time>{{ campaign.createdAt }}</time></td>
+    <td><button><i class="fa-solid fa-trash"></i></button></td>
+</tr>

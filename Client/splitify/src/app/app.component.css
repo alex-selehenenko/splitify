@@ -1,0 +1,25 @@
+/* Navigation */
+nav{
+    background-color: var(--color-blue-dark);
+    color: var(--color-white);
+    padding: 0.7rem 0;
+}
+
+nav ul{
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav a{
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 2px;
+    background-color: var(--color-white);
+    color: var(--color-blue-dark);
+    font-weight: 700;
+    text-align: center;
+    font-size: 1.3rem;
+}
