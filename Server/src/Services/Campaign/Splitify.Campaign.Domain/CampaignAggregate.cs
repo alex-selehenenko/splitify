@@ -10,35 +10,51 @@ namespace Splitify.Campaign.Domain
     {
         public const int MinLinksCount = 2;
 
+        public string Name { get; }
+
         public string? UserId { get; }
 
-        public bool IsRunning { get; private set; }
+        public CampaignStatus Status { get; private set; }
 
         private readonly List<Link> _links;
         public IReadOnlyCollection<Link> Links => _links;
 
-        internal CampaignAggregate(string id, string? userId, DateTime createdAt, List<Link> links)
-            : this(id, userId, false, createdAt, createdAt)
+        internal CampaignAggregate(string id, string name, string? userId, DateTime createdAt, List<Link> links)
+            : this(id, name, userId, CampaignStatus.Preparing, createdAt, createdAt)
         {
             _links = links;
             AddDomainEvent(new CampaignCreatedDomainEvent(id, createdAt, links));
         }
 
-        internal CampaignAggregate(string id, string? userId, bool isRunning, DateTime createdAt, DateTime updatedAt) : base(id, createdAt, updatedAt)
+        internal CampaignAggregate(string id, string name, string? userId, CampaignStatus status, DateTime createdAt, DateTime updatedAt) : base(id, createdAt, updatedAt)
         {
-            IsRunning = isRunning;
+            Status = status;
             UserId = userId;
+            Name = name;
             _links = new();
+        }
+
+        public Result Preparing(IDateTimeService dateTimeService)
+        {
+            if (Status == CampaignStatus.Preparing)
+            {
+                return Result.Failure(DomainError.ValidationError(detail: "Campaign is already in preparing status"));
+            }
+
+            Status = CampaignStatus.Preparing;
+            UpdatedAt = dateTimeService.UtcNow;
+
+            return Result.Success();
         }
 
         public Result Activate(IDateTimeService dateTimeService)
         {
-            if (IsRunning)
+            if (Status == CampaignStatus.Active)
             {
                 return Result.Failure(DomainError.ValidationError(detail: "Campaign is already active"));
             }
 
-            IsRunning = true;
+            Status = CampaignStatus.Active;
             UpdatedAt = dateTimeService.UtcNow;
 
             return Result.Success();
@@ -46,14 +62,14 @@ namespace Splitify.Campaign.Domain
 
         public Result Deactivate(IDateTimeService dateTimeService)
         {
-            if (!IsRunning)
+            if (Status == CampaignStatus.Inactive)
             {
-                return Result.Failure(DomainError.ValidationError(detail: "Campaign is already not active"));
+                return Result.Failure(DomainError.ValidationError(detail: "Campaign is already inactive"));
             }
 
             var now = dateTimeService.UtcNow;
 
-            IsRunning = false;
+            Status = CampaignStatus.Inactive;
             UpdatedAt = now;
 
             AddDomainEvent(new CampaignStoppedDomainEvent(now, Id));

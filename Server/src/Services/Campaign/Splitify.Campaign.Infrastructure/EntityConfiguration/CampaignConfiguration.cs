@@ -11,7 +11,10 @@ namespace Splitify.Campaign.Infrastructure.EntityConfiguration
         {
             base.Configure(builder);
 
-            builder.Property(x => x.IsRunning)
+            builder.Property(x => x.Name)
+                .UsePropertyAccessMode(PropertyAccessMode.Property);
+
+            builder.Property(x => x.Status)
                 .UsePropertyAccessMode(PropertyAccessMode.Property);
 
             builder.Property(x => x.UserId)

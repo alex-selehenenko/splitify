@@ -35,7 +35,7 @@ namespace Splitify.Campaign.Infrastructure
             return await _context.Campaigns
                 .Include(x => x.Links)
                 .Where(x => x.UserId == userId)
-                .OrderBy(x => x.IsRunning == true)
+                .OrderBy(x => x.Status == CampaignStatus.Active)
                 .OrderByDescending(x => x.CreatedAt)
                 .ToListAsync(cancellationToken);
         }

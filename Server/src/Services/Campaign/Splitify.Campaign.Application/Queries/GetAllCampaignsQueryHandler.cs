@@ -2,11 +2,6 @@
 using Splitify.Campaign.Application.Queries.Models;
 using Splitify.Campaign.Domain;
 using Splitify.Shared.Services.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Splitify.Campaign.Application.Queries
 {
@@ -29,7 +24,8 @@ namespace Splitify.Campaign.Application.Queries
             return campaigns.Select(x =>
                 new CampaignResponseModel(
                     x.Id,
-                    x.IsRunning,
+                    x.Name,
+                    x.Status,
                     x.Links.Select(l => l.Url).ToArray(),
                     x.CreatedAt)
                 );

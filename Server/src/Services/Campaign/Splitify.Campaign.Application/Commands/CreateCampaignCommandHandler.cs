@@ -50,7 +50,7 @@ namespace Splitify.Campaign.Application.Commands
             }
             while (await _campaignRepository.ExistsAsync(campaignId, cancellationToken));
 
-            var campaignCreationResult = CampaignFactory.Create(campaignId, _userService.GetUserId(), links, _dateTimeService);
+            var campaignCreationResult = CampaignFactory.Create(campaignId, request.Name, _userService.GetUserId(), links, _dateTimeService);
 
             if (campaignCreationResult.IsFailure)
             {

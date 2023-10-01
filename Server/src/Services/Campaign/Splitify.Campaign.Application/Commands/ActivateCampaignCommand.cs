@@ -3,5 +3,5 @@ using Resulty;
 
 namespace Splitify.Campaign.Application.Commands
 {
-    public record RunCampaignCommand(string CampaignId) : IRequest<Result>;
+    public record ActivateCampaignCommand(string CampaignId) : IRequest<Result>;
 }
