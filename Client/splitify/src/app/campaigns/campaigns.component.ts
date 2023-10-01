@@ -1,38 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Campaign } from 'src/core/models/campaign.model';
+import { CampaignService } from 'src/core/services/campaign.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-campaigns',
   templateUrl: './campaigns.component.html',
   styleUrls: ['./campaigns.component.css']
 })
-export class CampaignsComponent {
+export class CampaignsComponent implements OnInit{
   campaigns: Campaign[];
 
-  constructor(){
-    let c1 = new Campaign();
-    c1.id = 'bdyujw23erS';
-    c1.links = ['https://powercoders.org', 'https://google.com'];
-    c1.name = 'First Campaign';
-    c1.status = 2;
+  constructor(private campaignService: CampaignService){}
 
-    let c2 = new Campaign();
-    c2.id = 'bdyujw23erS';
-    c2.links = ['https://powercoders.org', 'https://google.com'];
-    c2.name = 'First Campaign';
-    c2.status = 1;
-
-    let c3 = new Campaign();
-    c3.id = 'bdyujw23erS';
-    c3.links = ['https://powercoders.org', 'https://google.com'];
-    c3.name = 'First Campaign';
-    c3.status = 2;
-
-    this.campaigns = [c1, c2, c3];
+  ngOnInit(){
+    this.campaignService.fetchCampaigns()
+      .then(data => data.json())
+      .then(json => this.campaigns = json);
   }
 
   resolveRedirectUrl(campaign: Campaign){
-    return 'https://splitify.com/' + campaign.id;
+    return environment.redirectUrl + campaign.id;
   }
 
   resolveStatusName(campaign: Campaign){
