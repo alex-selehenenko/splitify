@@ -1,7 +1,7 @@
-export class Campaign{
+export class CampaignGet{
     id: string;
     name: string;
-    links: string[];
+    destinations: string[];
     status: number;
     createdAt: Date;
 }

@@ -5,7 +5,12 @@
     <section>
         <table width="100%">
             <caption>
-                <button class="btn btn-success">Create</button>
+                <button class="btn btn-success" (click)="onCreateCampaign()">Create</button>
+                <app-create-campaign
+                    *ngIf="displayCreateForm"
+                    (campaignCreated)="onCampaignCreated()"
+                    (declined)="onCreateCampaignDeclined()">
+                </app-create-campaign>
             </caption>
             <thead>
                 <tr>
@@ -35,10 +40,10 @@
                         <a title="{{ resolveRedirectUrl(campaign) }}">{{ resolveRedirectUrl(campaign) }}</a>
                     </td>
                     <td>
-                        <a title="{{ campaign.links[0] }}">{{ campaign.links[0] }}</a>
+                        <a title="{{ campaign.destinations[0] }}">{{ campaign.destinations[0] }}</a>
                     </td>
                     <td>
-                        <a title="{{ campaign.links[1] }}">{{ campaign.links[1] }}</a>
+                        <a title="{{ campaign.destinations[1] }}">{{ campaign.destinations[1] }}</a>
                     </td>
                     <td>
                         <time>{{ campaign.createdAt }}</time>

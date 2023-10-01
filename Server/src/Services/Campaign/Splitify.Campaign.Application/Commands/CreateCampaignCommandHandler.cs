@@ -32,7 +32,7 @@ namespace Splitify.Campaign.Application.Commands
         public async Task<Result<CampaignModel>> Handle(CreateCampaignCommand request, CancellationToken cancellationToken)
         {
             var links = new List<Link>();
-            foreach (var url in request.Urls)
+            foreach (var url in request.Destinations)
             {
                 var linkCreationResult = LinkFactory.Create(url, _dateTimeService);
                 if (linkCreationResult.IsFailure)

@@ -4,5 +4,5 @@ using Splitify.Campaign.Application.Commands.Models;
 
 namespace Splitify.Campaign.Application.Commands
 {
-    public record CreateCampaignCommand(string Name, string[] Urls) : IRequest<Result<CampaignModel>>;
+    public record CreateCampaignCommand(string Name, string[] Destinations) : IRequest<Result<CampaignModel>>;
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Campaign } from 'src/core/models/campaign.model';
+import { CampaignGet } from 'src/core/models/campaign.get.model';
 import { CampaignService } from 'src/core/services/campaign.service';
 import { environment } from 'src/environments/environment';
 
@@ -9,21 +9,32 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./campaigns.component.css']
 })
 export class CampaignsComponent implements OnInit{
-  campaigns: Campaign[];
+  campaigns: CampaignGet[];
+  displayCreateForm = false;
 
   constructor(private campaignService: CampaignService){}
 
   ngOnInit(){
-    this.campaignService.fetchCampaigns()
-      .then(data => data.json())
-      .then(json => this.campaigns = json);
+    this.fetchCampaigns();
   }
 
-  resolveRedirectUrl(campaign: Campaign){
+  onCreateCampaign(){
+    this.displayCreateForm = true;
+  }
+
+  onCampaignCreated() {
+    this.fetchCampaigns();
+  }
+
+  onCreateCampaignDeclined(){
+    this.displayCreateForm = false;
+  }
+
+  resolveRedirectUrl(campaign: CampaignGet){
     return environment.redirectUrl + campaign.id;
   }
 
-  resolveStatusName(campaign: Campaign){
+  resolveStatusName(campaign: CampaignGet){
     switch (campaign.status){
       case 0: return 'Preparing';
       case 1: return 'Active';
@@ -32,7 +43,7 @@ export class CampaignsComponent implements OnInit{
     }
   }
 
-  resolveStatusClass(campaign: Campaign){
+  resolveStatusClass(campaign: CampaignGet){
     switch (campaign.status){
       case 0: return 'status-preparing';
       case 1: return 'status-active';
@@ -41,7 +52,16 @@ export class CampaignsComponent implements OnInit{
     }
   }
 
-  resolveCheckboxStatus(campaign: Campaign){
+  resolveCheckboxStatus(campaign: CampaignGet){
     return campaign.status === 0 || campaign.status === 1;
+  }
+
+  private fetchCampaigns(){
+    this.campaignService.fetchCampaigns()
+      .then(data => data.json())
+      .then(json => {
+        this.campaigns = json;
+        this.displayCreateForm = false;
+      });
   }
 }

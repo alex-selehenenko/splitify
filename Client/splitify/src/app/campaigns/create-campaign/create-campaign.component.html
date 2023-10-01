@@ -1,0 +1,15 @@
+<aside>
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+        <label for="name">Campaign name</label>
+        <input type="text" id="name" name="name" placeholder="Your campaign name" ngModel>
+        
+        <label for="destinationA">Destination A</label>            
+        <input type="url" id="destinationA" name="destinationA" placeholder="https://..." required ngModel>        
+        
+        <label for="destinationB">Destination B</label>
+        <input type="url" id="destinationB" name="destinationB" placeholder="https://..." required ngModel> 
+        
+        <button class="btn-success" type="submit" [disabled]="!form.valid">Create</button>
+        <button class="btn-danger" type="button" (click)="declined.emit()">Decline</button>
+    </form>
+</aside>
