@@ -1,3 +1,4 @@
+/* Text with scroll */
 textarea{
     border: none;
     background-color: transparent;
@@ -8,6 +9,8 @@ textarea{
     font-size: inherit;
     color: inherit;
     white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: auto;
     outline: none;
     width: 100%;
 }
@@ -26,6 +29,7 @@ textarea::-webkit-scrollbar-track {
     background-color: var(--color-scrollbar-track);
 }
 
+/* Statuses */
 .status-active{
     color: var(--color-green);
 }
@@ -44,6 +48,10 @@ span i{
 }
 
 /* switch button */
+label{
+    justify-self: center;
+}
+
 .switch {
     position: relative;
     display: inline-block;
@@ -97,4 +105,13 @@ input:checked + .slider:before {
 
 .slider.round:before {
     border-radius: 50%;
+}
+
+/* Manage button */
+button{
+    justify-self: center;
+}
+
+button:hover{
+    background-color: var(--color-light);
 }
