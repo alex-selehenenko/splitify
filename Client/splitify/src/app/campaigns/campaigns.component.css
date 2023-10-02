@@ -1,6 +1,6 @@
 /* header */
 header{
-    padding: 2rem 0 3rem 0;
+    padding: 2rem 0;
 }
 
 h1{
@@ -8,107 +8,38 @@ h1{
 }
 
 /* main */
+main{
+  border-radius: 5px 5px 0 0;
+  background-color: var(--color-white);
+  padding: 0 0.7rem;
+}
+
 main > input{
     width: 100%;
 }
 
 section{
-    background-color: var(--color-white);
-    border-radius: 5px;
-    padding: 0.7rem;
-}
-
-/* table */
-table{
-    border-collapse: collapse;
-    table-layout: fixed;
-    width: 100%;
-}
-
-caption{
-    border-bottom: 1px solid var(--color-light);
-    padding: 0 0.4rem 0.7rem 0.4rem;
-    text-align: left;
-}
-
-th, td{
-    padding: 0.7rem 0.4rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-thead tr{
-    border-bottom: 2px solid var(--color-light);
-    text-align: left;
-}
-
-thead th{
-    padding: 1.2rem 0.4rem;
-}
-
-tbody tr{
+  padding: 0.7rem 0;
     border-bottom: 1px solid var(--color-light);
 }
 
-th:nth-child(2),
-td:nth-child(2),
-th:nth-child(7),
-td:nth-child(7),
-th:nth-child(8),
-td:nth-child(8){
-  width: 7%;
+/* Grid */
+ul{
+  font-weight: bold;
+  border-bottom: 2px solid var(--color-light);
 }
 
-th:hover, tbody tr:hover{
-    background-color: var(--color-lighter);
+.grid-hover:hover{
+  background-color: var(--color-lighter);
 }
 
-/* Campaign Item */
-.status-active{
-    color: var(--color-green);
+.grid{
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  min-width: 100%;
+  justify-items: start;
+  align-items: center;
+  padding: 1rem 0.2rem;
+  border-bottom: 1px solid var(--color-light);
 }
-
-.status-inactive{
-    color: var(--color-gray);
-}
-
-.status-preparing{
-    color: var(--color-orange);
-}
-
-td span i{
-    font-size: 0.7rem;
-    margin-right: 1rem;
-}
-
-/* Mobile version */
-@media screen and (max-width: 600px) {
-    table {
-      border: 0;
-    }
-    table thead {
-      display: none;
-    }
-    table tr {
-      margin-bottom: 10px;
-      display: block;
-      border-bottom: 2px solid #ddd;
-    }
-    table td {
-      display: block;
-      text-align: right;
-      font-size: 13px;
-      border-bottom: 1px dotted #ccc;
-      border-right: 1px solid transparent;
-    }
-    table td:last-child {
-      border-bottom: 0;
-    }
-    table td:before {
-      content: attr(data-label);
-      float: left;
-      text-transform: uppercase;
-      font-weight: bold;
-    }
-  }

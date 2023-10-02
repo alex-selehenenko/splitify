@@ -1,0 +1,33 @@
+<span readonly>
+    {{ campaign.name }}
+</span>
+
+<label class="switch">
+    <input type="checkbox" [checked]="resolveCheckboxStatus(campaign)">
+    <span class="slider round"></span>
+</label>
+
+<span>
+    <i class="fa-solid fa-circle {{ resolveStatusClass(campaign) }}"></i>
+    {{ resolveStatusName(campaign) }}
+</span>
+
+<textarea readonly>
+    {{ resolveRedirectUrl(campaign) }}
+</textarea>
+
+<textarea readonly>
+    {{ campaign.destinations[0] }}
+</textarea>
+
+<textarea readonly>
+    {{ campaign.destinations[1] }}
+</textarea>
+
+<time>
+    {{ resolveDateTime(campaign.createdAt) }}
+</time>
+
+<button>
+    <i class="fa-solid fa-trash"></i>
+</button>

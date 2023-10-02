@@ -3,22 +3,24 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { CampaignsComponent } from './campaigns/campaigns.component';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { CreateCampaignComponent } from './campaigns/create-campaign/create-campaign.component';
 import { FormsModule } from '@angular/forms';
+import { CampaignItemComponent } from './campaigns/campaign-item/campaign-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CampaignsComponent,
-    CreateCampaignComponent
+    CreateCampaignComponent,
+    CampaignItemComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     CommonModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,56 +3,27 @@
 </header>
 <main>
     <section>
-        <table width="100%">
-            <caption>
-                <button class="btn btn-success" (click)="onCreateCampaign()">Create</button>
-                <app-create-campaign
-                    *ngIf="displayCreateForm"
-                    (campaignCreated)="onCampaignCreated()"
-                    (declined)="onCreateCampaignDeclined()">
-                </app-create-campaign>
-            </caption>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>On/Off</th>
-                    <th>Status</th>
-                    <th>Redirect</th>
-                    <th>Destination A</th>
-                    <th>Destination B</th>
-                    <th>Created</th>
-                    <th>Manage</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let campaign of campaigns">
-                    <td>{{ campaign.name }}</td>
-                    <td>
-                        <label class="switch">
-                            <input type="checkbox" [checked]="resolveCheckboxStatus(campaign)">
-                            <span class="slider round"></span>
-                        </label>
-                    </td>
-                    <td>
-                        <span><i class="fa-solid fa-circle {{ resolveStatusClass(campaign) }}"></i>{{ resolveStatusName(campaign) }}</span>
-                    </td>
-                    <td>
-                        <a title="{{ resolveRedirectUrl(campaign) }}">{{ resolveRedirectUrl(campaign) }}</a>
-                    </td>
-                    <td>
-                        <a title="{{ campaign.destinations[0] }}">{{ campaign.destinations[0] }}</a>
-                    </td>
-                    <td>
-                        <a title="{{ campaign.destinations[1] }}">{{ campaign.destinations[1] }}</a>
-                    </td>
-                    <td>
-                        <time>{{ campaign.createdAt }}</time>
-                    </td>
-                    <td>
-                        <button><i class="fa-solid fa-trash"></i></button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <button class="btn btn-success" (click)="onCreateCampaign()">Create</button>
+        <app-create-campaign
+            *ngIf="displayCreateForm"
+            (campaignCreated)="onCampaignCreated()"
+            (declined)="onCreateCampaignDeclined()">
+        </app-create-campaign>
+    </section>
+    <section>
+        <ul class="grid">
+            <li>Name</li>
+            <li>On/Off</li>
+            <li>Status</li>
+            <li>Redirect</li>
+            <li>Destination A</li>
+            <li>Destination B</li>
+            <li>Created</li>
+            <li>Manage</li>
+        </ul>
+        <app-campaign-item
+            class="grid grid-hover" 
+            *ngFor="let campaign of campaigns" [campaign]="campaign">
+        </app-campaign-item>
     </section>
 </main>
