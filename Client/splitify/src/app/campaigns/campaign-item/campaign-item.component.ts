@@ -1,6 +1,8 @@
 import { DatePipe } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { CampaignGet } from 'src/core/models/campaign.get.model';
+import { CampaignPatch } from 'src/core/models/campaign.patch.model';
+import { CampaignService } from 'src/core/services/campaign.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -9,9 +11,26 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./campaign-item.component.css']
 })
 export class CampaignItemComponent {
-  @Input() campaign: CampaignGet;
+  private readonly statusPreparing = 0;
+  private readonly statusActive = 1;
+  private readonly statusInactive = 2;
 
-  constructor(private datePipe: DatePipe){}
+  @Input() campaign: CampaignGet;
+  @Output() campaignChanged: EventEmitter<CampaignGet> = new EventEmitter<CampaignGet>();
+  
+  constructor(private datePipe: DatePipe, private campaignService: CampaignService){}
+
+  onCampaignStatusChanged(event: Event){
+    const checkbox = event.target as HTMLInputElement;
+    
+    let campaignPatch = new CampaignPatch();    
+    campaignPatch.status = checkbox.checked ? this.statusInactive : this.statusActive;
+    
+    this.campaignService.changeCampaignStatus(this.campaign.id, campaignPatch)
+      .then(response => {
+          this.campaignChanged.emit(this.campaign);
+        });
+  }
 
   resolveRedirectUrl(campaign: CampaignGet){
     return environment.redirectUrl + campaign.id;
@@ -19,24 +38,24 @@ export class CampaignItemComponent {
 
   resolveStatusName(campaign: CampaignGet){
     switch (campaign.status){
-      case 0: return 'Preparing';
-      case 1: return 'Active';
-      case 2: return 'Inactive';
+      case this.statusPreparing: return 'Preparing';
+      case this.statusActive: return 'Active';
+      case this.statusInactive: return 'Inactive';
       default: return 'Inactive';
     }
   }
 
   resolveStatusClass(campaign: CampaignGet){
     switch (campaign.status){
-      case 0: return 'status-preparing';
-      case 1: return 'status-active';
-      case 2: return 'status-inactive';
+      case this.statusPreparing: return 'status-preparing';
+      case this.statusActive: return 'status-active';
+      case this.statusInactive: return 'status-inactive';
       default: return 'status-inactive';
     }
   }
 
   resolveCheckboxStatus(campaign: CampaignGet){
-    return campaign.status === 0 || campaign.status === 1;
+    return campaign.status === this.statusPreparing || campaign.status === this.statusActive;
   }
 
   resolveDateTime(inputDate: Date): string {

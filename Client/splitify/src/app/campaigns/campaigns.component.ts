@@ -26,6 +26,15 @@ export class CampaignsComponent implements OnInit{
     this.fetchCampaigns();
   }
 
+  onCampaignChanged(campaign: CampaignGet){
+    this.campaignService.fetchCampaign(campaign.id)
+    .then(response => response.json())
+    .then(json => {
+        const index = this.campaigns.findIndex(x => x.id === campaign.id);
+        this.campaigns[index] = json;
+    });
+  }
+
   onCreateCampaignDeclined(){
     this.displayCreateForm = false;
   }
