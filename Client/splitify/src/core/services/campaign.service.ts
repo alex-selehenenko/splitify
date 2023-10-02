@@ -19,7 +19,11 @@ export class CampaignService{
           });
     }
 
-    deactivateCampaign(id: string, campaign: CampaignPatch){
+    fetchCampaign(id: string){
+      return fetch(environment.campaignServiceApiUrl + 'campaigns/' + id);
+    }
+
+    changeCampaignStatus(id: string, campaign: CampaignPatch){
       return fetch(environment.campaignServiceApiUrl + 'campaigns/' + id ,{
         method: 'PATCH',
         body: JSON.stringify(campaign),

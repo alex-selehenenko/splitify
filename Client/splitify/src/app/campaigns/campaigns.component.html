@@ -23,7 +23,8 @@
         </ul>
         <app-campaign-item
             class="grid grid-hover" 
-            *ngFor="let campaign of campaigns" [campaign]="campaign">
+            *ngFor="let campaign of campaigns" [campaign]="campaign"
+            (campaignChanged)="onCampaignChanged($event)">
         </app-campaign-item>
     </section>
 </main>
