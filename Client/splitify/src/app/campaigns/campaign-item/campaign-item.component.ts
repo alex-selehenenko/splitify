@@ -1,6 +1,8 @@
 import { DatePipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { CampaignGet } from 'src/core/models/campaign.get.model';
+import { CampaignPatch } from 'src/core/models/campaign.patch.model';
+import { CampaignService } from 'src/core/services/campaign.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -11,7 +13,17 @@ import { environment } from 'src/environments/environment';
 export class CampaignItemComponent {
   @Input() campaign: CampaignGet;
 
-  constructor(private datePipe: DatePipe){}
+  constructor(private datePipe: DatePipe, private campaignService: CampaignService){}
+
+  onCampaignStatusChanged(event: Event){
+    const checkbox = event.target as HTMLInputElement;
+    let campaignPatch = new CampaignPatch();
+    
+    if (!checkbox.checked){
+        campaignPatch.status = 2;
+        this.campaignService.deactivateCampaign(this.campaign.id, campaignPatch);
+    }
+  }
 
   resolveRedirectUrl(campaign: CampaignGet){
     return environment.redirectUrl + campaign.id;
