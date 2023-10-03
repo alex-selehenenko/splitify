@@ -3,6 +3,7 @@ using Splitify.BuildingBlocks.Domain;
 using Splitify.BuildingBlocks.Domain.Errors;
 using Splitify.Redirect.Domain.Events;
 using Splitify.Shared.Services.Misc;
+using Splitify.Shared.Services.Misc.Implementation;
 
 namespace Splitify.Redirect.Domain
 {
@@ -51,6 +52,15 @@ namespace Splitify.Redirect.Domain
             destination.RegisterUniqueVisitor(dateTimeService);
 
             return Result.Success(destination);
+        }
+
+        public Result DeleteRedirect(IDateTimeService dateTimeService)
+        {
+            _destinations.Clear();
+            AddDomainEvent(new RedirectDeletedDomainEvent(Id, dateTimeService.UtcNow));
+
+            return Result.Success();
+
         }
     }
 }

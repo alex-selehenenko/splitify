@@ -55,18 +55,9 @@ namespace Splitify.Campaign.Domain
                 return Result.Failure(DomainError.ValidationError(detail: "Campaign is already active"));
             }
 
-            IDomainEvent? ev = newStatus switch
-            {
-                CampaignStatus.Active => new CampaignChangedStatusToActiveDomainEvent(dateTimeService.UtcNow, Id),
-                CampaignStatus.Inactive => new CampaignChangedStatusToInactiveDomainEvent(dateTimeService.UtcNow, Id),
-                _ => null
-            };
+            Status = CampaignStatus.Preparing;
 
-            if (ev is null)
-            {
-                return Result.Failure(DomainError.ValidationError(detail: "Invalid Status"));
-            }
-
+            var ev = new CampaignStatusChangedDomainEvent(dateTimeService.UtcNow, Id, newStatus);
             AddDomainEvent(ev);
 
             return Result.Success();
@@ -96,8 +87,6 @@ namespace Splitify.Campaign.Domain
 
             Status = CampaignStatus.Inactive;
             UpdatedAt = now;
-
-            AddDomainEvent(new CampaignChangedStatusToInactiveDomainEvent(now, Id));
 
             return Result.Success();
         }
