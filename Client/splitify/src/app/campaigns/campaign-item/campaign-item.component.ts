@@ -14,6 +14,7 @@ export class CampaignItemComponent {
   private readonly statusPreparing = 0;
   private readonly statusActive = 1;
   private readonly statusInactive = 2;
+  private readonly statusDeactivating = 3;
 
   @Input() campaign: CampaignGet;
   @Output() campaignChanged: EventEmitter<CampaignGet> = new EventEmitter<CampaignGet>();
@@ -41,6 +42,7 @@ export class CampaignItemComponent {
       case this.statusPreparing: return 'Preparing';
       case this.statusActive: return 'Active';
       case this.statusInactive: return 'Inactive';
+      case this.statusDeactivating: return 'Deactivating';
       default: return 'Inactive';
     }
   }
@@ -50,6 +52,7 @@ export class CampaignItemComponent {
       case this.statusPreparing: return 'status-preparing';
       case this.statusActive: return 'status-active';
       case this.statusInactive: return 'status-inactive';
+      case this.statusDeactivating: return 'status-deactivating';
       default: return 'status-inactive';
     }
   }
