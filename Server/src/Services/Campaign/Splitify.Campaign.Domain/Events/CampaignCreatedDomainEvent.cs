@@ -15,7 +15,7 @@ namespace Splitify.Campaign.Domain.Events
         {
             CampaignId = campaignId;
             OccuredAt = occuredAt;
-            Links = links.Select(x => new LinkDto() { Id = x.Id, Url = x.Url }).ToList();
+            Links = links.Select(x => new LinkDto(x.Id, x.Url)).ToList();
         }
     }
 }

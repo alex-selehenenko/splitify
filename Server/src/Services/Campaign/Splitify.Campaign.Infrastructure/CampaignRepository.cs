@@ -27,7 +27,9 @@ namespace Splitify.Campaign.Infrastructure
 
         public async Task<CampaignAggregate?> FindAsync(string id, CancellationToken cancellationToken = default)
         {
-            return await _context.Campaigns.FindAsync(id);
+            return await _context.Campaigns
+                .Include(x => x.Links)
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<IEnumerable<CampaignAggregate>> GetAllAsync(string? userId, CancellationToken cancellationToken = default)

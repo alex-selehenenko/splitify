@@ -55,6 +55,8 @@ namespace Splitify.Redirect.Api
                 });
 
                 c.AddConsumer<CampaignCreatedConsumer>();
+                c.AddConsumer<CampaignActivatedConsumer>();
+                c.AddConsumer<CampaignDeactivatedConsumer>();
             });
 
             var app = builder.Build();

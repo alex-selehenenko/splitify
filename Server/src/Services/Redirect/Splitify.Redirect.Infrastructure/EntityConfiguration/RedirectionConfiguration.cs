@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Splitify.Redirect.Domain;
 using Splitify.Redirect.Infrastructure.EntityConfiguration.Abstractions;
 
@@ -12,7 +13,8 @@ namespace Splitify.Redirect.Infrastructure.EntityConfiguration
             
             builder.HasMany(e => e.Destinations)
                 .WithOne()
-                .HasForeignKey("RedirectId");
+                .HasForeignKey("RedirectId")
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

@@ -24,7 +24,7 @@ export class CampaignItemComponent {
     const checkbox = event.target as HTMLInputElement;
     
     let campaignPatch = new CampaignPatch();    
-    campaignPatch.status = checkbox.checked ? this.statusInactive : this.statusActive;
+    campaignPatch.status = checkbox.checked ? this.statusActive : this.statusInactive;
     
     this.campaignService.changeCampaignStatus(this.campaign.id, campaignPatch)
       .then(response => {
