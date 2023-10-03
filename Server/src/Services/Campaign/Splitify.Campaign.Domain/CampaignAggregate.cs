@@ -1,6 +1,7 @@
 ﻿using Resulty;
 using Splitify.BuildingBlocks.Domain;
 using Splitify.BuildingBlocks.Domain.Errors;
+using Splitify.BuildingBlocks.Domain.Events;
 using Splitify.Campaign.Domain.Events;
 using Splitify.Shared.Services.Misc;
 
@@ -47,6 +48,30 @@ namespace Splitify.Campaign.Domain
             return Result.Success();
         }
 
+        public Result ChangeStatus(CampaignStatus newStatus, IDateTimeService dateTimeService)
+        {
+            if (!CanChangeStatus(newStatus))
+            {
+                return Result.Failure(DomainError.ValidationError(detail: "Campaign is already active"));
+            }
+
+            IDomainEvent? ev = newStatus switch
+            {
+                CampaignStatus.Active => new CampaignChangedStatusToActiveDomainEvent(dateTimeService.UtcNow, Id),
+                CampaignStatus.Inactive => new CampaignChangedStatusToInactiveDomainEvent(dateTimeService.UtcNow, Id),
+                _ => null
+            };
+
+            if (ev is null)
+            {
+                return Result.Failure(DomainError.ValidationError(detail: "Invalid Status"));
+            }
+
+            AddDomainEvent(ev);
+
+            return Result.Success();
+        }
+
         public Result Activate(IDateTimeService dateTimeService)
         {
             if (Status == CampaignStatus.Active)
@@ -72,7 +97,7 @@ namespace Splitify.Campaign.Domain
             Status = CampaignStatus.Inactive;
             UpdatedAt = now;
 
-            AddDomainEvent(new CampaignStoppedDomainEvent(now, Id));
+            AddDomainEvent(new CampaignChangedStatusToInactiveDomainEvent(now, Id));
 
             return Result.Success();
         }
@@ -81,6 +106,16 @@ namespace Splitify.Campaign.Domain
         {
             UpdatedAt = dateTimeService.UtcNow;
             AddDomainEvent(new CampaignDeletedDomainEvent(dateTimeService.UtcNow, Id));
+        }
+
+        public bool CanChangeStatus(CampaignStatus newStatus)
+        {
+            if (Status == CampaignStatus.Active || Status == CampaignStatus.Preparing)
+            {
+                return newStatus == CampaignStatus.Inactive;
+            }
+
+            return newStatus != Status;
         }
     }
 }

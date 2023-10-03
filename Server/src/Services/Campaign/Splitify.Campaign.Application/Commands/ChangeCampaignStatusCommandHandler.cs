@@ -6,18 +6,18 @@ using Splitify.Shared.Services.Misc;
 
 namespace Splitify.Campaign.Application.Commands
 {
-    public class ActivateCampaignCommandHandler : IRequestHandler<ActivateCampaignCommand, Result>
+    public class ChangeCampaignStatusCommandHandler : IRequestHandler<ChangeCampaignStatusCommand, Result>
     {
         private readonly ICampaignRepository _campaignRepository;
         private readonly IDateTimeService _dateTimeService;
 
-        public ActivateCampaignCommandHandler(IDateTimeService dateTimeService, ICampaignRepository campaignRepository)
+        public ChangeCampaignStatusCommandHandler(IDateTimeService dateTimeService, ICampaignRepository campaignRepository)
         {
             _dateTimeService = dateTimeService;
             _campaignRepository = campaignRepository;
         }
 
-        public async Task<Result> Handle(ActivateCampaignCommand request, CancellationToken cancellationToken)
+        public async Task<Result> Handle(ChangeCampaignStatusCommand request, CancellationToken cancellationToken)
         {
             var campaign = await _campaignRepository.FindAsync(request.CampaignId);
             if (campaign is null)
@@ -25,7 +25,13 @@ namespace Splitify.Campaign.Application.Commands
                 return Result.Failure(DomainError.ResourceNotFound(detail: $"Campaign was not found - {request.CampaignId}"));
             }
 
-            var result = campaign.Activate(_dateTimeService);
+            var result = request.Status switch
+            {
+                CampaignStatus.Inactive => campaign.Deactivate(_dateTimeService),
+                CampaignStatus.Active => campaign.Activate(_dateTimeService),
+                _ => Result.Failure(DomainError.ValidationError(detail: "Invalid status"))
+            };
+
             if (result.IsFailure)
             {
                 return result;
