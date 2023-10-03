@@ -50,6 +50,13 @@ namespace Splitify.Campaign.Api.Controllers
                 .MapAsync(Ok, CreateProblemResponse);
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAsync(string id)
+        {
+            await Task.CompletedTask;
+            return Ok();
+        }
+
         private IActionResult CreateProblemResponse(Error error)
         {
             var problemDetails = error.ToProblemDetails();

@@ -24,7 +24,7 @@
         <app-campaign-item
             class="grid grid-hover" 
             *ngFor="let campaign of campaigns" [campaign]="campaign"
-            (campaignChanged)="onCampaignChanged($event)">
+            (campaignDeleted)="onCampaignDeleted($event)">
         </app-campaign-item>
     </section>
 </main>

@@ -17,9 +17,16 @@ export class CampaignItemComponent {
   private readonly statusDeactivating = 3;
 
   @Input() campaign: CampaignGet;
-  @Output() campaignChanged: EventEmitter<CampaignGet> = new EventEmitter<CampaignGet>();
+  @Output() campaignDeleted: EventEmitter<CampaignGet> = new EventEmitter<CampaignGet>();
   
   constructor(private datePipe: DatePipe, private campaignService: CampaignService){}
+
+  onDelete(){
+    this.campaignService.deleteCampaign(this.campaign.id)
+      .then(response => {
+        this.campaignDeleted.emit(this.campaign);
+      });
+  }
 
   onCampaignStatusChanged(event: Event){
     const checkbox = event.target as HTMLInputElement;
@@ -29,8 +36,10 @@ export class CampaignItemComponent {
     
     this.campaignService.changeCampaignStatus(this.campaign.id, campaignPatch)
       .then(response => {
-          this.campaignChanged.emit(this.campaign);
-        });
+        this.campaignService.fetchCampaign(this.campaign.id)
+          .then(response => response.json())
+          .then(json => this.campaign = json);
+      });
   }
 
   resolveRedirectUrl(campaign: CampaignGet){

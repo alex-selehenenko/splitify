@@ -9,6 +9,12 @@ export class CampaignService{
         return fetch(environment.campaignServiceApiUrl + 'campaigns');
     }
 
+    deleteCampaign(id: string){
+      return fetch(environment.campaignServiceApiUrl + 'campaigns/' + id, {
+        method: "DELETE"
+      });
+    }
+
     postCampaign(campaign: CampaignPost){
         return fetch(environment.campaignServiceApiUrl + 'campaigns', {
             method: "POST",
