@@ -56,7 +56,6 @@ namespace Splitify.Redirect.Domain
 
         public Result DeleteRedirect(IDateTimeService dateTimeService)
         {
-            _destinations.Clear();
             AddDomainEvent(new RedirectDeletedDomainEvent(Id, dateTimeService.UtcNow));
 
             return Result.Success();

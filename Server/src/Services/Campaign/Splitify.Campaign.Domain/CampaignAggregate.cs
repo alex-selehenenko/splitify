@@ -56,7 +56,9 @@ namespace Splitify.Campaign.Domain
                 return Result.Failure(DomainError.ValidationError(detail: "Campaign is already active"));
             }
 
-            Status = CampaignStatus.Preparing;
+            Status = newStatus == CampaignStatus.Active
+                ? CampaignStatus.Preparing
+                : CampaignStatus.Deactivating;
 
             var ev = new CampaignStatusChangedDomainEvent(
                 dateTimeService.UtcNow,
