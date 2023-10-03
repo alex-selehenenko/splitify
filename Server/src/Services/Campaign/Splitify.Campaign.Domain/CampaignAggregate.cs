@@ -3,6 +3,7 @@ using Splitify.BuildingBlocks.Domain;
 using Splitify.BuildingBlocks.Domain.Errors;
 using Splitify.BuildingBlocks.Domain.Events;
 using Splitify.Campaign.Domain.Events;
+using Splitify.Campaign.Domain.Events.Dto;
 using Splitify.Shared.Services.Misc;
 
 namespace Splitify.Campaign.Domain
@@ -57,7 +58,11 @@ namespace Splitify.Campaign.Domain
 
             Status = CampaignStatus.Preparing;
 
-            var ev = new CampaignStatusChangedDomainEvent(dateTimeService.UtcNow, Id, newStatus);
+            var ev = new CampaignStatusChangedDomainEvent(
+                dateTimeService.UtcNow,
+                Id,
+                newStatus,
+                _links.Select(x => new LinkDto(Id, x.Url)).ToList());
             AddDomainEvent(ev);
 
             return Result.Success();

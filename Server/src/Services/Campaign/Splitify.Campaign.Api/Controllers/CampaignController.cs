@@ -36,6 +36,14 @@ namespace Splitify.Campaign.Api.Controllers
             return Ok(campaigns);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetByIdAsync(string id)
+        {
+            return await _mediator.Send(new GetCampaignQuery(id))
+                .MapAsync(Ok, CreateProblemResponse);
+        }
+
+        [HttpPatch("{id}")]
         public async Task<IActionResult> PatchAsync(string id, [FromBody] CampaignPatch body)
         {
             return await _mediator.Send(new ChangeCampaignStatusCommand(id, body.Status))

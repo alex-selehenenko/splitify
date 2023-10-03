@@ -1,7 +1,6 @@
 ﻿using MassTransit;
 using MediatR;
 using Splitify.Campaign.Application.Commands;
-using Splitify.Campaign.Domain;
 using Splitify.EventBus.Contracts;
 
 namespace Splitify.Campaign.Api.Consumers
@@ -20,7 +19,7 @@ namespace Splitify.Campaign.Api.Consumers
         public async Task Consume(ConsumeContext<RedirectCreatedMessage> context)
         {
             _logger.LogInformation("Start consuming {name}. Redirect Id: {id}", nameof(RedirectCreatedMessage), context.Message.RedirectId);
-            await _mediator.Send(new ChangeCampaignStatusCommand(context.Message.RedirectId, CampaignStatus.Active));
+            await _mediator.Send(new ActivateCampaignCommand(context.Message.RedirectId));
         }
     }
 }

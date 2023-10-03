@@ -3,12 +3,6 @@ using Resulty;
 using Splitify.BuildingBlocks.Domain.Errors;
 using Splitify.Campaign.Domain;
 using Splitify.Shared.Services.Misc;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Splitify.Campaign.Application.Commands
 {
