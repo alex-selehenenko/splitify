@@ -17,7 +17,7 @@ export class CreateCampaignComponent {
   onSubmit(form){    
     let campaign = new CampaignPost();
     campaign.name = form.value.name;
-    campaign.destinations = [form.value.destinationA, form.value.destinationA];
+    campaign.destinations = [form.value.destinationA, form.value.destinationB];
 
     this.campaignService.postCampaign(campaign)
       .then(response =>

@@ -1,7 +1,6 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { CampaignGet } from 'src/core/models/campaign.get.model';
 import { CampaignService } from 'src/core/services/campaign.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-campaigns',
