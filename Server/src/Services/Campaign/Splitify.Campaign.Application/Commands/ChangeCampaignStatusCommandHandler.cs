@@ -25,19 +25,12 @@ namespace Splitify.Campaign.Application.Commands
                 return Result.Failure(DomainError.ResourceNotFound(detail: $"Campaign was not found - {request.CampaignId}"));
             }
 
-            var result = request.Status switch
-            {
-                CampaignStatus.Inactive => campaign.Deactivate(_dateTimeService),
-                CampaignStatus.Active => campaign.Activate(_dateTimeService),
-                _ => Result.Failure(DomainError.ValidationError(detail: "Invalid status"))
-            };
+            var result = campaign.ChangeStatus(request.Status, _dateTimeService);
 
-            if (result.IsFailure)
+            if (result.IsSuccess)
             {
-                return result;
+                await _campaignRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
             }
-
-            await _campaignRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
             return result;
         }

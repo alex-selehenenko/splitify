@@ -62,7 +62,7 @@ namespace Splitify.Campaign.Domain
                 dateTimeService.UtcNow,
                 Id,
                 newStatus,
-                _links.Select(x => new LinkDto(Id, x.Url)).ToList());
+                _links.Select(x => new LinkDto(x.Id, x.Url)).ToList());
             AddDomainEvent(ev);
 
             return Result.Success();

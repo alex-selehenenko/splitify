@@ -11,6 +11,14 @@ namespace Splitify.Campaign.Application.Commands
         private readonly ICampaignRepository _campaignRepository;
         private readonly IDateTimeService _dateTimeService;
 
+        public ActivateCampaignCommandHandler(
+            ICampaignRepository campaignRepository,
+            IDateTimeService dateTimeService)
+        {
+            _campaignRepository = campaignRepository;
+            _dateTimeService = dateTimeService;
+        }
+
         public async Task<Result> Handle(ActivateCampaignCommand request, CancellationToken cancellationToken)
         {
             var campaign = await _campaignRepository.FindAsync(request.CampaignId, cancellationToken);
