@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Resulty;
+using Splitify.Shared.Services.Misc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -9,20 +11,23 @@ namespace Splitify.Identity.Domain.Factories
 {
     public abstract class UserFactory
     {
-        private static byte[] HashPassword(string password, byte[] salt)
+        public static Result<UserAggregate> Create(string email, string password, IDateTimeService dt)
         {
-            var passwordBytes = Encoding.UTF8.GetBytes(password);
+            var now = dt.UtcNow;
 
-            using var pbkdf2 = new Rfc2898DeriveBytes(passwordBytes, salt, 10000, HashAlgorithmName.SHA256);
-            return pbkdf2.GetBytes(32);
-        }
+            var userId = Guid.NewGuid().ToString();
+            var userPassword = UserPasswordFactory.Create(password, dt).Value;
+            var verificationCode = VerificationCodeFactory.Create(dt).Value;
 
-        private static byte[] GenerateSalt()
-        {
-            var salt = new byte[16];
-            using var rng = RandomNumberGenerator.Create();
-            rng.GetBytes(salt);
-            return salt;
+            var user = new UserAggregate(
+                userId,
+                email,
+                userPassword,
+                now,
+                now,
+                verificationCode);
+
+            return Result.Success(user);
         }
     }
 }

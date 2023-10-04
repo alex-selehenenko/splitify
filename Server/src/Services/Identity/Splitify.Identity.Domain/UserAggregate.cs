@@ -1,42 +1,62 @@
 ﻿using Resulty;
 using Splitify.BuildingBlocks.Domain;
-using System.Security.Cryptography;
-using System.Text;
+using Splitify.Identity.Domain.Events;
+using Splitify.Identity.Domain.Factories;
+using Splitify.Shared.Services.Misc.Implementation;
 
 namespace Splitify.Identity.Domain
 {
-    public class UserAggregate : Entity
+    public class UserAggregate : Entity, IAggregateRoot
     {
-        public const int ConfirmationCodeLifetimeMinutes = 10;
-
-        public const int ResetPasswordCodeLifetimeMinutes = 10;
-
         public string Email { get; }
 
-        public byte[] Password { get; private set; }
+        public UserPassword Password { get; }
 
-        public byte[] Salt { get; private set; }
+        public bool Verified { get; private set; }
 
-        public bool Confirmed { get; private set; }
-
-        public ConfirmationCode ConfirmationCode { get; private set; }
+        public VerificationCode VerificationCode { get; private set; }
 
         public UserAggregate(
             string id,
             string email,
-            byte[] password,
-            byte[] salt,
+            UserPassword password,
             DateTime createdAt,
             DateTime updatedAt,
-            ConfirmationCode confirmationCode,
-            bool confirmed)
+            VerificationCode verificationCode)
+            : this(id, email, password, createdAt, updatedAt, verificationCode, false)
+        {
+            AddDomainEvent(
+                new UserCreatedDomainEvent(id, email, verificationCode.Code, createdAt));
+        }
+
+        public UserAggregate(
+            string id,
+            string email,
+            UserPassword password,
+            DateTime createdAt,
+            DateTime updatedAt,
+            VerificationCode verififcationCode,
+            bool verified)
             : base(id, createdAt, updatedAt)
         {
             Email = email;
             Password = password;
-            Salt = salt;
-            Confirmed = confirmed;
-            ConfirmationCode = confirmationCode;
+            Verified = verified;
+            VerificationCode = verififcationCode;
+        }
+
+        public UserAggregate(
+            string id,
+            string email,
+            DateTime createdAt,
+            DateTime updatedAt,
+            bool verified)
+            : base(id, createdAt, updatedAt)
+        {
+            Email = email;
+            Password = default;
+            Verified = verified;
+            VerificationCode = default;
         }
 
         public Result SendConfirmationCode()
@@ -75,33 +95,9 @@ namespace Splitify.Identity.Domain
             return Result.Success();
         }
 
-        public string GetRole()
+        public UserRole GetRole()
         {
-            if (Confirmed)
-            {
-                return "user";
-            }
-            else
-            {
-                return "visitor";
-            }
-        }
-
-        //public static UserProfile Create(string id, string email, string password, AuthProvider authProvider, DateTime utcNow)
-        //{
-        //    byte[] saltBytes = Array.Empty<byte>();
-        //    byte[] passwordBytes = Array.Empty<byte>();
-
-        //    if (!string.IsNullOrWhiteSpace(password))
-        //    {
-        //        saltBytes = GenerateSalt();
-        //        passwordBytes = HashPassword(password, saltBytes);
-        //    }
-
-        //    var confirmationCode = GenerateConfirmationCode();
-        //    return new(id, email.ToLowerInvariant(), passwordBytes, saltBytes, authProvider, utcNow, DateTime.MinValue, utcNow.AddMinutes(1), confirmationCode, false, string.Empty, DateTime.MinValue);
-        //}
-
-        
+            return Verified ? UserRole.Verified : UserRole.Registered;
+        }        
     }
 }

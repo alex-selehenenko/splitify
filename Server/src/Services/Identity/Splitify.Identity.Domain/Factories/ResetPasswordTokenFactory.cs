@@ -1,21 +1,18 @@
-﻿using Splitify.Shared.Services.Misc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Resulty;
+using Splitify.Shared.Services.Misc;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Splitify.Identity.Domain.Factories
 {
     public abstract class ResetPasswordTokenFactory
     {
-        public static ResetPasswordToken Create(IDateTimeService dateTimeService)
+        public static Result<ResetPasswordToken> Create(string userId, IDateTimeService dateTimeService)
         {
             var now = dateTimeService.UtcNow;
-            var token = ComputeHash(now.ToString());
+            var token = ComputeHash(now.ToString() + userId);
 
-            return new(token, now);
+            return Result.Success(new ResetPasswordToken(token, now));
         }
 
         private static string ComputeHash(string str)

@@ -2,7 +2,7 @@
 
 namespace Splitify.Identity.Domain
 {
-    public class ConfirmationCode : ValueObject
+    public class VerificationCode : ValueObject
     {
         public const int Lifetime = 600000;
 
@@ -10,7 +10,7 @@ namespace Splitify.Identity.Domain
 
         public DateTime CreatedAt { get; }
 
-        public ConfirmationCode(string code, DateTime createdAt)
+        public VerificationCode(string code, DateTime createdAt)
         {
             Code = code;
             CreatedAt = createdAt;
