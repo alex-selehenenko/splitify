@@ -6,7 +6,7 @@
         <button class="btn btn-success" (click)="onCreateCampaign()">Create</button>
         <app-create-campaign
             *ngIf="displayCreateForm"
-            (campaignCreated)="onCampaignCreated()"
+            (campaignCreated)="onCampaignCreated($event)"
             (declined)="onCreateCampaignDeclined()">
         </app-create-campaign>
     </section>

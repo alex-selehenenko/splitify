@@ -8,7 +8,7 @@ import { CampaignService } from 'src/core/services/campaign.service';
   styleUrls: ['./create-campaign.component.css']
 })
 export class CreateCampaignComponent {
-  @Output() campaignCreated: EventEmitter<CampaignPost> = new EventEmitter<CampaignPost>()
+  @Output() campaignCreated: EventEmitter<string> = new EventEmitter<string>()
 
   @Output() declined: EventEmitter<void> = new EventEmitter();
 
@@ -20,9 +20,7 @@ export class CreateCampaignComponent {
     campaign.destinations = [form.value.destinationA, form.value.destinationB];
 
     this.campaignService.postCampaign(campaign)
-      .then(response =>
-      {
-        this.campaignCreated.emit(campaign)
-      });
+      .then(response => response.json())
+      .then(json => this.campaignCreated.emit(json.campaignId));
   }
 }

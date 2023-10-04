@@ -41,15 +41,7 @@ export class CampaignItemComponent {
           .then(json => this.campaign = json)
         });
       
-      const currentStatus = this.campaign.status;
-      const interval = setInterval(() => {
-        this.campaignService.fetchCampaign(this.campaign.id)
-          .then(response => response.json())
-          .then(json => this.campaign = json);
-        if (this.campaign.status !== currentStatus){
-          clearInterval(interval);
-        }
-        }, 2000);
+    this.autoUpdateCampaign();
   }
 
   resolveRedirectUrl(campaign: CampaignGet){
@@ -82,5 +74,17 @@ export class CampaignItemComponent {
 
   resolveDateTime(inputDate: Date): string {
     return this.datePipe.transform(inputDate, 'dd.MM.yy HH:mm') || '';
+  }
+
+  private autoUpdateCampaign(){
+    const currentStatus = this.campaign.status;
+      const interval = setInterval(() => {
+        this.campaignService.fetchCampaign(this.campaign.id)
+          .then(response => response.json())
+          .then(json => this.campaign = json);
+        if (this.campaign.status !== currentStatus){
+          clearInterval(interval);
+        }
+        }, 2000);
   }
 }
