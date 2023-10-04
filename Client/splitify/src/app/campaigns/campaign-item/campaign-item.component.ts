@@ -38,8 +38,18 @@ export class CampaignItemComponent {
       .then(response => {
         this.campaignService.fetchCampaign(this.campaign.id)
           .then(response => response.json())
+          .then(json => this.campaign = json)
+        });
+      
+      const currentStatus = this.campaign.status;
+      const interval = setInterval(() => {
+        this.campaignService.fetchCampaign(this.campaign.id)
+          .then(response => response.json())
           .then(json => this.campaign = json);
-      });
+        if (this.campaign.status !== currentStatus){
+          clearInterval(interval);
+        }
+        }, 2000);
   }
 
   resolveRedirectUrl(campaign: CampaignGet){
