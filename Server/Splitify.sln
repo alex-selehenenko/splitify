@@ -59,6 +59,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splitify.Identity.Applicati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splitify.Identity.Infrastructure", "src\Services\Identity\Splitify.Identity.Infrastructure\Splitify.Identity.Infrastructure.csproj", "{8744BB46-A26D-465B-BE95-9B36D4DAF06D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apps", "Apps", "{C886E846-A9BD-4258-8240-2C52AD7981F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splitify.EmailSender", "src\Apps\Splitify.EmailSender\Splitify.EmailSender.csproj", "{B0A25D63-1898-4793-BF49-D11154589712}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -145,6 +149,10 @@ Global
 		{8744BB46-A26D-465B-BE95-9B36D4DAF06D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8744BB46-A26D-465B-BE95-9B36D4DAF06D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8744BB46-A26D-465B-BE95-9B36D4DAF06D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0A25D63-1898-4793-BF49-D11154589712}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0A25D63-1898-4793-BF49-D11154589712}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0A25D63-1898-4793-BF49-D11154589712}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0A25D63-1898-4793-BF49-D11154589712}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -177,6 +185,8 @@ Global
 		{631DCEE5-4FC9-4029-BD20-C42F77B8B831} = {98FE3BB0-0762-42F8-9089-DDD303A509B8}
 		{B9DCA7DD-7C94-4D1F-9B2C-1246732DA19C} = {98FE3BB0-0762-42F8-9089-DDD303A509B8}
 		{8744BB46-A26D-465B-BE95-9B36D4DAF06D} = {98FE3BB0-0762-42F8-9089-DDD303A509B8}
+		{C886E846-A9BD-4258-8240-2C52AD7981F1} = {E815BD78-837E-4F3F-AE59-91AFBFE2A897}
+		{B0A25D63-1898-4793-BF49-D11154589712} = {C886E846-A9BD-4258-8240-2C52AD7981F1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {026026E1-C7D3-43B3-AFE1-C6A8D16549C1}

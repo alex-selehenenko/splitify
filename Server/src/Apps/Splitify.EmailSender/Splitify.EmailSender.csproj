@@ -6,4 +6,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MassTransit" Version="8.1.1" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\EventBus\Splitify.EventBus.Contracts\Splitify.EventBus.Contracts.csproj" />
+  </ItemGroup>
+
 </Project>
