@@ -24,7 +24,6 @@ export class AuthInterceptor implements HttpInterceptor {
         return next.handle(request).pipe(
             catchError((error: HttpErrorResponse) => {
               if (error.status === 401) {
-                console.log('401 RESPONSE')
                 this.userService.userUnauthorized.emit();
               }
               else if(error.status === 403){

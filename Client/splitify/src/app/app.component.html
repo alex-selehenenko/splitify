@@ -1,9 +1,16 @@
 <nav>
   <ul class="container">
       <li><a href="#">S</a></li>
-      <li *ngIf="state === 1 || state === 2"><button class="btn-link">Logout</button></li>
+      <li *ngIf="state === authorized || state === notVerified">
+        <span>{{ userEmail }}</span>
+        <button
+          (click)="onLogoutClick()"
+          class="btn-link">
+            Logout<i class="fa-solid fa-arrow-right-from-bracket"></i>
+        </button>
+      </li>
   </ul>
 </nav>
-<app-auth *ngIf="state === 0"></app-auth>
-<app-verify *ngIf="state === 1"></app-verify>
-<app-campaigns *ngIf="state === 2"></app-campaigns>
+<app-auth *ngIf="state === unauthorized"></app-auth>
+<app-verify *ngIf="state === notVerified"></app-verify>
+<app-campaigns *ngIf="state === authorized"></app-campaigns>

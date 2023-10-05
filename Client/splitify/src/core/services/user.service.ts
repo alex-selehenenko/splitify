@@ -1,8 +1,9 @@
 import { EventEmitter, Injectable } from "@angular/core";
 import { UserPost } from "../models/user.post.model";
-import { Observable } from "rxjs";
+import { Observable, Observer } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
+import { UserGet } from "../models/user.get.model";
 
 @Injectable({ providedIn: 'root' })
 export class UserService{
@@ -12,6 +13,10 @@ export class UserService{
 
     constructor(private httpClient: HttpClient){}
     
+    fetchUser(): Observable<UserGet>{
+        return this.httpClient.get<UserGet>(environment.userServiceApiUrl + 'api/v1/user');
+    }
+
     createUser(userEmail: string, userPassword: string): Observable<UserPost>{
         const body = {
             email: userEmail,

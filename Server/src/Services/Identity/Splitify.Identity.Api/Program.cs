@@ -107,15 +107,15 @@ namespace Splitify.Identity.Api
 
             app.UseHttpsRedirection();
 
-            app.UseAuthentication();
-            app.UseAuthorization();
-
             app.UseCors(cfg =>
             {
                 cfg.AllowAnyOrigin();
                 cfg.AllowAnyMethod();
                 cfg.AllowAnyHeader();
             });
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.MapControllers();
 

@@ -7,22 +7,39 @@ import { UserService } from 'src/core/services/user.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
+  readonly default = 0;
+  readonly unauthorized = 1;
+  readonly notVerified = 2;
+  readonly authorized = 3;
+  
   title = 'splitify';
-  state: number = 2;
+  userEmail = '';
+  state = this.default;
 
   constructor(private userService: UserService){}
 
   ngOnInit(): void {
     this.userService.userUnauthorized.subscribe(() => {
-      this.state = 0;
+      this.state = this.unauthorized;
     });
 
     this.userService.userNotVerified.subscribe(() => {
-      this.state = 1;
+      this.state = this.notVerified;
     });
 
     this.userService.userAuthorized.subscribe(() => {
-      this.state = 2;
+      this.state = this.authorized;
     });
+
+    this.userService.fetchUser()
+        .subscribe(user => {
+          this.userEmail = user.email;
+          this.state = this.authorized;
+        });
+  }
+
+  onLogoutClick(){
+    localStorage.removeItem('AUTH_TOKEN');
+    location.reload();
   }
 }
