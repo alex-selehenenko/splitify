@@ -17,6 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\Splitify.BuildingBlocks.EventBus\Splitify.BuildingBlocks.EventBus.csproj" />
+    <ProjectReference Include="..\..\..\EventBus\Splitify.EventBus.MassTransit\Splitify.EventBus.MassTransit.csproj" />
     <ProjectReference Include="..\Splitify.Identity.Application\Splitify.Identity.Application.csproj" />
     <ProjectReference Include="..\Splitify.Identity.Infrastructure\Splitify.Identity.Infrastructure.csproj" />
   </ItemGroup>

@@ -10,7 +10,7 @@ import { CampaignService } from 'src/core/services/campaign.service';
 export class CreateCampaignComponent {
   @Output() campaignCreated: EventEmitter<string> = new EventEmitter<string>()
 
-  @Output() declined: EventEmitter<void> = new EventEmitter();
+  @Output() canceled: EventEmitter<void> = new EventEmitter();
 
   constructor(private campaignService: CampaignService){}
   

@@ -1,30 +1,38 @@
-﻿using Splitify.BuildingBlocks.Domain.Persistence;
+﻿using Microsoft.EntityFrameworkCore;
+using Splitify.BuildingBlocks.Domain.Persistence;
 using Splitify.Identity.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Splitify.Identity.Infrastructure.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        public IUnitOfWork UnitOfWork => throw new NotImplementedException();
+        private readonly ApplicationDbContext _context;
+
+        public UserRepository(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        public IUnitOfWork UnitOfWork => _context;
 
         public void Add(UserAggregate entity)
         {
-            throw new NotImplementedException();
+            _context.Users.Add(entity);
         }
 
-        public Task<UserAggregate?> FindAsync(string id, CancellationToken cancellationToken = default)
+        public async Task<bool> ExistsAsync(string email)
         {
-            throw new NotImplementedException();
+            return await _context.Users.AnyAsync(x => x.Email == email.ToLowerInvariant());
+        }
+
+        public async Task<UserAggregate?> FindAsync(string id, CancellationToken cancellationToken = default)
+        {
+            return await _context.Users.FindAsync(id, cancellationToken);
         }
 
         public void Remove(UserAggregate entity)
         {
-            throw new NotImplementedException();
+            _context.Users.Remove(entity);
         }
     }
 }

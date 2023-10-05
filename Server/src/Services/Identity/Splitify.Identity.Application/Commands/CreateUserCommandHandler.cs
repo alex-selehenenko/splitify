@@ -1,10 +1,12 @@
 ﻿using MediatR;
 using Resulty;
+using Splitify.BuildingBlocks.Domain.Errors;
 using Splitify.Identity.Application.Commands.Dto;
 using Splitify.Identity.Application.Services;
 using Splitify.Identity.Domain;
 using Splitify.Identity.Domain.Factories;
 using Splitify.Shared.Services.Misc;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Splitify.Identity.Application.Commands
 {
@@ -27,6 +29,10 @@ namespace Splitify.Identity.Application.Commands
 
         public async Task<Result<UserDto>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
+            if(await _userRepository.ExistsAsync(request.Email))
+            {
+                return Result.Failure<UserDto>(DomainError.ValidationError("User already exists"));
+            }
             var userCreationResult = UserFactory.Create(request.Email, request.Password, _dateTimeService);
 
             if (userCreationResult.IsFailure)

@@ -1,4 +1,7 @@
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
+using Splitify.BuildingBlocks.EventBus;
+using Splitify.EventBus.MassTransit;
 using Splitify.Identity.Application.Commands;
 using Splitify.Identity.Application.Services;
 using Splitify.Identity.Domain;
@@ -22,6 +25,20 @@ namespace Splitify.Identity.Api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddScoped<IEventBus, MassTransitEventBus>();
+            builder.Services.AddMassTransit(c =>
+            {
+                c.UsingRabbitMq((ctx, cfg) =>
+                {
+                    cfg.Host("localhost", "/", h => {
+                        h.Username("guest");
+                        h.Password("guest");
+                    });
+
+                    cfg.ConfigureEndpoints(ctx);
+                });
+            });
+
             builder.Services.AddMediatR(cfg =>
             {
                 cfg.RegisterServicesFromAssemblyContaining<CreateUserCommand>();
@@ -29,7 +46,7 @@ namespace Splitify.Identity.Api
 
             builder.Services.AddSingleton<IDateTimeService, DateTimeService>();
             builder.Services.AddSingleton<IJwtService, JwtService>(x =>
-                new JwtService(new("this-issuer", "this-aud", "this-secret", 80000000)));
+                new JwtService(new("this-issuer", "this-aud", "tikiwrwualqxoprlcnkxxtnqjvbnvwovuyjyjxpxpriksnquwbwgmpipflxvmfjhrwzxohnhwteybmfeobpgakiemonuchlfnaygguuxsattipzukwajwsvzshnjyxta", 80000000)));
             
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddDbContext<ApplicationDbContext>(cfg =>

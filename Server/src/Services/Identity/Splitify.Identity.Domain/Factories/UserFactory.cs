@@ -1,11 +1,5 @@
 ﻿using Resulty;
 using Splitify.Shared.Services.Misc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Splitify.Identity.Domain.Factories
 {
@@ -21,7 +15,7 @@ namespace Splitify.Identity.Domain.Factories
 
             var user = new UserAggregate(
                 userId,
-                email,
+                email.ToLowerInvariant(),
                 userPassword,
                 now,
                 now,

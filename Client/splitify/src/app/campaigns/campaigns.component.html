@@ -7,7 +7,7 @@
         <app-create-campaign
             *ngIf="displayCreateForm"
             (campaignCreated)="onCampaignCreated($event)"
-            (declined)="onCreateCampaignDeclined()">
+            (canceled)="onCreateCampaignCanceled()">
         </app-create-campaign>
     </section>
     <section>

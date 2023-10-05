@@ -17,6 +17,9 @@ namespace Splitify.Identity.Infrastructure.EntityConfiguration
             builder.Property(x => x.Email)
                 .UsePropertyAccessMode(PropertyAccessMode.Property);
 
+            builder.HasIndex(e => e.Email)
+                .IsUnique();
+
             builder.OwnsOne(x => x.Password, p =>
             {
                 p.Property(p => p.Salt);

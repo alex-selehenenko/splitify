@@ -10,6 +10,6 @@
         <input type="url" id="destinationB" name="destinationB" placeholder="https://..." required ngModel> 
         
         <button class="btn-success" type="submit" [disabled]="!form.valid">Create</button>
-        <button class="btn-danger" type="button" (click)="declined.emit()">Decline</button>
+        <button class="btn-danger" type="button" (click)="canceled.emit()">Cancel</button>
     </form>
 </aside>

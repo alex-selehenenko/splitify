@@ -416,3 +416,5 @@ FodyWeavers.xsd
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,visualstudio
+/Server/src/Apps/Splitify.EmailSender/appsettings.json
+/Server/src/Apps/Splitify.EmailSender/appsettings.Development.json

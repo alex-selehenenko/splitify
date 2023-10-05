@@ -49,7 +49,7 @@ export class CampaignsComponent implements OnInit{
     this.campaigns.splice(index, 1);
   }
 
-  onCreateCampaignDeclined(){
+  onCreateCampaignCanceled(){
     this.displayCreateForm = false;
   }
 
