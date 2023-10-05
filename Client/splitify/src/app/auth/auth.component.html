@@ -1,0 +1,20 @@
+<header>
+    <h1 *ngIf="isLoginForm">Login to the app</h1>
+    <h1 *ngIf="!isLoginForm">Create a new account</h1>
+</header>
+<main>
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+        <label for="email">Email</label>
+        <input id="email" type="email" name="email" ngModel>
+
+        <label for="password">Password</label>
+        <input id="password" type="password" name="password" ngModel>
+
+        <label *ngIf="!isLoginForm" for="confirmPassword">Confirm password</label>
+        <input *ngIf="!isLoginForm" name="confirmPassword" id="confirmPassword" type="password" ngModel>
+
+        <button class="btn-success" type="submit">{{ submitButtonText }}</button>
+    </form>
+    <p *ngIf="isLoginForm">Don't have an account? <button type="button">Sign up</button> for free</p>
+    <p *ngIf="!isLoginForm">Already have account? <button type="button">Login</button> to the app</p>
+</main>

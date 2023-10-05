@@ -67,6 +67,12 @@ namespace Splitify.Identity.Api
 
             app.UseAuthorization();
 
+            app.UseCors(cfg =>
+            {
+                cfg.AllowAnyOrigin();
+                cfg.AllowAnyMethod();
+                cfg.AllowAnyHeader();
+            });
 
             app.MapControllers();
 

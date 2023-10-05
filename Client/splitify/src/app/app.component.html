@@ -4,4 +4,5 @@
       <li *ngIf="isUserLogged"><button class="btn-link">Logout</button></li>
   </ul>
 </nav>
-<app-campaigns></app-campaigns>
+<app-campaigns *ngIf="isUserLogged"></app-campaigns>
+<app-auth *ngIf="!isUserLogged"></app-auth>
