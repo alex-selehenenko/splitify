@@ -21,4 +21,12 @@ export class UserService{
             environment.userServiceApiUrl + 'api/v1/auth/register',
             body);
     }
+
+    verifyUser(code: string){
+        const body = { verificationCode: code };
+        
+        return this.httpClient.post<UserPost>(
+            environment.userServiceApiUrl + 'api/v1/auth/verify',
+            body);
+    }
 }

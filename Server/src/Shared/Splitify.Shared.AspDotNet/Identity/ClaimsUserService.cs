@@ -16,7 +16,7 @@ namespace Splitify.Shared.AspDotNet.Identity
         public string? GetUserId()
         {
             var claims = _httpContextAccessor?.HttpContext?.User.Claims;
-            return claims?.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+            return claims.FirstOrDefault(x => x?.Type == ClaimTypes.NameIdentifier)?.Value;
         }
     }
 }

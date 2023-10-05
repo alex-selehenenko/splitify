@@ -1,1 +1,13 @@
-<p>verify works!</p>
+<header>
+    <h1>Account verification</h1>
+    <p>Please, insert the verification code that you should have received on your email.</p>
+</header>
+<main>
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+        <label for="code">Verification code</label>
+        <input id="code" type="code" name="code" ngModel>
+
+        <button class="btn-success" type="submit">Verify</button>
+    </form>
+    <p>Have not received the code? <button type="button">Send again</button></p>
+</main>

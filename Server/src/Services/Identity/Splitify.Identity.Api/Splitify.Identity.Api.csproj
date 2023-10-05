@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -8,17 +8,20 @@
 
   <ItemGroup>
     <PackageReference Include="MediatR" Version="12.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.22" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.11">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.11" />
+    <PackageReference Include="Resulty" Version="2.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\BuildingBlocks\Splitify.BuildingBlocks.EventBus\Splitify.BuildingBlocks.EventBus.csproj" />
     <ProjectReference Include="..\..\..\EventBus\Splitify.EventBus.MassTransit\Splitify.EventBus.MassTransit.csproj" />
+    <ProjectReference Include="..\..\..\Shared\Splitify.Shared.AspDotNet\Splitify.Shared.AspDotNet.csproj" />
     <ProjectReference Include="..\Splitify.Identity.Application\Splitify.Identity.Application.csproj" />
     <ProjectReference Include="..\Splitify.Identity.Infrastructure\Splitify.Identity.Infrastructure.csproj" />
   </ItemGroup>

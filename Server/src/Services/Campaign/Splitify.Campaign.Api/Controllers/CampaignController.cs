@@ -9,7 +9,7 @@ using Splitify.Shared.AspDotNet.Results;
 
 namespace Splitify.Campaign.Api.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "verified")]
     [ApiController]
     [Route("api/v1/campaigns")]
     public class CampaignController : ControllerBase

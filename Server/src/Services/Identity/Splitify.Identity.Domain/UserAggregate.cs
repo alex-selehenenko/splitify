@@ -70,8 +70,15 @@ namespace Splitify.Identity.Domain
             return Result.Success();
         }
 
-        public Result Confirm(string confirmationCode)
+        public Result Verify(string verificationCode)
         {
+            var validationResult = VerificationCode.ValidateCode(verificationCode);
+            if (validationResult.IsFailure)
+            {
+                return validationResult;
+            }
+
+            Verified = true;
 
             return Result.Success();
         }

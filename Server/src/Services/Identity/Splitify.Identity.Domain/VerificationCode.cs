@@ -1,4 +1,6 @@
-﻿using Splitify.BuildingBlocks.Domain;
+﻿using Resulty;
+using Splitify.BuildingBlocks.Domain;
+using Splitify.BuildingBlocks.Domain.Errors;
 
 namespace Splitify.Identity.Domain
 {
@@ -16,7 +18,22 @@ namespace Splitify.Identity.Domain
             CreatedAt = createdAt;
         }
 
-        public bool IsExpired()
+        public Result ValidateCode(string verificationCode)
+        {
+            if (Code != verificationCode)
+            {
+                return Result.Failure(DomainError.ValidationError(detail: "Code is invalid"));
+            }
+
+            if (IsExpired())
+            {
+                return Result.Failure(DomainError.ValidationError(detail: "Code is expired"));
+            }
+
+            return Result.Success();
+        }
+
+        private bool IsExpired()
         {
             return (DateTime.UtcNow - CreatedAt).TotalMilliseconds > Lifetime;
         }
