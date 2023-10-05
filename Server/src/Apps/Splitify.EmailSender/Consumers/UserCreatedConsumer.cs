@@ -15,7 +15,7 @@ namespace Splitify.EmailSender.Consumers
         public async Task Consume(ConsumeContext<UserCreatedMessage> context)
         {
             var subject = "Verify your account on Splitify";
-            var body = $"Your verification code is <b>{context.Message.VerificationCode}</b>. It's valid for 10 minutes";
+            var body = $"Your verification code is <b>{context.Message.VerificationCode}</b>";
 
             await _client.SendAsync(subject, body, context.Message.Email);
         }

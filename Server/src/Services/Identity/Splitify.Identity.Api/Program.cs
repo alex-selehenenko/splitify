@@ -45,8 +45,14 @@ namespace Splitify.Identity.Api
             });
 
             builder.Services.AddSingleton<IDateTimeService, DateTimeService>();
+
+            var jwtVars = builder.Configuration.GetSection("Jwt");
             builder.Services.AddSingleton<IJwtService, JwtService>(x =>
-                new JwtService(new("this-issuer", "this-aud", "tikiwrwualqxoprlcnkxxtnqjvbnvwovuyjyjxpxpriksnquwbwgmpipflxvmfjhrwzxohnhwteybmfeobpgakiemonuchlfnaygguuxsattipzukwajwsvzshnjyxta", 80000000)));
+                new JwtService(new JwtOptions(
+                    jwtVars["Issuer"],
+                    jwtVars["Audience"],
+                    jwtVars["Secret"],
+                    604800000)));
             
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddDbContext<ApplicationDbContext>(cfg =>

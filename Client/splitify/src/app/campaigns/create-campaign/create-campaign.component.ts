@@ -20,7 +20,6 @@ export class CreateCampaignComponent {
     campaign.destinations = [form.value.destinationA, form.value.destinationB];
 
     this.campaignService.postCampaign(campaign)
-      .then(response => response.json())
-      .then(json => this.campaignCreated.emit(json.campaignId));
+      .subscribe(json => this.campaignCreated.emit(json.campaignId));
   }
 }

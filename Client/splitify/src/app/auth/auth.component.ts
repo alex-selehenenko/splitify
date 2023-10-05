@@ -18,7 +18,7 @@ export class AuthComponent {
 
     this.userService.createUser(email, password)
       .subscribe(data => {
-        localStorage.setItem('AUTH_TOKEN', data.jwt);
+        localStorage.setItem('AUTH_TOKEN', data.jwtToken);
         location.reload();
       });
   }

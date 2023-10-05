@@ -1,4 +1,4 @@
 export class UserPost{
-    id: string;
-    jwt: string;
+    userId: string;
+    jwtToken: string;
 }

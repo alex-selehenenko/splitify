@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Resulty;
 using Splitify.Campaign.Api.Controllers.Dto;
@@ -8,6 +9,7 @@ using Splitify.Shared.AspDotNet.Results;
 
 namespace Splitify.Campaign.Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/v1/campaigns")]
     public class CampaignController : ControllerBase

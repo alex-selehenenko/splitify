@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { CampaignsComponent } from './campaigns/campaigns.component';
@@ -9,6 +9,8 @@ import { CreateCampaignComponent } from './campaigns/create-campaign/create-camp
 import { FormsModule } from '@angular/forms';
 import { CampaignItemComponent } from './campaigns/campaign-item/campaign-item.component';
 import { AuthComponent } from './auth/auth.component';
+import { VerifyComponent } from './verify/verify.component';
+import { AuthInterceptor } from 'src/interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import { AuthComponent } from './auth/auth.component';
     CampaignsComponent,
     CreateCampaignComponent,
     CampaignItemComponent,
-    AuthComponent
+    AuthComponent,
+    VerifyComponent
   ],
   imports: [
     HttpClientModule,
@@ -24,7 +27,14 @@ import { AuthComponent } from './auth/auth.component';
     FormsModule,
     CommonModule 
   ],
-  providers: [DatePipe],
+  providers: [
+    DatePipe,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

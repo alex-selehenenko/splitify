@@ -1,5 +1,6 @@
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Splitify.BuildingBlocks.EventBus;
 using Splitify.Campaign.Api.Consumers;
 using Splitify.Campaign.Application.Commands;
@@ -10,6 +11,7 @@ using Splitify.Shared.AspDotNet.Identity;
 using Splitify.Shared.Services.Identity;
 using Splitify.Shared.Services.Misc;
 using Splitify.Shared.Services.Misc.Implementation;
+using System.Text;
 
 namespace Splitify.Campaign.Api
 {
@@ -62,6 +64,36 @@ namespace Splitify.Campaign.Api
                 c.AddConsumer<RedirectDeletedConsumer>();
             });
 
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = "Bearer";
+                options.DefaultChallengeScheme = "Bearer";
+            }).AddJwtBearer(options =>
+            {
+                var vars = builder.Configuration.GetSection("Jwt");
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidateAudience = true,
+                    ValidateIssuer = true,
+
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(vars["Secret"])),
+                    ValidAudience = vars["Audience"],
+                    ValidIssuer = vars["Issuer"],
+
+                    ClockSkew = TimeSpan.Zero,
+                    LifetimeValidator = (notBefore, expires, token, parameters) =>
+                    {
+                        if (expires.HasValue && expires.Value < DateTime.UtcNow)
+                        {
+                            return false;
+                        }
+                        return true;
+                    }
+                };
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -80,6 +112,7 @@ namespace Splitify.Campaign.Api
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

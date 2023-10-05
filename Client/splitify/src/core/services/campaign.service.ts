@@ -2,40 +2,36 @@ import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 import { CampaignPost } from "../models/campaign.post.model";
 import { CampaignPatch } from "../models/campaign.patch.model";
+import { HttpClient } from "@angular/common/http";
+import { CampaignGet } from "../models/campaign.get.model";
+import { Observable } from "rxjs";
 
 @Injectable({ providedIn: 'root' })
 export class CampaignService{
-    fetchCampaigns(){
-        return fetch(environment.campaignServiceApiUrl + 'campaigns');
+
+    constructor(private httpClient: HttpClient){}
+
+    fetchCampaigns(): Observable<CampaignGet[]>{
+      return this.httpClient.get<CampaignGet[]>(environment.campaignServiceApiUrl + 'campaigns');
     }
 
-    deleteCampaign(id: string){
-      return fetch(environment.campaignServiceApiUrl + 'campaigns/' + id, {
-        method: "DELETE"
-      });
+    deleteCampaign(id: string): Observable<any>{
+      return this.httpClient.delete(environment.campaignServiceApiUrl + 'campaigns/' + id);
     }
 
-    postCampaign(campaign: CampaignPost){
-        return fetch(environment.campaignServiceApiUrl + 'campaigns', {
-            method: "POST",
-            body: JSON.stringify(campaign),
-            headers: {
-              "Content-type": "application/json; charset=UTF-8"
-            }
-          });
+    postCampaign(campaign: CampaignPost): Observable<any>{
+        return this.httpClient.post(
+          environment.campaignServiceApiUrl + 'campaigns',
+          campaign
+        );
     }
 
-    fetchCampaign(id: string){
-      return fetch(environment.campaignServiceApiUrl + 'campaigns/' + id);
+    fetchCampaign(id: string): Observable<CampaignGet>{
+      return this.httpClient.get<CampaignGet>(environment.campaignServiceApiUrl + 'campaigns/' + id);
     }
 
     changeCampaignStatus(id: string, campaign: CampaignPatch){
-      return fetch(environment.campaignServiceApiUrl + 'campaigns/' + id ,{
-        method: 'PATCH',
-        body: JSON.stringify(campaign),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8"
-        }
-      });
+      return this.httpClient.patch(environment.campaignServiceApiUrl + 'campaigns/' + id,
+        campaign);
     }
 }

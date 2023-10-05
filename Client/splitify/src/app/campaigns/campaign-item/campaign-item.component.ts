@@ -23,7 +23,7 @@ export class CampaignItemComponent {
 
   onDelete(){
     this.campaignService.deleteCampaign(this.campaign.id)
-      .then(response => {
+      .subscribe(_ => {
         this.campaignDeleted.emit(this.campaign);
       });
   }
@@ -35,10 +35,9 @@ export class CampaignItemComponent {
     campaignPatch.status = checkbox.checked ? this.statusActive : this.statusInactive;
     
     this.campaignService.changeCampaignStatus(this.campaign.id, campaignPatch)
-      .then(response => {
+      .subscribe(response => {
         this.campaignService.fetchCampaign(this.campaign.id)
-          .then(response => response.json())
-          .then(json => this.campaign = json)
+          .subscribe(response => this.campaign = response)
         });
       
     this.autoUpdateCampaign();
@@ -80,8 +79,7 @@ export class CampaignItemComponent {
     const currentStatus = this.campaign.status;
       const interval = setInterval(() => {
         this.campaignService.fetchCampaign(this.campaign.id)
-          .then(response => response.json())
-          .then(json => this.campaign = json);
+          .subscribe(json => this.campaign = json);
         if (this.campaign.status !== currentStatus){
           clearInterval(interval);
         }

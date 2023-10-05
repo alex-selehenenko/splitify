@@ -26,17 +26,16 @@ export class CampaignsComponent implements OnInit{
 
     let campaign = undefined;
     this.campaignService.fetchCampaign(id)
-      .then(response => response.json())
-      .then(json => {
+      .subscribe(json => {
         campaign = json;
         this.campaigns = [campaign, ...this.campaigns];
         
         const currentStatus = campaign.status;
         const interval = setInterval(() => {
           this.campaignService.fetchCampaign(campaign.id)
-            .then(response => response.json())
-            .then(json => campaign = json);
-          if (campaign.status !== currentStatus){
+            .subscribe(json => campaign = json);
+          
+            if (campaign.status !== currentStatus){
             this.campaigns[0] = campaign;
             clearInterval(interval);
           }
@@ -55,8 +54,7 @@ export class CampaignsComponent implements OnInit{
 
   private fetchCampaigns(){
     this.campaignService.fetchCampaigns()
-      .then(data => data.json())
-      .then(json => {
+      .subscribe(json => {
         this.campaigns = json;
         this.displayCreateForm = false;
       });

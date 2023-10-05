@@ -1,8 +1,9 @@
 <nav>
   <ul class="container">
       <li><a href="#">S</a></li>
-      <li *ngIf="isUserLogged"><button class="btn-link">Logout</button></li>
+      <li *ngIf="state === 1 || state === 2"><button class="btn-link">Logout</button></li>
   </ul>
 </nav>
-<app-campaigns *ngIf="isUserLogged"></app-campaigns>
-<app-auth *ngIf="!isUserLogged"></app-auth>
+<app-auth *ngIf="state === 0"></app-auth>
+<app-verify *ngIf="state === 1"></app-verify>
+<app-campaigns *ngIf="state === 2"></app-campaigns>

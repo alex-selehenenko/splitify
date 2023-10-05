@@ -418,3 +418,5 @@ FodyWeavers.xsd
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,visualstudio
 /Server/src/Apps/Splitify.EmailSender/appsettings.json
 /Server/src/Apps/Splitify.EmailSender/appsettings.Development.json
+/Server/src/Services/Campaign/Splitify.Campaign.Api/appsettings.Development.json
+/Server/src/Services/Identity/Splitify.Identity.Api/appsettings.Development.json
