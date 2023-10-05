@@ -7,7 +7,7 @@ import { UserService } from 'src/core/services/user.service';
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent {
-  isLoginForm = false;
+  isLoginForm = true;
   submitButtonText = this.isLoginForm ? 'Login' : 'Sign Up'
 
   constructor(private userService: UserService){}
@@ -21,5 +21,9 @@ export class AuthComponent {
         localStorage.setItem('AUTH_TOKEN', data.jwtToken);
         location.reload();
       });
+  }
+
+  onToggleForm(){
+    this.isLoginForm = !this.isLoginForm;
   }
 }

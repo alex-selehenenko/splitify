@@ -25,6 +25,13 @@ namespace Splitify.Identity.Api.Controllers
                 .MapAsync(Ok, CreateProblemResponse);
         }
 
+        [HttpPost("login")]
+        public async Task<IActionResult> LoginAsync([FromBody] LoginUserCommand body)
+        {
+            return await _mediator.Send(body)
+                .MapAsync(Ok, CreateProblemResponse);
+        }
+
         [Authorize(Roles = "registered")]
         [HttpPost("verify")]
         public async Task<IActionResult> VerifyAsync([FromBody] VerifyUserCommand body)

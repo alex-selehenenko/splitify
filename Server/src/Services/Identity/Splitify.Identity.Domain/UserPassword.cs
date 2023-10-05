@@ -1,4 +1,7 @@
-﻿using Splitify.BuildingBlocks.Domain;
+﻿using Resulty;
+using Splitify.BuildingBlocks.Domain;
+using Splitify.BuildingBlocks.Domain.Errors;
+using Splitify.Identity.Domain.Utils;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -16,22 +19,13 @@ namespace Splitify.Identity.Domain
             Salt = salt;
         }
 
-
-
-        private static byte[] HashPassword(string password, byte[] salt)
+        public Result ValidatePassword(string password)
         {
-            var passwordBytes = Encoding.UTF8.GetBytes(password);
-
-            using var pbkdf2 = new Rfc2898DeriveBytes(passwordBytes, salt, 10000, HashAlgorithmName.SHA512);
-            return pbkdf2.GetBytes(32);
-        }
-
-        private static byte[] GenerateSalt()
-        {
-            var salt = new byte[16];
-            using var rng = RandomNumberGenerator.Create();
-            rng.GetBytes(salt);
-            return salt;
+            var hash = PasswordUtils.HashPassword(password, Salt);
+            
+            return hash.SequenceEqual(Hash)
+                ? Result.Success()
+                : Result.Failure(DomainError.ValidationError(detail: "Invalid login or password"));
         }
 
         public override IEnumerable<object> GetEqualityComponents()

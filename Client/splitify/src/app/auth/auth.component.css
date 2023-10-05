@@ -22,8 +22,12 @@ form{
 input{
     box-sizing: border-box;
     padding: 0.5rem 0.4rem;
-    border: var(--color-gray) 1px solid;
+    border: var(--color-light) 1px solid;
     margin-bottom: 1.5rem;
+}
+
+label{
+    margin-bottom: 0.5rem;
 }
 
 button[type="submit"]{

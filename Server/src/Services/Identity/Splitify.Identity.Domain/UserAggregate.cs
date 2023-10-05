@@ -1,8 +1,7 @@
 ﻿using Resulty;
 using Splitify.BuildingBlocks.Domain;
 using Splitify.Identity.Domain.Events;
-using Splitify.Identity.Domain.Factories;
-using Splitify.Shared.Services.Misc.Implementation;
+using Splitify.Identity.Domain.Utils;
 
 namespace Splitify.Identity.Domain
 {
@@ -59,17 +58,6 @@ namespace Splitify.Identity.Domain
             VerificationCode = default;
         }
 
-        public Result SendConfirmationCode()
-        {
-
-            return Result.Success();
-        }
-
-        public Result ValidatePassword(string inputPassword)
-        {
-            return Result.Success();
-        }
-
         public Result Verify(string verificationCode)
         {
             var validationResult = VerificationCode.ValidateCode(verificationCode);
@@ -83,24 +71,10 @@ namespace Splitify.Identity.Domain
             return Result.Success();
         }
 
-        public Result ValidateResetPasswordCode(string resetPasswordCode)
+        public Result Login(string password)
         {
-            return Result.Success();
-        }
-
-        public Result CompleteResetPassword(
-            string resetPasswordCode,
-            string password)
-        {
-
-            return Result.Success();
-        }
-
-        public Result SendResetPasswordCode()
-        {
-
-            return Result.Success();
-        }
+            return Password.ValidatePassword(password);
+        }        
 
         public UserRole GetRole()
         {

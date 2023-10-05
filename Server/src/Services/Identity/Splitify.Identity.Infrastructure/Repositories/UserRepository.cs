@@ -30,6 +30,12 @@ namespace Splitify.Identity.Infrastructure.Repositories
             return await _context.Users.FindAsync(id, cancellationToken);
         }
 
+        public async Task<UserAggregate?> FindByEmailAsync(string email, CancellationToken cancellationToken = default)
+        {
+            return await _context.Users
+                .FirstOrDefaultAsync(x => x.Email == email.ToLowerInvariant(), cancellationToken);
+        }
+
         public void Remove(UserAggregate entity)
         {
             _context.Users.Remove(entity);

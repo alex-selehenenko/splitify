@@ -14,7 +14,8 @@
         <input *ngIf="!isLoginForm" name="confirmPassword" id="confirmPassword" type="password" ngModel>
 
         <button class="btn-success" type="submit">{{ submitButtonText }}</button>
+        <button class=".btn-link" type="button">Forgot password?</button>
     </form>
-    <p *ngIf="isLoginForm">Don't have an account? <button type="button">Sign up</button> for free</p>
-    <p *ngIf="!isLoginForm">Already have account? <button type="button">Login</button> to the app</p>
+    <p *ngIf="isLoginForm">Don't have an account? <button type="button" (click)="onToggleForm()">Sign up</button></p>
+    <p *ngIf="!isLoginForm">Already have account? <button type="button" (click)="onToggleForm()">Login</button></p>
 </main>
