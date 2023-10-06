@@ -9,6 +9,7 @@ import { UserService } from 'src/core/services/user.service';
 export class AuthComponent {
   @ViewChild('form') form: any
 
+  displayResetPassword = false;
   isLoginForm = true;
   submitButtonText = 'Login';
   errorMessage= '';
@@ -39,5 +40,9 @@ export class AuthComponent {
     this.isLoginForm = !this.isLoginForm;
     this.errorMessage = '';
     this.submitButtonText = this.isLoginForm ? 'Login' : 'Sign Up';
+  }
+
+  onForgotPasswordClick(){
+    this.displayResetPassword = true;
   }
 }

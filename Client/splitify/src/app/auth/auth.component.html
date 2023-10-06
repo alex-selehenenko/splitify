@@ -15,7 +15,7 @@
 
         <div>
             <button class="btn-success" type="submit">{{ submitButtonText }}</button>
-            <button *ngIf="isLoginForm" class="btn-link" type="button">Forgot password?</button>
+            <button *ngIf="isLoginForm" class="btn-link" type="button" (click)="displayResetPassword = true">Forgot password?</button>
         </div>
 
         <p *ngIf="errorMessage.length > 0">{{ errorMessage }}</p>
@@ -23,3 +23,4 @@
     <p *ngIf="isLoginForm">Don't have an account? <button type="button" (click)="onToggleForm()">Sign up</button></p>
     <p *ngIf="!isLoginForm">Already have account? <button type="button" (click)="onToggleForm()">Login</button></p>
 </main>
+<app-reset-password *ngIf="displayResetPassword" (closed)="displayResetPassword = false"></app-reset-password>

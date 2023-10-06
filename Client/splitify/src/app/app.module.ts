@@ -11,6 +11,7 @@ import { CampaignItemComponent } from './campaigns/campaign-item/campaign-item.c
 import { AuthComponent } from './auth/auth.component';
 import { VerifyComponent } from './verify/verify.component';
 import { AuthInterceptor } from 'src/interceptors/auth.interceptor';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AuthInterceptor } from 'src/interceptors/auth.interceptor';
     CreateCampaignComponent,
     CampaignItemComponent,
     AuthComponent,
-    VerifyComponent
+    VerifyComponent,
+    ResetPasswordComponent
   ],
   imports: [
     HttpClientModule,

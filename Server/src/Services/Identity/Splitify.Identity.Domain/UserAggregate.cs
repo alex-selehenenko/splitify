@@ -1,7 +1,8 @@
 ﻿using Resulty;
 using Splitify.BuildingBlocks.Domain;
 using Splitify.Identity.Domain.Events;
-using Splitify.Identity.Domain.Utils;
+using Splitify.Identity.Domain.Factories;
+using Splitify.Shared.Services.Misc;
 
 namespace Splitify.Identity.Domain
 {
@@ -14,6 +15,8 @@ namespace Splitify.Identity.Domain
         public bool Verified { get; private set; }
 
         public VerificationCode VerificationCode { get; private set; }
+
+        public ResetPasswordToken ResetPasswordToken { get; private set; }
 
         public UserAggregate(
             string id,
@@ -74,7 +77,21 @@ namespace Splitify.Identity.Domain
         public Result Login(string password)
         {
             return Password.ValidatePassword(password);
-        }        
+        }
+
+        public Result SendResetPasswordToken(string resetBaseUrl, IDateTimeService dateTimeService)
+        {
+            var result = ResetPasswordTokenFactory.Create(Id, dateTimeService);
+            if (result.IsSuccess)
+            {
+                ResetPasswordToken = result.Value;
+            }
+
+            var resetUrl = resetBaseUrl + ResetPasswordToken.Token;
+            AddDomainEvent(new SendResetPasswordTokenDomainEvent(Email, resetUrl, dateTimeService.UtcNow));
+            
+            return result;
+        }
 
         public UserRole GetRole()
         {

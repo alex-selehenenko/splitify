@@ -19,7 +19,7 @@ namespace Splitify.EmailSender
 
             var options = new HttpEmailClientOptions(path, key, email, name);
 
-            builder.Services.AddHttpClient<IHttpEmailClient, HttpEmailClient>((p, c) =>
+            builder.Services.AddHttpClient<IEmailClient, HttpEmailClient>((p, c) =>
                 new HttpEmailClient(options));
             
             builder.Services.AddMassTransit(c =>

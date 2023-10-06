@@ -42,4 +42,12 @@ export class UserService{
             environment.userServiceApiUrl + 'api/v1/auth/login',
             body);
     }
+
+    sendResetPasswordCode(email: string){
+        const body = { email: email }
+
+        return this.httpClient.post<UserPost>(
+            environment.userServiceApiUrl + 'api/v1/password/token/reset',
+            body);
+    }
 }

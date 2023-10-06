@@ -1,6 +1,6 @@
 ﻿namespace Splitify.EmailSender
 {
-    public interface IHttpEmailClient
+    public interface IEmailClient
     {
         Task SendAsync(string subject, string body, string recipient);
     }

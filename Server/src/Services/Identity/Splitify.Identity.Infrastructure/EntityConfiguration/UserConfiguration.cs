@@ -31,6 +31,12 @@ namespace Splitify.Identity.Infrastructure.EntityConfiguration
                 c.Property(c => c.CreatedAt);
                 c.Property(c => c.Code);
             });
+
+            builder.OwnsOne(x => x.ResetPasswordToken, c =>
+            {
+                c.Property(c => c.CreatedAt);
+                c.Property(c => c.Token);
+            });
         }
     }
 }

@@ -5,9 +5,9 @@ namespace Splitify.EmailSender.Consumers
 {
     public class UserCreatedConsumer : IConsumer<UserCreatedMessage>
     {
-        private readonly IHttpEmailClient _client;
+        private readonly IEmailClient _client;
 
-        public UserCreatedConsumer(IHttpEmailClient client)
+        public UserCreatedConsumer(IEmailClient client)
         {
             _client = client;
         }

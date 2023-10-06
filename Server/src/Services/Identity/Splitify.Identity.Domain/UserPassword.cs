@@ -2,8 +2,6 @@
 using Splitify.BuildingBlocks.Domain;
 using Splitify.BuildingBlocks.Domain.Errors;
 using Splitify.Identity.Domain.Utils;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace Splitify.Identity.Domain
 {

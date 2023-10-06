@@ -1,6 +1,6 @@
 ﻿namespace Splitify.EmailSender
 {
-    public class HttpEmailClient : HttpClient, IHttpEmailClient
+    public class HttpEmailClient : HttpClient, IEmailClient
     {
         private readonly HttpEmailClientOptions _options;
 

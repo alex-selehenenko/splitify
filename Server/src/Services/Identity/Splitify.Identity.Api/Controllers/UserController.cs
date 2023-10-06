@@ -27,11 +27,5 @@ namespace Splitify.Identity.Api.Controllers
                 ? Ok(result.Value)
                 : Unauthorized();
         }
-
-        private IActionResult CreateProblemResponse(Error error)
-        {
-            var problemDetails = error.ToProblemDetails();
-            return StatusCode(problemDetails.Status ?? 500, problemDetails);
-        }
     }
 }
