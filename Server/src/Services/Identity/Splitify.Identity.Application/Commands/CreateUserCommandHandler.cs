@@ -6,7 +6,6 @@ using Splitify.Identity.Application.Services;
 using Splitify.Identity.Domain;
 using Splitify.Identity.Domain.Factories;
 using Splitify.Shared.Services.Misc;
-using System.Reflection.Metadata.Ecma335;
 
 namespace Splitify.Identity.Application.Commands
 {
@@ -31,7 +30,7 @@ namespace Splitify.Identity.Application.Commands
         {
             if(await _userRepository.ExistsAsync(request.Email))
             {
-                return Result.Failure<UserDto>(DomainError.ValidationError("User already exists"));
+                return Result.Failure<UserDto>(DomainError.ValidationError(detail: "User already exists"));
             }
             var userCreationResult = UserFactory.Create(request.Email, request.Password, _dateTimeService);
 

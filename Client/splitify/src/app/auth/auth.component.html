@@ -5,16 +5,20 @@
 <main>
     <form #form="ngForm" (ngSubmit)="onSubmit(form)">
         <label for="email">Email</label>
-        <input id="email" type="email" name="email" ngModel>
+        <input id="email" type="email" name="email" required ngModel>
 
         <label for="password">Password</label>
-        <input id="password" type="password" name="password" ngModel>
+        <input id="password" type="password" name="password" required ngModel>
 
         <label *ngIf="!isLoginForm" for="confirmPassword">Confirm password</label>
-        <input *ngIf="!isLoginForm" name="confirmPassword" id="confirmPassword" type="password" ngModel>
+        <input *ngIf="!isLoginForm" name="confirmPassword" id="confirmPassword" type="password" required ngModel>
 
-        <button class="btn-success" type="submit">{{ submitButtonText }}</button>
-        <button class=".btn-link" type="button">Forgot password?</button>
+        <div>
+            <button class="btn-success" type="submit">{{ submitButtonText }}</button>
+            <button *ngIf="isLoginForm" class="btn-link" type="button">Forgot password?</button>
+        </div>
+
+        <p *ngIf="errorMessage.length > 0">{{ errorMessage }}</p>
     </form>
     <p *ngIf="isLoginForm">Don't have an account? <button type="button" (click)="onToggleForm()">Sign up</button></p>
     <p *ngIf="!isLoginForm">Already have account? <button type="button" (click)="onToggleForm()">Login</button></p>

@@ -28,13 +28,14 @@ namespace Splitify.Identity.Application.Commands
             }
 
             var loginResult = user.Login(request.Password);
-            if (loginResult.IsSuccess)
+            if (loginResult.IsFailure)
             {
-                await _userRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+                return Result.Failure<UserDto>(loginResult.Error);
             }
 
+            await _userRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
             var dto = new UserDto(user.Id, _jwtService.Generate(user.Id, user.GetRole()));
-            
+
             return Result.Success(dto);
         }
     }

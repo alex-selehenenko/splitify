@@ -34,4 +34,12 @@ export class UserService{
             environment.userServiceApiUrl + 'api/v1/auth/verify',
             body);
     }
+
+    loginUser(login: string, password: string): Observable<UserPost>{
+        const body = { email: login, password: password };
+
+        return this.httpClient.post<UserPost>(
+            environment.userServiceApiUrl + 'api/v1/auth/login',
+            body);
+    }
 }

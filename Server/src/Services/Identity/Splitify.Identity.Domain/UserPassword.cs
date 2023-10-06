@@ -22,7 +22,7 @@ namespace Splitify.Identity.Domain
         public Result ValidatePassword(string password)
         {
             var hash = PasswordUtils.HashPassword(password, Salt);
-            
+
             return hash.SequenceEqual(Hash)
                 ? Result.Success()
                 : Result.Failure(DomainError.ValidationError(detail: "Invalid login or password"));

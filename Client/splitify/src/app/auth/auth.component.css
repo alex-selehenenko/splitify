@@ -12,7 +12,7 @@ main{
 form{
     display: flex;
     flex-direction: column;
-    padding: 2rem;
+    padding: 2rem 2rem 0 2rem;
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0rem 0rem 0.2rem #989898;
@@ -30,12 +30,33 @@ label{
     margin-bottom: 0.5rem;
 }
 
+form div{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+form div .btn-link{
+    font-weight: 400;
+    text-decoration: underline;
+    color: var(--color-gray);
+}
+
 button[type="submit"]{
     padding: 0.7rem 0;
+    flex-basis: 50%;
 }
 
 button[type="button"]{
     padding: 0;
     color: var(--color-orange);
     font-weight: 700;
+}
+
+form p{
+    color: var(--color-red);
+    background-color: rgb(252, 237, 237);
+    padding: 0.5rem 0.4rem;
+    margin-bottom: 1rem;
+    margin-top: -1rem;
 }

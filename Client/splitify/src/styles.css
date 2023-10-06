@@ -101,7 +101,7 @@ button{
 }
 
 .btn-link{
-    background: none;
+    background: transparent;
 	color: inherit;
 	border: none;
 	padding: 0;

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { UserService } from 'src/core/services/user.service';
 
 @Component({
@@ -7,8 +7,11 @@ import { UserService } from 'src/core/services/user.service';
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent {
+  @ViewChild('form') form: any
+
   isLoginForm = true;
-  submitButtonText = this.isLoginForm ? 'Login' : 'Sign Up'
+  submitButtonText = 'Login';
+  errorMessage= '';
 
   constructor(private userService: UserService){}
 
@@ -16,14 +19,25 @@ export class AuthComponent {
     const email = form.value.email;
     const password = form.value.password;
 
-    this.userService.createUser(email, password)
-      .subscribe(data => {
-        localStorage.setItem('AUTH_TOKEN', data.jwtToken);
-        location.reload();
+    let action = this.isLoginForm
+      ? this.userService.loginUser(email, password)
+      : this.userService.createUser(email, password);
+
+    action.subscribe({
+        next: res => { 
+          localStorage.setItem('AUTH_TOKEN', res.jwtToken);
+          location.reload();
+        },
+        error: err => {
+          this.errorMessage = err.error.detail;
+        }
       });
   }
 
   onToggleForm(){
+    this.form.resetForm();
     this.isLoginForm = !this.isLoginForm;
+    this.errorMessage = '';
+    this.submitButtonText = this.isLoginForm ? 'Login' : 'Sign Up';
   }
 }
