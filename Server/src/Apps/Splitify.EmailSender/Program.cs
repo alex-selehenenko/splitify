@@ -35,6 +35,7 @@ namespace Splitify.EmailSender
                 });
 
                 c.AddConsumer<UserCreatedConsumer>();
+                c.AddConsumer<SendResetPasswordTokenConsumer>();
                 
             });
 
