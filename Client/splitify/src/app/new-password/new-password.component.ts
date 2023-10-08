@@ -1,0 +1,35 @@
+import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/core/services/user.service';
+
+@Component({
+  selector: 'app-new-password',
+  templateUrl: './new-password.component.html',
+  styleUrls: ['./new-password.component.css']
+})
+export class NewPasswordComponent implements OnInit{
+  errorMessage = '';
+  isTokenValid = false;
+
+  token = '';
+
+  constructor(private userService: UserService){}
+  
+  ngOnInit(){
+    const queryParams = new URLSearchParams(location.toString().split('?')[1]);
+    this.token = queryParams.get('token');
+
+    this.userService.verifyResetPasswordToken(this.token)
+      .subscribe({
+        next: data => this.isTokenValid = true,
+        error: err => this.isTokenValid = false
+      });
+  }
+
+  onSubmit(form){
+    const password = form.value.password;
+    this.userService.setNewPassword(this.token, password)
+      .subscribe({
+        next: response => location.replace('/')
+      });
+  }
+}

@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { CampaignsComponent } from './campaigns/campaigns.component';
 import { CommonModule, DatePipe } from '@angular/common';
 import { CreateCampaignComponent } from './campaigns/create-campaign/create-campaign.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CampaignItemComponent } from './campaigns/campaign-item/campaign-item.component';
 import { AuthComponent } from './auth/auth.component';
 import { VerifyComponent } from './verify/verify.component';
 import { AuthInterceptor } from 'src/interceptors/auth.interceptor';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
+import { RouterModule } from '@angular/router';
+import { NewPasswordComponent } from './new-password/new-password.component';
 
 @NgModule({
   declarations: [
@@ -21,13 +23,16 @@ import { ResetPasswordComponent } from './auth/reset-password/reset-password.com
     CampaignItemComponent,
     AuthComponent,
     VerifyComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    NewPasswordComponent
   ],
   imports: [
+    RouterModule,
     HttpClientModule,
     BrowserModule,
     FormsModule,
-    CommonModule 
+    ReactiveFormsModule,
+    CommonModule
   ],
   providers: [
     DatePipe,

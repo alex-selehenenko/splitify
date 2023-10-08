@@ -36,6 +36,17 @@ namespace Splitify.Identity.Infrastructure.Repositories
                 .FirstOrDefaultAsync(x => x.Email == email.ToLowerInvariant(), cancellationToken);
         }
 
+        public async Task<UserAggregate?> FindByResetPasswordTokenAsync(string token, CancellationToken cancellationToken = default)
+        {
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                return null;
+            }
+
+            return await _context.Users
+                .FirstOrDefaultAsync(x => x.ResetPasswordToken.Token == token, cancellationToken);
+        }
+
         public void Remove(UserAggregate entity)
         {
             _context.Users.Remove(entity);

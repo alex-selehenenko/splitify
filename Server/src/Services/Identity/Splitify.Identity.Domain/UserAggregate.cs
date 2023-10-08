@@ -10,7 +10,7 @@ namespace Splitify.Identity.Domain
     {
         public string Email { get; }
 
-        public UserPassword Password { get; }
+        public UserPassword Password { get; private set; }
 
         public bool Verified { get; private set; }
 
@@ -91,6 +91,21 @@ namespace Splitify.Identity.Domain
             AddDomainEvent(new SendResetPasswordTokenDomainEvent(Email, resetUrl, dateTimeService.UtcNow));
             
             return result;
+        }
+
+        public Result SetNewPassword(string password, IDateTimeService dateTimeService)
+        {
+            var result = UserPasswordFactory.Create(password, dateTimeService);
+
+            if (result.IsFailure)
+            {
+                return Result.Failure(result.Error);
+            }
+
+            Password = result.Value;
+            ResetPasswordToken = ResetPasswordTokenFactory.Create(Id, dateTimeService).Value;
+
+            return Result.Success();
         }
 
         public UserRole GetRole()

@@ -50,4 +50,22 @@ export class UserService{
             environment.userServiceApiUrl + 'api/v1/password/token/reset',
             body);
     }
+
+    setNewPassword(token: string, password: string){
+        const body = {
+            token: token,
+            password: password
+        }
+
+        return this.httpClient.post(
+            environment.userServiceApiUrl + 'api/v1/password/',
+            body);
+    }
+
+    verifyResetPasswordToken(token: string){
+        return this.httpClient.get<any>(
+            environment.userServiceApiUrl
+            + 'api/v1/password/token/'
+            + token);
+    }
 }

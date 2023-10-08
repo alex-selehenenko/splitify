@@ -8,5 +8,7 @@ namespace Splitify.Identity.Domain
         Task<bool> ExistsAsync(string email);
 
         Task<UserAggregate?> FindByEmailAsync(string email, CancellationToken cancellationToken = default);
+
+        Task<UserAggregate?> FindByResetPasswordTokenAsync(string token, CancellationToken cancellationToken = default);
     }
 }
