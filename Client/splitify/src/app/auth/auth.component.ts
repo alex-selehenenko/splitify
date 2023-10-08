@@ -20,6 +20,14 @@ export class AuthComponent {
     const email = form.value.email;
     const password = form.value.password;
 
+    if (!this.isLoginForm){
+      const confirmPassword = form.value.confirmPassword;      
+      if (confirmPassword !== password){
+        this.errorMessage =  `Password didn't match`;
+        return;
+      }        
+    }
+
     let action = this.isLoginForm
       ? this.userService.loginUser(email, password)
       : this.userService.createUser(email, password);

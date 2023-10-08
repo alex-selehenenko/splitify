@@ -27,9 +27,17 @@ export class NewPasswordComponent implements OnInit{
 
   onSubmit(form){
     const password = form.value.password;
+    const confirmPassword = form.value.confirmPassword;
+
+    if (password !== confirmPassword){
+      this.errorMessage = "Password mismatch";
+      return;
+    }
+
     this.userService.setNewPassword(this.token, password)
       .subscribe({
-        next: response => location.replace('/')
+        next: response => location.replace('/'),
+        error: err => this.errorMessage = err.error.detail
       });
   }
 }

@@ -51,9 +51,9 @@ namespace Splitify.Identity.Api.Controllers
             var baseResetUrl = _configuration["BaseResetUrl"];
             var command = new SendResetPasswordTokenCommand(body.Email, baseResetUrl);
 
-            return await _mediator
-                .Send(command)
-                .MapAsync(Ok, CreateProblemResponse);
+            _ = await _mediator.Send(command);
+            
+            return Ok();
         }
 
         private IActionResult CreateProblemResponse(Error error)
