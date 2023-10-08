@@ -2,6 +2,9 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Resulty;
+using Splitify.BuildingBlocks.Domain.Errors;
+using Splitify.Identity.Api.Validators;
+using Splitify.Identity.Api.Validators.Models;
 using Splitify.Identity.Application.Commands;
 using Splitify.Shared.AspDotNet.Results;
 
@@ -21,6 +24,15 @@ namespace Splitify.Identity.Api.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> RegisterAsync([FromBody] CreateUserCommand body)
         {
+            var validation = Validator
+                .ValidatePassword(body.Password)
+                .Then(res => Validator.ValidateEmail(body.Email));
+
+            if (validation.IsFailure)
+            {
+                return CreateProblemResponse(validation.Error);
+            }
+
             return await _mediator.Send(body)
                 .MapAsync(Ok, CreateProblemResponse);
         }

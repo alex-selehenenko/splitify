@@ -5,6 +5,7 @@ using Resulty;
 using Splitify.Identity.Api.Controllers.Dto;
 using Splitify.Identity.Application.Commands;
 using Splitify.Identity.Application.Queries;
+using Splitify.Identity.Api.Validators;
 
 namespace Splitify.Identity.Api.Controllers
 {
@@ -24,6 +25,13 @@ namespace Splitify.Identity.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] CreateNewPasswordCommand body)
         {
+            var validation = Validator.ValidatePassword(body.Password);
+
+            if (validation.IsFailure)
+            {
+                return CreateProblemResponse(validation.Error);
+            }
+
             return await _mediator
                 .Send(body)
                 .MapAsync(Ok, CreateProblemResponse);
