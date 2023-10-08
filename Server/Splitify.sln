@@ -51,17 +51,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Splitify.EventBus.Contracts
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{98FE3BB0-0762-42F8-9089-DDD303A509B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splitify.Identity.Domain", "src\Services\Identity\Splitify.Identity.Domain\Splitify.Identity.Domain.csproj", "{02BD0E6A-9EBD-4949-992F-6A6BAA316485}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Splitify.Identity.Domain", "src\Services\Identity\Splitify.Identity.Domain\Splitify.Identity.Domain.csproj", "{02BD0E6A-9EBD-4949-992F-6A6BAA316485}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splitify.Identity.Api", "src\Services\Identity\Splitify.Identity.Api\Splitify.Identity.Api.csproj", "{631DCEE5-4FC9-4029-BD20-C42F77B8B831}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Splitify.Identity.Api", "src\Services\Identity\Splitify.Identity.Api\Splitify.Identity.Api.csproj", "{631DCEE5-4FC9-4029-BD20-C42F77B8B831}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splitify.Identity.Application", "src\Services\Identity\Splitify.Identity.Application\Splitify.Identity.Application.csproj", "{B9DCA7DD-7C94-4D1F-9B2C-1246732DA19C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Splitify.Identity.Application", "src\Services\Identity\Splitify.Identity.Application\Splitify.Identity.Application.csproj", "{B9DCA7DD-7C94-4D1F-9B2C-1246732DA19C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splitify.Identity.Infrastructure", "src\Services\Identity\Splitify.Identity.Infrastructure\Splitify.Identity.Infrastructure.csproj", "{8744BB46-A26D-465B-BE95-9B36D4DAF06D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Splitify.Identity.Infrastructure", "src\Services\Identity\Splitify.Identity.Infrastructure\Splitify.Identity.Infrastructure.csproj", "{8744BB46-A26D-465B-BE95-9B36D4DAF06D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apps", "Apps", "{C886E846-A9BD-4258-8240-2C52AD7981F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splitify.EmailSender", "src\Apps\Splitify.EmailSender\Splitify.EmailSender.csproj", "{B0A25D63-1898-4793-BF49-D11154589712}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Splitify.EmailSender", "src\Apps\Splitify.EmailSender\Splitify.EmailSender.csproj", "{B0A25D63-1898-4793-BF49-D11154589712}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
