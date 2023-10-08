@@ -9,6 +9,7 @@ import { UserService } from 'src/core/services/user.service';
 export class NewPasswordComponent implements OnInit{
   errorMessage = '';
   isTokenValid = false;
+  passwordResetCompleted = false;
 
   token = '';
 
@@ -36,8 +37,12 @@ export class NewPasswordComponent implements OnInit{
 
     this.userService.setNewPassword(this.token, password)
       .subscribe({
-        next: response => location.replace('/'),
+        next: _ => this.passwordResetCompleted = true,
         error: err => this.errorMessage = err.error.detail
       });
+  }
+
+  onSuccessClick(){
+    location.replace('/');
   }
 }

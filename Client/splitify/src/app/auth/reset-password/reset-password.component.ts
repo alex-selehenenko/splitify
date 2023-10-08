@@ -9,18 +9,22 @@ import { UserService } from 'src/core/services/user.service';
 export class ResetPasswordComponent {
   @Output() closed: EventEmitter<void> = new EventEmitter();
 
+  errorMessage = "";
+  requestCompleted = false;
+
   constructor(private userService: UserService){}
 
   onSubmit(form){
     this.userService.sendResetPasswordCode(form.value.email)
       .subscribe({
-          next: data => {
-            this.closed.emit();
-          },
-          error: err => {
-            console.log(err);
+          next: _ => {
+            this.requestCompleted = true;
           }
         }
       )
+  }
+
+  onCloseClicked(){
+    this.closed.emit();
   }
 }
