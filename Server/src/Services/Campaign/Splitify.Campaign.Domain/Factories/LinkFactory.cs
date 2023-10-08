@@ -8,6 +8,11 @@ namespace Splitify.Campaign.Domain.Factories
     {
         public static Result<Link> Create(string url, IDateTimeService dateTimeService)
         {
+            if (url.Length > Link.MaxLength)
+            {
+                return Result.Failure<Link>(DomainError.ValidationError(detail: "Url was too long"));
+            }
+
             var isValidUrl = Uri.TryCreate(url, UriKind.Absolute, out var uri)
                 && (uri?.Scheme == Uri.UriSchemeHttp || uri?.Scheme == Uri.UriSchemeHttps);
 

@@ -11,5 +11,7 @@
         
         <button class="btn-success" type="submit" [disabled]="!form.valid">Create</button>
         <button class="btn-danger" type="button" (click)="canceled.emit()">Cancel</button>
+
+        <p *ngIf="errorMessage.length > 0">{{ errorMessage }}</p>
     </form>
 </aside>

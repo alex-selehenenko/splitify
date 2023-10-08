@@ -12,6 +12,8 @@ export class CreateCampaignComponent {
 
   @Output() canceled: EventEmitter<void> = new EventEmitter();
 
+  errorMessage = '';
+
   constructor(private campaignService: CampaignService){}
   
   onSubmit(form){    
@@ -20,6 +22,9 @@ export class CreateCampaignComponent {
     campaign.destinations = [form.value.destinationA, form.value.destinationB];
 
     this.campaignService.postCampaign(campaign)
-      .subscribe(json => this.campaignCreated.emit(json.campaignId));
+      .subscribe({
+        next: json => this.campaignCreated.emit(json.campaignId),
+        error: err => this.errorMessage = err.error.detail
+      });
   }
 }

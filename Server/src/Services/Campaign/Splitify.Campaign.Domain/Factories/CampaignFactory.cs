@@ -25,6 +25,15 @@ namespace Splitify.Campaign.Domain.Factories
 
         private static Result ValidateLinks(Result result, List<Link> links)
         {
+            var set = new HashSet<string>();
+            foreach(var link in links)
+            {
+                if (!set.Add(link.Url.ToLowerInvariant()))
+                {
+                    return Result.Failure(DomainError.ValidationError(detail: "Duplicate links"));
+                }
+            }
+
             if (links == null || links.Count < CampaignAggregate.MinLinksCount)
             {
                 return Result.Failure(DomainError.ValidationError(detail: $"Links count was less than { CampaignAggregate.MinLinksCount }"));

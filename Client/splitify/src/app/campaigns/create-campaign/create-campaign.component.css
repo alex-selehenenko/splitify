@@ -14,7 +14,7 @@ aside{
 form{
     background-color: var(--color-white);
     min-width: 30%;
-    padding: 2rem;
+    padding: 2rem 2rem 0 2rem;
     border-radius: 5px;
 }
 
@@ -34,4 +34,13 @@ input{
 
 button[type="submit"]{
     margin-right: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+form p{
+    color: var(--color-red);
+    background-color: rgb(252, 237, 237);
+    padding: 0.5rem 0.4rem;
+    margin-bottom: 1rem;
+    margin-top: -1rem;
 }
