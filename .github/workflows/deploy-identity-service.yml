@@ -22,6 +22,7 @@ jobs:
           echo "${{ secrets.IDENTITY_PK }}" > private_key && chmod 600 private_key
           echo "-- CONNECT TO EC2"
           ssh -o StrictHostKeyChecking=no -i private_key ${{ secrets.IDENTITY_INSTANCE }}
+          sudo su
           docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" -p "${{ secrets.DOCKERHUB_PASSWORD }}"
           docker pull salex2202/splitify:identity-latest
           docker rm -f identity || true
