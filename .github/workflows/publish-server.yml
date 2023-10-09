@@ -40,25 +40,22 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
-
-      - name: Build Services
-        run: |
-          cd Server
           
       - name: Log in to Docker Hub
         run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Build and Push Docker Images
         run: |
-          docker buildx build -t salex2202/splitify:redirect-latest -f src/Services/Redirect/Splitify.Redirect.Api/Dockerfile .
-          docker buildx build -t salex2202/splitify:campaign-latest -f src/Services/Campaign/Splitify.Campaign.Api/Dockerfile .
-          docker buildx build -t salex2202/splitify:identity-latest -f src/Services/Identity/Identity.Campaign.Api/Dockerfile .
-          docker buildx build -t salex2202/splitify:emailsender-latest -f src/Apps/Splitify.EmailSender/Dockerfile .
-
-          docker push salex2202/splitify:redirect-latest
-          docker push salex2202/splitify:campaign-latest
-          docker push salex2202/splitify:identity-latest
-          docker push salex2202/splitify:emailsender-latest
-
+          cd Server
+          ls
+          echo "PUSH REDIRECT SERVICE"
+          docker buildx build -t salex2202/splitify:redirect-latest -f src/Services/Redirect/Splitify.Redirect.Api/Dockerfile . --push
+          echo "PUSH CAMPAIGN SERVICE"
+          docker buildx build -t salex2202/splitify:campaign-latest -f src/Services/Campaign/Splitify.Campaign.Api/Dockerfile . --push
+          echo "PUSH IDENTITY SERVICE"
+          docker buildx build -t salex2202/splitify:identity-latest -f src/Services/Identity/Splitify.Identity.Api/Dockerfile . --push
+          echo "PUSH EMAIL SENDER"
+          docker buildx build -t salex2202/splitify:emailsender-latest -f src/Apps/Splitify.EmailSender/Dockerfile . --push
+          
         env:
           DOCKER_BUILDKIT: 1
