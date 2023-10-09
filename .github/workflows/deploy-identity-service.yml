@@ -18,9 +18,11 @@ jobs:
 
       - name: Deploy App
         run: |
-          ssh -o StrictHostKeyChecking=no -i ${{ secrets.IDENTITY_PK }} ${{secrets.IDENTITY_INSTANCE}} << 'EOF'
+          echo "-- SET PRIVATE KEY"
+          echo "${{ secrets.IDENTITY_PK }}" > private_key && chmod 600 private_key
+          echo "-- CONNECT TO EC2"
+          ssh -o StrictHostKeyChecking=no -i private_key ${{ secrets.IDENTITY_INSTANCE }}
           docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" -p "${{ secrets.DOCKERHUB_PASSWORD }}"
           docker pull salex2202/splitify:identity-latest
           docker rm -f identity || true
           docker run -d -p 80:80 --name identity salex2202/splitify:identity-latest
-          EOF
