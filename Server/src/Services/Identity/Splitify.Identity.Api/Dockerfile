@@ -5,7 +5,8 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-ENV ConnectionStrings__ApplicationDbContext=
+ARG CONNECTION_STRING
+ENV ConnectionStrings__ApplicationDbContext=$CONNECTION_STRING
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src

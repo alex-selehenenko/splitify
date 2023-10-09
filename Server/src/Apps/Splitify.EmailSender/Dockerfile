@@ -5,10 +5,15 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-ENV SmtpClient__ApiPath=
-ENV SmtpClient__ApiKey=
-ENV SmtpClient__SenderEmail=
-ENV SmtpClient__SenderName=
+ENV SMTP_API_PATH
+ENV SMTP_API_KEY
+ENV SMTP_SENDER_EAMIL
+ENV SMTP_SENDER_NAME
+
+ENV SmtpClient__ApiPath=$SMTP_API_PATH
+ENV SmtpClient__ApiKey=$SMTP_API_KEY
+ENV SmtpClient__SenderEmail=$SMTP_SENDER_EAMIL
+ENV SmtpClient__SenderName=$SMTP_SENDER_NAME
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
