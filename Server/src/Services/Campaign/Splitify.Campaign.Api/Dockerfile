@@ -5,6 +5,8 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
+ENV ConnectionStrings__ApplicationDbContext=
+
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["src/Services/Campaign/Splitify.Campaign.Api/Splitify.Campaign.Api.csproj", "src/Services/Campaign/Splitify.Campaign.Api/"]
