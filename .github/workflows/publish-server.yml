@@ -49,13 +49,13 @@ jobs:
           cd Server
           ls
           echo "PUSH REDIRECT SERVICE"
-          docker build --build-arg CONNECTION_STRING=${{secrets.CONNECTION_STRING}} --build-arg JWT_ISS=${{secrets.JWT_ISS}} --build-arg JWT_AUD=${{secrets.JWT_AUD}} --build-arg JWT_SECRET={{secrets.JWT_SECRET}} -t salex2202/splitify:redirect-latest -f src/Services/Redirect/Splitify.Redirect.Api/Dockerfile . --push
+          docker build --build-arg CONNECTION_STRING="${{ secrets.CONNECTION_STRING }}" --build-arg JWT_ISS="${{ secrets.JWT_ISS }}" --build-arg JWT_AUD="${{ secrets.JWT_AUD }}" --build-arg JWT_SECRET="${{ secrets.JWT_SECRET }}" -t salex2202/splitify:redirect-latest -f src/Services/Redirect/Splitify.Redirect.Api/Dockerfile . --push
           echo "PUSH CAMPAIGN SERVICE"
-          docker build --build-arg CONNECTION_STRING=${{secrets.CONNECTION_STRING}} --build-arg JWT_ISS=${{secrets.JWT_ISS}} --build-arg JWT_AUD=${{secrets.JWT_AUD}} --build-arg JWT_SECRET=${{secrets.JWT_SECRET}} -t salex2202/splitify:campaign-latest -f src/Services/Campaign/Splitify.Campaign.Api/Dockerfile . --push
+          docker build --build-arg CONNECTION_STRING=$"{{ secrets.CONNECTION_STRING }}" --build-arg JWT_ISS="${{ secrets.JWT_ISS }}" --build-arg JWT_AUD="${{ secrets.JWT_AUD }}" --build-arg JWT_SECRET="${{ secrets.JWT_SECRET }}" -t salex2202/splitify:campaign-latest -f src/Services/Campaign/Splitify.Campaign.Api/Dockerfile . --push
           echo "PUSH IDENTITY SERVICE"
-          docker build --build-arg CONNECTION_STRING=${{secrets.CONNECTION_STRING}} --build-arg JWT_ISS=${{secrets.JWT_ISS}} --build-arg JWT_AUD=${{secrets.JWT_AUD}} --build-arg JWT_SECRET=${{secrets.JWT_SECRET}} -t salex2202/splitify:identity-latest -f src/Services/Identity/Splitify.Identity.Api/Dockerfile . --push
+          docker build --build-arg CONNECTION_STRING="${{ secrets.CONNECTION_STRING }}" --build-arg JWT_ISS="${{ secrets.JWT_ISS }}" --build-arg JWT_AUD="${{ secrets.JWT_AUD }}" --build-arg JWT_SECRET="${{ secrets.JWT_SECRET }}" -t salex2202/splitify:identity-latest -f src/Services/Identity/Splitify.Identity.Api/Dockerfile . --push
           echo "PUSH EMAIL SENDER"
-          docker build --build-arg SMTP_API_PATH=${{secrets.SMTP_API_PATH}} --build-arg SMTP_API_KEY=${{secrets.SMTP_API_KEY}} --build-arg SMTP_SENDER_EMAIL=${{secrets.SMTP_SENDER_EMAIL}} --build-arg SMTP_SENDER_NAME=${{secrets.SMTP_SENDER_NAME}} -t salex2202/splitify:emailsender-latest -f src/Apps/Splitify.EmailSender/Dockerfile . --push
+          docker build --build-arg SMTP_API_PATH="${{ secrets.SMTP_API_PATH }}" --build-arg SMTP_API_KEY="${{ secrets.SMTP_API_KEY }}" --build-arg SMTP_SENDER_EMAIL="${{ secrets.SMTP_SENDER_EMAIL }}" --build-arg SMTP_SENDER_NAME="${{ secrets.SMTP_SENDER_NAME }}" -t salex2202/splitify:emailsender-latest -f src/Apps/Splitify.EmailSender/Dockerfile . --push
           
         env:
           DOCKER_BUILDKIT: 1
