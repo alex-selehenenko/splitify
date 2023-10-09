@@ -6,7 +6,13 @@ EXPOSE 80
 EXPOSE 443
 
 ARG CONNECTION_STRING
+ARG JWT_SECRET
+ARG JWT_AUD
+ARG JWT_ISS
 
+ENV Jwt__Issuer=$JWT_ISS
+ENV Jwt__Audience=$JWT_AUD
+ENV Jwt__Secret=$JWT_SECRET
 ENV ConnectionStrings__ApplicationDbContext=$CONNECTION_STRING
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
