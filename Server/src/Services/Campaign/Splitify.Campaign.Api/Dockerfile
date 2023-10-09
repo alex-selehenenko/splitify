@@ -6,6 +6,7 @@ EXPOSE 80
 EXPOSE 443
 
 ARG CONNECTION_STRING
+
 ENV ConnectionStrings__ApplicationDbContext=$CONNECTION_STRING
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
