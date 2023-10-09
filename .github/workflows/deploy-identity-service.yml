@@ -19,9 +19,8 @@ jobs:
       - name: Deploy App
         run: |
           ssh -o StrictHostKeyChecking=no -i ${{ secrets.IDENTITY_PK }} ${{secrets.IDENTITY_INSTANCE}} << 'EOF'
-            sudo su
-            docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" -p "${{ secrets.DOCKERHUB_PASSWORD }}"
-            docker pull salex2202/splitify:identity-latest
-            docker rm -f identity || true
-            docker run -d -p 80:80 --name identity salex2202/splitify:identity-latest
+          docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" -p "${{ secrets.DOCKERHUB_PASSWORD }}"
+          docker pull salex2202/splitify:identity-latest
+          docker rm -f identity || true
+          docker run -d -p 80:80 --name identity salex2202/splitify:identity-latest
           EOF
