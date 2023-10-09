@@ -1,0 +1,27 @@
+name: Deploy Identity Service
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.IDENTITY_PK }}
+
+      - name: Deploy App
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ${{ secrets.IDENTITY_PK }} ${{secrets.IDENTITY_INSTANCE}} << 'EOF'
+            sudo su
+            docker login -u "${{ DOCKERHUB_USERNAME }}" -p "${{ DOCKERHUB_PASSWORD }}"
+            docker pull salex2202/splitify:identity-latest
+            docker rm -f identity || true
+            docker run -d -p 80:80 --name identity salex2202/splitify:identity-latest
+          EOF
