@@ -420,3 +420,4 @@ FodyWeavers.xsd
 /Server/src/Apps/Splitify.EmailSender/appsettings.Development.json
 /Server/src/Services/Campaign/Splitify.Campaign.Api/appsettings.Development.json
 /Server/src/Services/Identity/Splitify.Identity.Api/appsettings.Development.json
+/Server/src/Services/Redirect/Splitify.Redirect.Api/appsettings.Development.json
