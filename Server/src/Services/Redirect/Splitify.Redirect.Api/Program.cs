@@ -36,7 +36,7 @@ namespace Splitify.Redirect.Api
             builder.Services.AddScoped<IRedirectRepository, RedirectRepository>();
             builder.Services.AddDbContext<ApplicationDbContext>(cfg =>
             { 
-                var connectionString = builder.Configuration.GetConnectionString("ApplicationDb");
+                var connectionString = builder.Configuration.GetConnectionString("ApplicationDbContext");
                 cfg.UseSqlServer(connectionString);
             });
 
