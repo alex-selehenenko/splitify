@@ -10,10 +10,17 @@ ARG JWT_SECRET
 ARG JWT_AUD
 ARG JWT_ISS
 
+ARG MESSAGING_ACCESS_KEY
+ARG MESSAGING_SECRET_KEY
+ENV Messaging__AccessKey=$MESSAGING_ACCESS_KEY
+ENV Messaging__SecretKey=$MESSAGING_SECRET_KEY
+
 ENV Jwt__Issuer=$JWT_ISS
 ENV Jwt__Audience=$JWT_AUD
 ENV Jwt__Secret=$JWT_SECRET
 ENV ConnectionStrings__ApplicationDbContext=$CONNECTION_STRING
+ENV Messaging__AccessKey=$MESSAGING_ACCESS_KEY
+ENV Messaging__SecretKey=$MESSAGING_SECRET_KEY
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
