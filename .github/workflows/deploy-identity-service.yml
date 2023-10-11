@@ -1,0 +1,41 @@
+name: Deploy Identity Service
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.IDENTITY_PK }}
+          
+      - name: Run Identity Service
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          echo "LOG: configure AWS CLI"
+          aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+          aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+          aws configure set default.region us-east-1
+          echo "LOG: get identity service EC2 instance id"
+          instance_id=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=identity_service" --query "Reservations[].Instances[].InstanceId" --output text)
+          echo "LOG identity EC2 instance id: $instance_id"
+          echo "LOG: run identity service EC2 instance"
+          aws ec2 start-instances --instance-ids $instance_id
+          aws ec2 wait instance-running --instance-ids $instance_id
+          echo "LOG: identity service EC2 instance has been run"
+          echo "LOG: get identity service public IP address"
+          instance_public_ip=$(aws ec2 describe-instances --instance-ids $instance_id --query "Reservations[].Instances[].PublicIpAddress" --output text)
+          echo "LOG: identity service public IP address: $instance_public_ip"
+          echo "LOG: deploy identity service"
+          echo "${{ secrets.IDENTITY_PK }}" > private_key && chmod 600 private_key
+          echo "LOG: connect to EC2"
+          ssh -o StrictHostKeyChecking=no -i private_key ec2-user@$instance_public_ip "sudo docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }} && sudo docker pull salex2202/splitify:identity-latest && sudo docker images && sudo docker rm -f identity || true && sudo docker run -d -p 5050:80 --name identity salex2202/splitify:identity-latest && sudo docker container ls && ngrok authtoken ${{ secrets.NGROK_IDENTITY_AUTH_TOKEN }} && ngrok http --domain=mole-above-promptly.ngrok-free.app 5050"
