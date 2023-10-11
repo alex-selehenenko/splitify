@@ -50,11 +50,12 @@ namespace Splitify.Campaign.Api
             builder.Services.AddScoped<IEventBus, MassTransitEventBus>();
             builder.Services.AddMassTransit(c =>
             {
-                c.UsingRabbitMq((ctx, cfg) =>
+                c.UsingAmazonSqs((ctx, cfg) =>
                 {
-                    cfg.Host("localhost", "/", h => {
-                        h.Username("guest");
-                        h.Password("guest");
+                    cfg.Host("us-east-1", h =>
+                    {
+                        h.AccessKey(builder.Configuration.GetSection("Messaging")["AccessKey"]);
+                        h.SecretKey(builder.Configuration.GetSection("Messaging")["SecretKey"]);
                     });
 
                     cfg.ConfigureEndpoints(ctx);
