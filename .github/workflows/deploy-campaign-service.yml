@@ -14,7 +14,7 @@ jobs:
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.5.3
         with:
-          ssh-private-key: ${{ secrets.campaign_PK }}
+          ssh-private-key: ${{ secrets.IDENTITY_PK }}
           
       - name: Run Campaign Service
         env:
@@ -36,6 +36,6 @@ jobs:
           instance_public_ip=$(aws ec2 describe-instances --instance-ids $instance_id --query "Reservations[].Instances[].PublicIpAddress" --output text)
           echo "LOG: campaign service public IP address: $instance_public_ip"
           echo "LOG: deploy campaign service"
-          echo "${{ secrets.campaign_PK }}" > private_key && chmod 600 private_key
+          echo "${{ secrets.IDENTITY_PK }}" > private_key && chmod 600 private_key
           echo "LOG: connect to EC2"
           ssh -o StrictHostKeyChecking=no -i private_key ec2-user@$instance_public_ip "sudo docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }} && sudo docker pull salex2202/splitify:campaign-latest && sudo docker images && sudo docker rm -f campaign || true && sudo docker run -d -p 5050:80 --name campaign salex2202/splitify:campaign-latest && sudo docker container ls && ngrok authtoken ${{ secrets.NGROK_CAMPAIGN_AUTH_TOKEN }} && ngrok http --domain=expert-wildcat-hopefully.ngrok-free.app 5050"
