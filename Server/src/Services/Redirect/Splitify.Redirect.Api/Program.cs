@@ -43,11 +43,12 @@ namespace Splitify.Redirect.Api
             builder.Services.AddScoped<IEventBus, MassTransitEventBus>();
             builder.Services.AddMassTransit(c =>
             {
+                var messagingVars = builder.Configuration.GetSection("Messaging");
                 c.UsingRabbitMq((ctx, cfg) =>
                 {
-                    cfg.Host("localhost", "/", h => {
-                        h.Username("guest");
-                        h.Password("guest");
+                    cfg.Host(messagingVars["Host"], "/", h => {
+                        h.Username(messagingVars["AccessKey"]);
+                        h.Password(messagingVars["SecretKey"]);
                     });
 
                     cfg.ConfigureEndpoints(ctx);
