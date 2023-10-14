@@ -48,7 +48,7 @@ namespace Splitify.Identity.Api.Controllers
         [HttpPost("token/reset")]
         public async Task<IActionResult> PostResetPasswordToken([FromBody] ResetPasswordTokenPost body)
         {
-            var baseResetUrl = _configuration["BaseResetUrl"];
+            var baseResetUrl = _configuration["ResetPasswordUrl"];
             var command = new SendResetPasswordTokenCommand(body.Email, baseResetUrl);
 
             _ = await _mediator.Send(command);

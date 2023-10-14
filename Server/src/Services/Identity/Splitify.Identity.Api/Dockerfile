@@ -17,6 +17,9 @@ ENV Messaging__Host=$MESSAGING_HOST
 ENV Messaging__AccessKey=$MESSAGING_ACCESS_KEY
 ENV Messaging__SecretKey=$MESSAGING_SECRET_KEY
 
+ARG RESET_PASSWORD_URL
+ENV ResetPasswordUrl=$RESET_PASSWORD_URL
+
 ENV Jwt__Issuer=$JWT_ISS
 ENV Jwt__Audience=$JWT_AUD
 ENV Jwt__Secret=$JWT_SECRET
