@@ -1,16 +1,21 @@
 ﻿namespace Splitify.EmailSender
 {
-    public class HttpEmailClient : HttpClient, IEmailClient
+    public class HttpEmailClient : IEmailClient
     {
         private readonly HttpEmailClientOptions _options;
         private readonly ILogger<HttpEmailClient> _logger;
 
-        public HttpEmailClient(HttpEmailClientOptions options, ILogger<HttpEmailClient> logger)
+        public HttpEmailClient(IConfiguration config, ILogger<HttpEmailClient> logger)
         {
-            _options = options;
-            DefaultRequestHeaders.Authorization = new(_options.ApiKey);
-            _logger = logger;
+            var smtpSection = config.GetSection("SmtpClient");
 
+            var path = smtpSection["ApiPath"];
+            var key = smtpSection["ApiKey"];
+            var email = smtpSection["SenderEmail"];
+            var name = smtpSection["SenderName"];
+            
+            _options = new HttpEmailClientOptions(path, key, email, name);
+            _logger = logger;
         }
 
         public async Task SendAsync(string subject, string body, string recipient)
@@ -25,7 +30,11 @@
             };
             try
             {
-                await PostAsync(_options.Path, formData);
+                using var httpClient = new HttpClient();
+                httpClient.DefaultRequestHeaders.Authorization = new(_options.ApiKey);
+                
+                await httpClient.PostAsync(_options.Path, formData);
+                
                 _logger.LogInformation("Successfully sent email to {email}", recipient);
             }
             catch (Exception ex)

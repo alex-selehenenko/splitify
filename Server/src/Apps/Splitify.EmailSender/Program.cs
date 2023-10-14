@@ -10,18 +10,8 @@ namespace Splitify.EmailSender
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            var smtpSection = builder.Configuration.GetSection("SmtpClient");
+            builder.Services.AddScoped<IEmailClient, HttpEmailClient>();
 
-            var path = smtpSection["ApiPath"];
-            var key = smtpSection["ApiKey"];
-            var email = smtpSection["SenderEmail"];
-            var name = smtpSection["SenderName"];
-
-            var options = new HttpEmailClientOptions(path, key, email, name);
-
-            builder.Services.AddHttpClient<IEmailClient, HttpEmailClient>((p, c) =>
-                new HttpEmailClient(options, p.GetRequiredService<ILogger<HttpEmailClient>>()));
-            
             builder.Services.AddMassTransit(c =>
             {
                 var messagingVars = builder.Configuration.GetSection("Messaging");
