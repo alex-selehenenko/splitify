@@ -28,8 +28,6 @@ namespace Splitify.Campaign.Infrastructure
         {
             modelBuilder.ApplyConfiguration(new CampaignConfiguration());
             modelBuilder.ApplyConfiguration(new LinkConfiguration());
-
-            _logger.LogInformation("Connection String is: {connectionString}", Database.GetConnectionString());
         }
     }
 }
