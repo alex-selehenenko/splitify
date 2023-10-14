@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Splitify.Identity.Domain;
 using Splitify.Identity.Infrastructure.EntityConfiguration;
 using Splitify.Shared.AspDotNet.EntityFramework;
