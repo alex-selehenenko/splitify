@@ -36,7 +36,7 @@ namespace Splitify.Redirect.Api
             builder.Services.AddDbContext<ApplicationDbContext>(cfg =>
             { 
                 var connectionString = builder.Configuration.GetConnectionString("ApplicationDbContext");
-                cfg.UseSqlServer(connectionString);
+                cfg.UseNpgsql(connectionString);
             });
 
             // event bus dependencies

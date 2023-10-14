@@ -43,7 +43,7 @@ namespace Splitify.Campaign.Api
             builder.Services.AddScoped<ICampaignRepository, CampaignRepository>();
             builder.Services.AddDbContext<ApplicationDbContext>(cfg =>
             {
-                cfg.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationDbContext"));
+                cfg.UseNpgsql(builder.Configuration.GetConnectionString("ApplicationDbContext"));
             });
 
             // inject event bus

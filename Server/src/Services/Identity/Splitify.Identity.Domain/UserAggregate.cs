@@ -24,11 +24,12 @@ namespace Splitify.Identity.Domain
             UserPassword password,
             DateTime createdAt,
             DateTime updatedAt,
-            VerificationCode verificationCode)
+            VerificationCode verificationCode,
+            ResetPasswordToken resetPasswordToken)
             : this(id, email, password, createdAt, updatedAt, verificationCode, false)
         {
-            AddDomainEvent(
-                new UserCreatedDomainEvent(id, email, verificationCode.Code, createdAt));
+            ResetPasswordToken = resetPasswordToken;
+            AddDomainEvent(new UserCreatedDomainEvent(id, email, verificationCode.Code, createdAt));
         }
 
         public UserAggregate(

@@ -12,14 +12,15 @@ namespace Splitify.Identity.Domain.Factories
             var userId = Guid.NewGuid().ToString();
             var userPassword = UserPasswordFactory.Create(password, dt).Value;
             var verificationCode = VerificationCodeFactory.Create(dt).Value;
-
+            var resetPasswordToken = ResetPasswordTokenFactory.Create(userId, dt).Value;
             var user = new UserAggregate(
                 userId,
                 email.ToLowerInvariant(),
                 userPassword,
                 now,
                 now,
-                verificationCode);
+                verificationCode,
+                resetPasswordToken);
 
             return Result.Success(user);
         }

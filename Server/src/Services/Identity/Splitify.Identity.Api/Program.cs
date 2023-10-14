@@ -64,7 +64,7 @@ namespace Splitify.Identity.Api
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddDbContext<ApplicationDbContext>(cfg =>
             {
-                cfg.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationDbContext"));
+                cfg.UseNpgsql(builder.Configuration.GetConnectionString("ApplicationDbContext"));
             });
 
             builder.Services.AddAuthentication(options =>

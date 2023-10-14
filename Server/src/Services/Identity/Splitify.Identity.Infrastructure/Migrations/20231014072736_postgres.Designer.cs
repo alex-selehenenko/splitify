@@ -2,9 +2,8 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Splitify.Identity.Infrastructure;
 
 #nullable disable
@@ -12,8 +11,8 @@ using Splitify.Identity.Infrastructure;
 namespace Splitify.Identity.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231004193605_Initial")]
-    partial class Initial
+    [Migration("20231014072736_postgres")]
+    partial class postgres
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,47 +20,70 @@ namespace Splitify.Identity.Infrastructure.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.11")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("Splitify.Identity.Domain.UserAggregate", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<bool>("Verified")
-                        .HasColumnType("bit");
+                        .HasColumnType("boolean");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Splitify.Identity.Domain.UserAggregate", b =>
                 {
+                    b.OwnsOne("Splitify.Identity.Domain.ResetPasswordToken", "ResetPasswordToken", b1 =>
+                        {
+                            b1.Property<string>("UserAggregateId")
+                                .HasColumnType("text");
+
+                            b1.Property<DateTime>("CreatedAt")
+                                .HasColumnType("timestamp with time zone");
+
+                            b1.Property<string>("Token")
+                                .IsRequired()
+                                .HasColumnType("text");
+
+                            b1.HasKey("UserAggregateId");
+
+                            b1.ToTable("Users");
+
+                            b1.WithOwner()
+                                .HasForeignKey("UserAggregateId");
+                        });
+
                     b.OwnsOne("Splitify.Identity.Domain.UserPassword", "Password", b1 =>
                         {
                             b1.Property<string>("UserAggregateId")
-                                .HasColumnType("nvarchar(450)");
+                                .HasColumnType("text");
 
                             b1.Property<byte[]>("Hash")
                                 .IsRequired()
-                                .HasColumnType("varbinary(max)");
+                                .HasColumnType("bytea");
 
                             b1.Property<byte[]>("Salt")
                                 .IsRequired()
-                                .HasColumnType("varbinary(max)");
+                                .HasColumnType("bytea");
 
                             b1.HasKey("UserAggregateId");
 
@@ -74,14 +96,14 @@ namespace Splitify.Identity.Infrastructure.Migrations
                     b.OwnsOne("Splitify.Identity.Domain.VerificationCode", "VerificationCode", b1 =>
                         {
                             b1.Property<string>("UserAggregateId")
-                                .HasColumnType("nvarchar(450)");
+                                .HasColumnType("text");
 
                             b1.Property<string>("Code")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasColumnType("text");
 
                             b1.Property<DateTime>("CreatedAt")
-                                .HasColumnType("datetime2");
+                                .HasColumnType("timestamp with time zone");
 
                             b1.HasKey("UserAggregateId");
 
@@ -92,6 +114,9 @@ namespace Splitify.Identity.Infrastructure.Migrations
                         });
 
                     b.Navigation("Password")
+                        .IsRequired();
+
+                    b.Navigation("ResetPasswordToken")
                         .IsRequired();
 
                     b.Navigation("VerificationCode")
