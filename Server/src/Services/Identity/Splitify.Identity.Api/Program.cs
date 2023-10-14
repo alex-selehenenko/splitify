@@ -106,15 +106,6 @@ namespace Splitify.Identity.Api
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
-
-            app.UseCors(cfg =>
-            {
-                cfg.AllowAnyOrigin();
-                cfg.AllowAnyMethod();
-                cfg.AllowAnyHeader();
-            });
-
             app.UseAuthentication();
             app.UseAuthorization();
 
