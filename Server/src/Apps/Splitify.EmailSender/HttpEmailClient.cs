@@ -3,11 +3,14 @@
     public class HttpEmailClient : HttpClient, IEmailClient
     {
         private readonly HttpEmailClientOptions _options;
+        private readonly ILogger<HttpEmailClient> _logger;
 
-        public HttpEmailClient(HttpEmailClientOptions options)
+        public HttpEmailClient(HttpEmailClientOptions options, ILogger<HttpEmailClient> logger)
         {
             _options = options;
             DefaultRequestHeaders.Authorization = new(_options.ApiKey);
+            _logger = logger;
+
         }
 
         public async Task SendAsync(string subject, string body, string recipient)
@@ -20,8 +23,15 @@
                 { new StringContent(recipient), "to" },
                 { new StringContent(body), "html" }
             };
-
-            await PostAsync(_options.Path, formData);
+            try
+            {
+                await PostAsync(_options.Path, formData);
+                _logger.LogInformation("Successfully sent email to {email}", recipient);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to send email to {email}. See the exception details", recipient);
+            }
         }
     }
 }
