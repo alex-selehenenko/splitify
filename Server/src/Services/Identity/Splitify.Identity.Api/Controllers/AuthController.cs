@@ -2,9 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Resulty;
-using Splitify.BuildingBlocks.Domain.Errors;
 using Splitify.Identity.Api.Validators;
-using Splitify.Identity.Api.Validators.Models;
 using Splitify.Identity.Application.Commands;
 using Splitify.Shared.AspDotNet.Results;
 

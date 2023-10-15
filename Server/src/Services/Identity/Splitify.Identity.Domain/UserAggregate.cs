@@ -112,6 +112,16 @@ namespace Splitify.Identity.Domain
         public UserRole GetRole()
         {
             return Verified ? UserRole.Verified : UserRole.Registered;
-        }        
+        }
+        
+        public Result SendNewVerificationCode(IDateTimeService dateTimeService)
+        {
+            VerificationCode = VerificationCodeFactory.Create(dateTimeService).Value;
+            
+            var domainEvent = new SendNewVerificationCodeDomainEvent(Email, VerificationCode.Code, dateTimeService.UtcNow);
+            AddDomainEvent(domainEvent);
+
+            return Result.Success();
+        }
     }
 }

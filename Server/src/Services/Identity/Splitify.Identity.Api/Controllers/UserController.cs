@@ -1,9 +1,10 @@
 ﻿using MediatR;
-using Splitify.Shared.AspDotNet.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Resulty;
+using Splitify.Identity.Application.Commands;
 using Splitify.Identity.Application.Queries;
+using Splitify.Shared.AspDotNet.Results;
 
 namespace Splitify.Identity.Api.Controllers
 {
@@ -19,6 +20,15 @@ namespace Splitify.Identity.Api.Controllers
         }
 
         [Authorize(Roles = "registered,verified")]
+        [HttpPatch("verificationCode")]
+        public async Task<IActionResult> PostVerificationCode()
+        {
+            return await _mediator.Send(new SendNewVerificationCodeCommand())
+                .MapAsync(Ok, CreateProblemResponse);
+        }
+
+
+        [Authorize(Roles = "registered,verified")]
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -26,6 +36,12 @@ namespace Splitify.Identity.Api.Controllers
             return result.IsSuccess
                 ? Ok(result.Value)
                 : Unauthorized();
+        }
+
+        private IActionResult CreateProblemResponse(Error error)
+        {
+            var problemDetails = error.ToProblemDetails();
+            return StatusCode(problemDetails.Status ?? 500, problemDetails);
         }
     }
 }
