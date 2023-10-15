@@ -6,15 +6,22 @@
     --color-lighter: #f2f2f2;
     --color-light: #ccc;
     --color-gray: #858585;
+    --color-black: #323232;
 }
 
 html, body{
     padding: 0;
     margin: 0;
+    color: var(--color-black);
+    line-height: 1.5rem;
 }
 
 body{
     font-family: 'Roboto', sans-serif;
+}
+
+h1{
+    line-height: 3rem;
 }
 
 header, .container{
@@ -41,7 +48,7 @@ nav div{
 
 nav a{
     text-decoration: none;
-    color: #000;
+    color: var(--color-black);
 }
 
 .logo{
@@ -104,8 +111,8 @@ em a{
     color: var(--color-gray);
 }
 
-/* Main */
-main{
+/* Main > Advantages */
+.advantages{
     background-color: var(--color-blue);
     background-image: url(img/main-bg.jpg);
     background-size: contain;
@@ -116,20 +123,20 @@ main{
     padding: 3rem 0;
 }
 
-h2{
+.advantages h2{
     text-align: center;
 }
 
-main ul {
+.advantages ul {
     margin-top: 4rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 3rem;
 }
 
-main ul li{
+.advantages ul li{
     background-color: white;
-    color: #000;
+    color: var(--color-black);
     text-align: center;
     padding: 1.5rem 2rem;
     border-radius: 1rem;
@@ -139,11 +146,11 @@ main ul li{
     align-items: center;
 }
 
-main ul li:hover{
+.advantages ul li:hover{
     box-shadow: rgba(255, 255, 255, 0.5) 0 0 3rem;
 }
 
-main h3::after{
+.advantages h3::after{
     display: block;
     content: "";
     margin: 0 auto;
@@ -153,34 +160,69 @@ main h3::after{
     margin-top: 0.5rem;
 }
 
-.fa-solid{
+.advantages i.fa-solid{
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.2rem;
     width: 2rem;
     height: 2rem;
-    background-color: #000;
+    background-color: var(--color-black);
     color: #fff;
     border-radius: 100%;
 }
 
+/* Main > Features */
+.features{
+    padding: 3rem 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+}
+
+.features div{
+    flex-basis: 50%;
+}
+
+.features img{
+    max-width: 100%;
+}
+
+.features p{
+    color: var(--color-gray);
+}
+
+/* Footer */
+footer{
+    text-align: center;
+    padding: 0.5rem 0;
+    border-top: 1px solid var(--color-gray);
+}
+
 /* Common */
-.btn-primary{
+.btn{
     display: inline-block;
     width: fit-content;
     background-color: var(--color-orange);
     color: #fff;
-    padding: 1rem 1.7rem;
+    padding: 0.8rem 2.5rem;
     text-decoration: none;
     font-weight: bold;
     font-size: 0.8rem;
     border-radius: 2rem;
-    transition: box-shadow 0.1s ease-in;
+    transition: background-color 0.2s ease-in;
 }
 
-.btn-primary:hover{
-    box-shadow: rgba(255, 82, 30, 0.6) 0 0 2rem;
+.btn:hover{
+    background-color: #d3390a;
+}
+
+.btn-secondary{
+    background-color: var(--color-blue);
+}
+
+.btn-secondary:hover{
+    background-color: #0e74c6;
 }
 
 .btn-outline{
@@ -192,7 +234,7 @@ main h3::after{
 }
 
 .btn-outline:hover{
-    background-color: #000;
+    background-color: var(--color-black);
     color: #fff;
 }
 
@@ -208,10 +250,19 @@ main h3::after{
     .img-header {
         display: none;
     }
+
+    .features{
+        grid-template-columns: 1fr;
+        padding: 0;
+    }
+
+    .features img{
+        display: none;
+    }
 }
 
 @media only screen and (max-width: 780px){
-    main ul{
+    .advantages ul{
         grid-template-columns: 1fr;
     }
 }
