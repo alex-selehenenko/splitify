@@ -7,6 +7,8 @@ import { UserService } from 'src/core/services/user.service';
   styleUrls: ['./verify.component.css']
 })
 export class VerifyComponent {
+  resendVerificationCodeRequestCompleted = false;
+
   constructor(private userService: UserService){}
   
   onSubmit(form){
@@ -17,5 +19,16 @@ export class VerifyComponent {
         localStorage.setItem('AUTH_TOKEN', data.jwtToken);
         location.reload();
       });
+  }
+
+  onSendAgain(){
+    this.userService.resendVerificationCode()
+    .subscribe({
+      next: _ => this.resendVerificationCodeRequestCompleted = true,
+    });
+  }
+
+  onCloseModalClicked(){
+    this.resendVerificationCodeRequestCompleted = false;
   }
 }

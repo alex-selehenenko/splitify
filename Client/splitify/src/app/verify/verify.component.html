@@ -9,5 +9,10 @@
 
         <button class="btn-success" type="submit">Verify</button>
     </form>
-    <p>Have not received the code? <button type="button">Send again</button></p>
+    <p>Have not received the code? <button type="button" (click)="onSendAgain()">Send again</button></p>
 </main>
+<aside *ngIf="resendVerificationCodeRequestCompleted">
+    <h2>Success!</h2>
+    <p>You should receive instructions on your email. Please, check SPAM folder.</p>
+    <button class="btn-success" (click)="onCloseModalClicked()">Ok</button>
+</aside>

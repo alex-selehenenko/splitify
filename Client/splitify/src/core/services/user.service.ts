@@ -27,6 +27,13 @@ export class UserService{
             body);
     }
 
+    resendVerificationCode(): Observable<any>{
+        const body = {};
+        return this.httpClient.patch<any>(
+            environment.userServiceApiUrl + 'api/v1/user/verificationCode',
+            body);
+    }
+
     verifyUser(code: string){
         const body = { verificationCode: code };
         
