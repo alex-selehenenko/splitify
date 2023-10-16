@@ -99,7 +99,16 @@ h1{
 }
 
 .service-logo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 50px;
+}
+
+.service-logo p{
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    text-align: center;
 }
 
 em{
@@ -218,6 +227,7 @@ footer{
 footer p{
     padding: 0;
     margin: 0;
+    font-size: 0.8rem;
 }
 
 /* Common */
