@@ -192,11 +192,32 @@ em a{
     color: var(--color-gray);
 }
 
+.features h3{
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.features ul{
+    list-style-type: disc;
+    margin-left: 1rem;
+    margin-bottom: 3rem;
+}
+
+.features ul li::marker{
+    color: var(--color-blue);
+}
+
 /* Footer */
 footer{
     text-align: center;
-    padding: 0.5rem 0;
-    border-top: 1px solid var(--color-gray);
+    background-color: var(--color-black);
+    color: #fff;
+    padding: 0.5rem;
+}
+
+footer p{
+    padding: 0;
+    margin: 0;
 }
 
 /* Common */
