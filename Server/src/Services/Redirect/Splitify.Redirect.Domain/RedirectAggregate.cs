@@ -37,6 +37,7 @@ namespace Splitify.Redirect.Domain
                 return GetDestinationForUniqueVisitor(dateTimeService);
             }
 
+            destination.RegisterVisitor(dateTimeService);
             return Result.Success(destination);
         }
 
@@ -50,6 +51,7 @@ namespace Splitify.Redirect.Domain
             }
 
             destination.RegisterUniqueVisitor(dateTimeService);
+            destination.RegisterVisitor(dateTimeService);
 
             return Result.Success(destination);
         }

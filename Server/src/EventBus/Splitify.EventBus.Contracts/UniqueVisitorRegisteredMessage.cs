@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Splitify.EventBus.Contracts
+﻿namespace Splitify.EventBus.Contracts
 {
-    internal class UniqueVisitorRegisteredMessage
-    {
-    }
+    public record UniqueVisitorRegisteredMessage(string LinkId);
 }
