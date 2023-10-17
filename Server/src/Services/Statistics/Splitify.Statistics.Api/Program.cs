@@ -2,6 +2,7 @@ using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Splitify.Shared.AspDotNet.Middlewares;
+using Splitify.Statistics.Api.Consumers;
 using Splitify.Statistics.Api.Infrastructure;
 using System.Text;
 
@@ -38,6 +39,9 @@ namespace Splitify.Statistics.Api
 
                     cfg.ConfigureEndpoints(ctx);
                 });
+
+                c.AddConsumer<UniqueVisitorRegisteredConsumer>();
+                c.AddConsumer<VisitorRegisteredConsumer>();
             });
 
             builder.Services.AddAuthentication(options =>
