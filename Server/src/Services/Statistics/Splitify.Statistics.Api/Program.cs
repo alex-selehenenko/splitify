@@ -42,6 +42,8 @@ namespace Splitify.Statistics.Api
 
                 c.AddConsumer<UniqueVisitorRegisteredConsumer>();
                 c.AddConsumer<VisitorRegisteredConsumer>();
+                c.AddConsumer<CampaignCreatedConsumer>();
+                c.AddConsumer<CampaignDeletedConsumer>();
             });
 
             builder.Services.AddAuthentication(options =>
