@@ -26,7 +26,7 @@ export class CreateCampaignComponent {
       .subscribe({
         next: json => this.campaignCreated.emit(json.campaignId),
         error: err => {
-          this.errorMessage = err.error === undefined || err.error === null
+          this.errorMessage = err.status === 500 || err.error === undefined || err.error === null
             ? 'Something went wrong. Please, try later.'
             : err.error.detail;
         }
