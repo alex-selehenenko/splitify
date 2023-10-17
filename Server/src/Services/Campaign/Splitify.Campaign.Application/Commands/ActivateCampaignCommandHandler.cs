@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.Extensions.Logging;
 using Resulty;
 using Splitify.BuildingBlocks.Domain.Errors;
 using Splitify.Campaign.Domain;
@@ -13,10 +14,12 @@ namespace Splitify.Campaign.Application.Commands
 
         public ActivateCampaignCommandHandler(
             ICampaignRepository campaignRepository,
-            IDateTimeService dateTimeService)
+            IDateTimeService dateTimeService,
+            ILogger<ActivateCampaignCommandHandler> logger)
         {
             _campaignRepository = campaignRepository;
             _dateTimeService = dateTimeService;
+            _logger = logger;
         }
 
         public async Task<Result> Handle(ActivateCampaignCommand request, CancellationToken cancellationToken)

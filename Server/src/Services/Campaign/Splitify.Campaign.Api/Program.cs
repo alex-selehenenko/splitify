@@ -8,6 +8,7 @@ using Splitify.Campaign.Domain;
 using Splitify.Campaign.Infrastructure;
 using Splitify.EventBus.MassTransit;
 using Splitify.Shared.AspDotNet.Identity;
+using Splitify.Shared.AspDotNet.Middlewares;
 using Splitify.Shared.Services.Identity;
 using Splitify.Shared.Services.Misc;
 using Splitify.Shared.Services.Misc.Implementation;
@@ -103,6 +104,8 @@ namespace Splitify.Campaign.Api
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
 
             app.UseCors(opt =>
             {

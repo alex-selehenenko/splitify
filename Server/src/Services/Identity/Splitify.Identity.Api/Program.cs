@@ -9,6 +9,7 @@ using Splitify.Identity.Domain;
 using Splitify.Identity.Infrastructure;
 using Splitify.Identity.Infrastructure.Repositories;
 using Splitify.Shared.AspDotNet.Identity;
+using Splitify.Shared.AspDotNet.Middlewares;
 using Splitify.Shared.Services.Identity;
 using Splitify.Shared.Services.Misc;
 using Splitify.Shared.Services.Misc.Implementation;
@@ -105,6 +106,8 @@ namespace Splitify.Identity.Api
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
 
             app.UseHttpsRedirection();
 

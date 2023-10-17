@@ -7,6 +7,7 @@ using Splitify.Redirect.Application.Commands;
 using Splitify.Redirect.Domain;
 using Splitify.Redirect.Infrastructure;
 using Splitify.Redirect.Infrastructure.Repositories;
+using Splitify.Shared.AspDotNet.Middlewares;
 using Splitify.Shared.Services.Misc;
 using Splitify.Shared.Services.Misc.Implementation;
 
@@ -68,6 +69,8 @@ namespace Splitify.Redirect.Api
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
 
             app.UseHttpsRedirection();
 
