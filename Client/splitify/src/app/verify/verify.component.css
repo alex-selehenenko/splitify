@@ -39,3 +39,41 @@ button[type="button"]{
 label{
     margin-bottom: 0.5rem;
 }
+
+aside{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.7);
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+aside form, aside section{
+    background-color: var(--color-white);
+    min-width: 30%;
+    padding: 2rem;
+    border-radius: 5px;
+}
+
+aside label, aside input{
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+aside label{
+    margin-bottom: 0.3rem;
+}
+
+aside input{
+    margin-bottom: 1rem;
+}
+
+button[type="submit"]{
+    margin-right: 0.5rem;
+}

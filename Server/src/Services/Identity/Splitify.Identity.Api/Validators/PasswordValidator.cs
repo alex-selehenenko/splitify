@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using Splitify.Identity.Api.Validators.Models;
-using Splitify.Identity.Application.Commands;
 
 namespace Splitify.Identity.Api.Validators
 {
