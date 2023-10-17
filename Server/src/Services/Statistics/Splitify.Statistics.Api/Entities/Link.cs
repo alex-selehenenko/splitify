@@ -8,11 +8,14 @@
 
         public int Visitors { get; set; }
 
-        public Link(string id, int uniqueVisitors, int visitors)
+        public string CampaignId { get; set; }
+
+        public Link(string id, int uniqueVisitors, int visitors, string campaignId)
         {
             Id = id;
             UniqueVisitors = uniqueVisitors;
             Visitors = visitors;
+            CampaignId = campaignId;
         }
     }
 }
