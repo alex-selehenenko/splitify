@@ -17,6 +17,8 @@ export class AuthComponent {
   constructor(private userService: UserService){}
 
   onSubmit(form){
+    this.errorMessage = '';
+
     const email = form.value.email;
     const password = form.value.password;
 
@@ -38,7 +40,9 @@ export class AuthComponent {
           location.reload();
         },
         error: err => {
-          this.errorMessage = err.error.detail;
+          this.errorMessage = err.error === undefined || err.error === null
+            ? 'Something went wrong. Please, try later.'
+            : err.error.detail;
         }
       });
   }
@@ -52,5 +56,6 @@ export class AuthComponent {
 
   onForgotPasswordClick(){
     this.displayResetPassword = true;
+    this.errorMessage = '';
   }
 }

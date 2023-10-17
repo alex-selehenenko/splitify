@@ -15,16 +15,23 @@ export class ResetPasswordComponent {
   constructor(private userService: UserService){}
 
   onSubmit(form){
+    this.errorMessage = '';
     this.userService.sendResetPasswordCode(form.value.email)
       .subscribe({
           next: _ => {
             this.requestCompleted = true;
+          },
+          error: err => {
+            this.errorMessage = err.error === undefined || err.error === null
+              ? 'Something went wrong. Please, try later.'
+              : err.error.detail;
           }
         }
       )
   }
 
   onCloseClicked(){
+    this.errorMessage = '';
     this.closed.emit();
   }
 }

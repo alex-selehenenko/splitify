@@ -27,6 +27,7 @@ export class NewPasswordComponent implements OnInit{
   }
 
   onSubmit(form){
+    this.errorMessage = '';
     const password = form.value.password;
     const confirmPassword = form.value.confirmPassword;
 
@@ -38,11 +39,16 @@ export class NewPasswordComponent implements OnInit{
     this.userService.setNewPassword(this.token, password)
       .subscribe({
         next: _ => this.passwordResetCompleted = true,
-        error: err => this.errorMessage = err.error.detail
+        error: err => {
+          this.errorMessage = err.error === undefined || err.error === null
+            ? 'Something went wrong. Please, try later.'
+            : err.error.detail;
+        }
       });
   }
 
   onSuccessClick(){
+    this.errorMessage = '';
     location.replace('/');
   }
 }

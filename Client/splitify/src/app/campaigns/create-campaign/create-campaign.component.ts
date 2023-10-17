@@ -16,7 +16,8 @@ export class CreateCampaignComponent {
 
   constructor(private campaignService: CampaignService){}
   
-  onSubmit(form){    
+  onSubmit(form){
+    this.errorMessage = '';
     let campaign = new CampaignPost();
     campaign.name = form.value.name;
     campaign.destinations = [form.value.destinationA, form.value.destinationB];
@@ -24,7 +25,11 @@ export class CreateCampaignComponent {
     this.campaignService.postCampaign(campaign)
       .subscribe({
         next: json => this.campaignCreated.emit(json.campaignId),
-        error: err => this.errorMessage = err.error.detail
+        error: err => {
+          this.errorMessage = err.error === undefined || err.error === null
+            ? 'Something went wrong. Please, try later.'
+            : err.error.detail;
+        }
       });
   }
 }
