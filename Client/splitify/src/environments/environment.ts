@@ -1,8 +1,8 @@
 export const environment = {
-    production: true,
+    production: false,
     
-    campaignServiceApiUrl: 'https://splitify-ms-eastus-campaign.calmdune-749aff69.eastus.azurecontainerapps.io/api/v1/',
-    redirectUrl: 'https://splitify-ms-eastus-redirect.calmdune-749aff69.eastus.azurecontainerapps.io/',
+    campaignServiceApiUrl: 'https://localhost:7042/api/v1/',
+    redirectUrl: 'https://localhost:7100/',
 
-    userServiceApiUrl: 'https://splitify-ms-eastus-identity.calmdune-749aff69.eastus.azurecontainerapps.io/',
+    userServiceApiUrl: 'https://localhost:7073/'
 };

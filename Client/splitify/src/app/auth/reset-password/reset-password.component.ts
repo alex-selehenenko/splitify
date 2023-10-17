@@ -22,7 +22,7 @@ export class ResetPasswordComponent {
             this.requestCompleted = true;
           },
           error: err => {
-            this.errorMessage = err.error === undefined || err.error === null
+            this.errorMessage = err.status === 500 || err.error === undefined || err.error === null
               ? 'Something went wrong. Please, try later.'
               : err.error.detail;
           }
