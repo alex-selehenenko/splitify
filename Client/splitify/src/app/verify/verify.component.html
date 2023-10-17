@@ -8,6 +8,7 @@
         <input id="code" type="code" name="code" ngModel>
 
         <button class="btn-success" type="submit">Verify</button>
+        <p *ngIf="errorMessage.length > 0">{{ errorMessage }}</p>
     </form>
     <p>Have not received the code? <button type="button" (click)="onSendAgain()">Send again</button></p>
 </main>
