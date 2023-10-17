@@ -16,11 +16,11 @@ namespace Splitify.Statistics.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAsync([FromQuery] params string[] ids)
+        public async Task<IActionResult> GetAsync([FromQuery] params string[] id)
         {
             var links = await _context.Links
                 .AsNoTracking()
-                .Where(link => ids.Contains(link.Id))
+                .Where(link => id.Contains(link.Id))
                 .ToListAsync();
 
             return Ok(links);
