@@ -14,12 +14,10 @@ namespace Splitify.Campaign.Application.Commands
 
         public ActivateCampaignCommandHandler(
             ICampaignRepository campaignRepository,
-            IDateTimeService dateTimeService,
-            ILogger<ActivateCampaignCommandHandler> logger)
+            IDateTimeService dateTimeService)
         {
             _campaignRepository = campaignRepository;
             _dateTimeService = dateTimeService;
-            _logger = logger;
         }
 
         public async Task<Result> Handle(ActivateCampaignCommand request, CancellationToken cancellationToken)
