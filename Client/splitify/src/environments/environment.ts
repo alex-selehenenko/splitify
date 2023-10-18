@@ -1,10 +1,9 @@
 export const environment = {
     production: true,
-    
-    campaignServiceApiUrl: 'https://localhost:7042/api/v1/',
-    redirectUrl: 'https://localhost:7100/',
+    //
+    statisticsApiUrl: 'https://splitify-ms-eastus-statistics.internal.calmdune-749aff69.eastus.azurecontainerapps.io/api/v1/',
+    campaignServiceApiUrl: 'https://splitify-ms-eastus-campaign.calmdune-749aff69.eastus.azurecontainerapps.io/api/v1/',
+    redirectUrl: 'https://splitify-ms-eastus-redirect.calmdune-749aff69.eastus.azurecontainerapps.io/',
 
-    userServiceApiUrl: 'https://localhost:7073/',
-
-    statisticsApiUrl: 'https://localhost:7043/api/v1/',
+    userServiceApiUrl: 'https://splitify-ms-eastus-identity.calmdune-749aff69.eastus.azurecontainerapps.io/'
 };
