@@ -36,13 +36,17 @@ namespace Splitify.Statistics.Api
                         h.Username(messagingVars["AccessKey"]);
                         h.Password(messagingVars["SecretKey"]);
                     });
-
                     cfg.ConfigureEndpoints(ctx);
+                    cfg.ReceiveEndpoint("statistics-service", c =>
+                    {
+                        c.Consumer<CampaignCreatedConsumer>(ctx);
+                        c.Consumer<CampaignDeletedConsumer>(ctx);
+                    });
                 });
 
+                c.AddConsumer<CampaignCreatedConsumer>();
                 c.AddConsumer<UniqueVisitorRegisteredConsumer>();
                 c.AddConsumer<VisitorRegisteredConsumer>();
-                c.AddConsumer<CampaignCreatedConsumer>();
                 c.AddConsumer<CampaignDeletedConsumer>();
             });
 

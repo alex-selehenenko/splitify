@@ -58,7 +58,7 @@ namespace Splitify.Campaign.Api
                         h.Username(messagingVars["AccessKey"]);
                         h.Password(messagingVars["SecretKey"]);
                     });
-
+                    
                     cfg.ConfigureEndpoints(ctx);
                 });
 
