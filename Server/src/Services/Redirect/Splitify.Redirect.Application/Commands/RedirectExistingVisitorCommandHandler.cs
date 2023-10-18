@@ -36,6 +36,8 @@ namespace Splitify.Redirect.Application.Commands
             }
 
             var destination = searchDestinationResult.Value;
+            await _redirectRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+
             return Result.Success(new DestinationModel(destination.Url, destination.Id));
         }
     }

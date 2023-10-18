@@ -28,6 +28,17 @@
     {{ resolveDateTime(campaign.createdAt) }}
 </time>
 
-<button (click)="onDelete()">
-    <i class="fa-solid fa-trash"></i>
-</button>
+<div>
+    <button (click)="onStatisticsClick()">
+        <i class="fa-solid fa-chart-simple"></i>
+    </button>
+    <button (click)="onDelete()">
+        <i class="fa-solid fa-trash"></i>
+    </button>
+</div>
+
+<app-campaign-stat
+    [campaign]="campaign"
+    *ngIf="displayStatistics"
+    (statClosed)="displayStatistics = false">
+</app-campaign-stat>

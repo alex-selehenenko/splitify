@@ -16,6 +16,8 @@ export class CampaignItemComponent {
   private readonly statusInactive = 2;
   private readonly statusDeactivating = 3;
 
+  displayStatistics = false;
+
   @Input() campaign: CampaignGet;
   @Output() campaignDeleted: EventEmitter<CampaignGet> = new EventEmitter<CampaignGet>();
   
@@ -73,6 +75,10 @@ export class CampaignItemComponent {
 
   resolveDateTime(inputDate: Date): string {
     return this.datePipe.transform(inputDate, 'dd.MM.yy HH:mm') || '';
+  }
+
+  onStatisticsClick(){
+    this.displayStatistics = true;
   }
 
   private autoUpdateCampaign(){

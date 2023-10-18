@@ -14,6 +14,7 @@ import { AuthInterceptor } from 'src/interceptors/auth.interceptor';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 import { RouterModule } from '@angular/router';
 import { NewPasswordComponent } from './new-password/new-password.component';
+import { CampaignStatComponent } from './campaigns/campaign-item/campaign-stat/campaign-stat.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NewPasswordComponent } from './new-password/new-password.component';
     AuthComponent,
     VerifyComponent,
     ResetPasswordComponent,
-    NewPasswordComponent
+    NewPasswordComponent,
+    CampaignStatComponent
   ],
   imports: [
     RouterModule,

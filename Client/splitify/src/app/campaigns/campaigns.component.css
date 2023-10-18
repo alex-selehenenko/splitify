@@ -36,7 +36,7 @@ ul{
 .grid{
   display: grid;
   gap: 1.5rem;
-  grid-template-columns: 4fr 3fr 3fr 4fr 4fr 4fr 3fr 2fr;
+  grid-template-columns: 4fr 3fr 3fr 4fr 4fr 4fr 3fr 3fr;
   min-width: 100%;
   justify-items: start;
   align-items: center;
@@ -44,6 +44,6 @@ ul{
   border-bottom: 1px solid var(--color-light);
 }
 
-li:nth-child(2), li:last-child{
+li:nth-child(2){
   justify-self: center;
 }

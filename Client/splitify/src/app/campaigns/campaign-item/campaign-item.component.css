@@ -112,8 +112,13 @@ input:checked + .slider:before {
 }
 
 /* Manage button */
+div{
+    display: flex;
+}
+
 button{
     justify-self: center;
+    margin-right: 0.3rem;
 }
 
 button:hover{

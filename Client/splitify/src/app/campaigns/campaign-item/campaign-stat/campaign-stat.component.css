@@ -1,0 +1,36 @@
+aside{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.7);
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+section{
+    width: 70%;
+    background-color: var(--color-white);
+    margin: 0 auto;
+    padding: 2rem;
+    border-radius: 5px;
+}
+
+h2{
+    margin-bottom: 0.5rem;
+}
+
+.redirect-url{
+    color: var(--color-orange);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+ul{
+    margin: 2rem 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}

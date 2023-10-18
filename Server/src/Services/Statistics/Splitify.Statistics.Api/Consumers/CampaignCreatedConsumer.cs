@@ -23,7 +23,7 @@ namespace Splitify.Statistics.Api.Consumers
             _logger.LogInformation("Consumed message {name}. Number of links - {numberOfLinks}", nameof(CampaignCreatedMessage), context.Message.Links.Count());
             
             var links = context.Message.Links
-                .Select(x => new Link(x.Id, 0, 0, context.Message.Id));
+                .Select(x => new Link(x.Id, x.Url, 0, 0, context.Message.Id));
 
             _context.Links.AddRange(links);
             await _context.SaveChangesAsync();

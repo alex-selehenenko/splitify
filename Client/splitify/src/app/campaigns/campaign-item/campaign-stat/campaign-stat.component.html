@@ -1,0 +1,14 @@
+<aside>
+    <section>
+        <h2>{{ campaign.name }}</h2>
+        <a class="redirect-url" href="{{ getRedirectUrl() }}" target="_blank"><i class="fa-solid fa-arrow-right-long"></i> {{ getRedirectUrl() }}</a>
+        <ul>
+            <li *ngFor="let stat of destinationStats">
+                <h3><a href="{{stat.url}}" target="_blank">{{ stat.url }}</a></h3>
+                <p><strong>Unique visitors:</strong> {{ stat.uniqueVisitors }}</p>
+                <p><strong>Total visitors</strong> {{ stat.visitors }}</p>
+            </li>
+        </ul>
+        <button class="btn-success" (click)="onClose()">Close</button>
+    </section>
+</aside>

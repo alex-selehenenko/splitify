@@ -90,6 +90,14 @@ namespace Splitify.Statistics.Api
             }
 
             app.UseMiddleware<ExceptionHandlerMiddleware>();
+
+            app.UseCors(cfg =>
+            {
+                cfg.AllowAnyHeader();
+                cfg.AllowAnyMethod();
+                cfg.AllowAnyOrigin();
+            });
+
             app.UseHttpsRedirection();
 
             app.UseAuthorization();

@@ -25,7 +25,7 @@ namespace Splitify.Statistics.Api.Consumers
             var link = await _context.Links.FirstOrDefaultAsync(x => x.Id == context.Message.LinkId)
                 ?? throw new InvalidOperationException($"Unnable to register a unique visitor. Link does not exist - {context.Message.LinkId}");
 
-            link.Visitors++;
+            link.Visitors = link.Visitors + 1;
             await _context.SaveChangesAsync();
         }
     }

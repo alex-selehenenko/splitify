@@ -37,6 +37,8 @@ namespace Splitify.Redirect.Domain
                 return GetDestinationForUniqueVisitor(dateTimeService);
             }
 
+            UpdatedAt = dateTimeService.UtcNow;
+
             destination.RegisterVisitor(dateTimeService);
             return Result.Success(destination);
         }
