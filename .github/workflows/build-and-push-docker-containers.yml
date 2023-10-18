@@ -48,6 +48,8 @@ jobs:
         run: |
           cd Server
           ls
+          echo "LOG: build and push statistics service"
+          docker build --build-arg MESSAGING_HOST="${{ secrets.MESSAGING_HOST }}" --build-arg MESSAGING_ACCESS_KEY="${{ secrets.MESSAGING_ACCESS_KEY }}" --build-arg MESSAGING_SECRET_KEY="${{ secrets.MESSAGING_SECRET_KEY }}" --build-arg CONNECTION_STRING="${{ secrets.STATISTICS_CONNECTION_STRING }}" --build-arg JWT_ISS="${{ secrets.JWT_ISS }}" --build-arg JWT_AUD="${{ secrets.JWT_AUD }}" --build-arg JWT_SECRET="${{ secrets.JWT_SECRET }}" -t salex2202/splitify:statistics-latest -f src/Services/Statistics/Splitify.Statistics.Api/Dockerfile . --push
           echo "LOG: build and push redirect service"
           docker build --build-arg MESSAGING_HOST="${{ secrets.MESSAGING_HOST }}" --build-arg MESSAGING_ACCESS_KEY="${{ secrets.MESSAGING_ACCESS_KEY }}" --build-arg MESSAGING_SECRET_KEY="${{ secrets.MESSAGING_SECRET_KEY }}" --build-arg CONNECTION_STRING="${{ secrets.REDIRECT_CONNECTION_STRING }}" --build-arg JWT_ISS="${{ secrets.JWT_ISS }}" --build-arg JWT_AUD="${{ secrets.JWT_AUD }}" --build-arg JWT_SECRET="${{ secrets.JWT_SECRET }}" -t salex2202/splitify:redirect-latest -f src/Services/Redirect/Splitify.Redirect.Api/Dockerfile . --push
           echo "LOG: build and push campaign service"
