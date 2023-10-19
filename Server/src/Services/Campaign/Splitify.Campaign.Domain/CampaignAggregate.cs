@@ -1,7 +1,6 @@
 ﻿using Resulty;
 using Splitify.BuildingBlocks.Domain;
 using Splitify.BuildingBlocks.Domain.Errors;
-using Splitify.BuildingBlocks.Domain.Events;
 using Splitify.Campaign.Domain.Events;
 using Splitify.Campaign.Domain.Events.Dto;
 using Splitify.Shared.Services.Misc;
