@@ -11,5 +11,11 @@ namespace Splitify.Statistics.Api.Infrastructure
             : base(options)
         {            
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Link>().HasKey(x => x.Id);
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
