@@ -8,10 +8,17 @@ namespace Splitify.Campaign.Domain.Factories
     {
         public static Result<Link> Create(string url, IDateTimeService dateTimeService)
         {
+            if (string.IsNullOrWhiteSpace(url))
+            {
+                return Result.Failure<Link>(DomainError.ValidationError(detail: "Url was empty, null or whitespace"));
+            }
+
             if (url.Length > Link.MaxLength)
             {
                 return Result.Failure<Link>(DomainError.ValidationError(detail: "Url was too long"));
             }
+
+            url = url.Trim();
 
             var isValidUrl = Uri.TryCreate(url, UriKind.Absolute, out var uri)
                 && (uri?.Scheme == Uri.UriSchemeHttp || uri?.Scheme == Uri.UriSchemeHttps);

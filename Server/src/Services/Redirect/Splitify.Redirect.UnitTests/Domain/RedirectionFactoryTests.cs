@@ -1,4 +1,5 @@
-﻿using Splitify.Redirect.Domain.Factories;
+﻿using Splitify.Redirect.Domain;
+using Splitify.Redirect.Domain.Factories;
 
 namespace Splitify.Redirect.UnitTests.Domain
 {

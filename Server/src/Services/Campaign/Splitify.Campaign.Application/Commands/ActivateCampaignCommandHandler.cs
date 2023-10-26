@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.Extensions.Logging;
 using Resulty;
 using Splitify.BuildingBlocks.Domain.Errors;
 using Splitify.Campaign.Domain;
