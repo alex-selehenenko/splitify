@@ -21,11 +21,11 @@ namespace Splitify.Redirect.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAsync(string id)
         {
-            var isUniqueVisitor = HttpContext.Request.Cookies.ContainsKey(id);
+            var isExistingVisitor = HttpContext.Request.Cookies.ContainsKey(id);
 
-            return !isUniqueVisitor
-                ? await RedirectUniqueVisitorAsync(id)
-                : await RedirectExistingVisitorAsync(id);
+            return isExistingVisitor
+                ? await RedirectExistingVisitorAsync(id)
+                : await RedirectUniqueVisitorAsync(id);
         }
 
         private async Task<IActionResult> RedirectUniqueVisitorAsync(string redirectionId)
