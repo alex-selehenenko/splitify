@@ -5,7 +5,7 @@ using Splitify.Statistics.Api.Infrastructure;
 
 namespace Splitify.Statistics.Api.Consumers
 {
-    public class CampaignCreatedConsumer : IConsumer<CampaignCreatedMessage>
+    public class CampaignCreatedConsumer : IConsumer<CampaignCreatedStatMessage>
     {
         private readonly ILogger<CampaignCreatedConsumer> _logger;
         private readonly ApplicationDbContext _context;
@@ -18,7 +18,7 @@ namespace Splitify.Statistics.Api.Consumers
             _context = context;
         }
 
-        public async Task Consume(ConsumeContext<CampaignCreatedMessage> context)
+        public async Task Consume(ConsumeContext<CampaignCreatedStatMessage> context)
         {
             _logger.LogInformation("Consumed message {name}. Number of links - {numberOfLinks}", nameof(CampaignCreatedMessage), context.Message.Links.Count());
             

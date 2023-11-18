@@ -23,6 +23,7 @@ namespace Splitify.Campaign.Application.Events
         public async Task Handle(CampaignDeletedDomainEvent notification, CancellationToken cancellationToken)
         {
             await _eventBus.PublishAsync(new CampaignDeletedMessage(notification.CampaignId));
+            await _eventBus.PublishAsync(new CampaignDeletedStatMessage(notification.CampaignId));
         }
     }
 }

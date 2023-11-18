@@ -26,6 +26,12 @@ namespace Splitify.Campaign.Application.Events
                 notification.Links.Select(x => new LinkMessageDto(x.Id, x.Url)));
             
             await _eventBus.PublishAsync(message, cancellationToken);
+
+            var messageStat = new CampaignCreatedStatMessage(
+                notification.CampaignId,
+                notification.Links.Select(x => new LinkMessageDto(x.Id, x.Url)));
+
+            await _eventBus.PublishAsync(messageStat, cancellationToken);
         }
     }
 }

@@ -37,11 +37,6 @@ namespace Splitify.Statistics.Api
                         h.Password(messagingVars["SecretKey"]);
                     });
                     cfg.ConfigureEndpoints(ctx);
-                    cfg.ReceiveEndpoint("statistics-service", c =>
-                    {
-                        c.Consumer<CampaignCreatedConsumer>(ctx);
-                        c.Consumer<CampaignDeletedConsumer>(ctx);
-                    });
                 });
 
                 c.AddConsumer<CampaignCreatedConsumer>();

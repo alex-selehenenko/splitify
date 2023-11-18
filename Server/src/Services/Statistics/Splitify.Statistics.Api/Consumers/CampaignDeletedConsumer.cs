@@ -4,7 +4,7 @@ using Splitify.Statistics.Api.Infrastructure;
 
 namespace Splitify.Statistics.Api.Consumers
 {
-    public class CampaignDeletedConsumer : IConsumer<CampaignDeletedMessage>
+    public class CampaignDeletedConsumer : IConsumer<CampaignDeletedStatMessage>
     {
         private readonly ApplicationDbContext _context;
         private readonly ILogger<CampaignDeletedConsumer> _logger;
@@ -15,7 +15,7 @@ namespace Splitify.Statistics.Api.Consumers
             _logger = logger;
         }
 
-        public async Task Consume(ConsumeContext<CampaignDeletedMessage> context)
+        public async Task Consume(ConsumeContext<CampaignDeletedStatMessage> context)
         {
             _logger.LogInformation("Message {name} consumed for campaign Id - {campaignId}", nameof(CampaignDeletedMessage), context.Message.CampaignId);
 
