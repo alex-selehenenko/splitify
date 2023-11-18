@@ -5,13 +5,13 @@ using Splitify.Statistics.Api.Infrastructure;
 
 namespace Splitify.Statistics.Api.Consumers
 {
-    public class CampaignCreatedConsumer : IConsumer<CampaignCreatedStatMessage>
+    public class CampaignCreatedStatConsumer : IConsumer<CampaignCreatedStatMessage>
     {
-        private readonly ILogger<CampaignCreatedConsumer> _logger;
+        private readonly ILogger<CampaignCreatedStatConsumer> _logger;
         private readonly ApplicationDbContext _context;
 
-        public CampaignCreatedConsumer(
-            ILogger<CampaignCreatedConsumer> logger,
+        public CampaignCreatedStatConsumer(
+            ILogger<CampaignCreatedStatConsumer> logger,
             ApplicationDbContext context)
         {
             _logger = logger;

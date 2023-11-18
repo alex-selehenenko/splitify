@@ -39,10 +39,10 @@ namespace Splitify.Statistics.Api
                     cfg.ConfigureEndpoints(ctx);
                 });
 
-                c.AddConsumer<CampaignCreatedConsumer>();
+                c.AddConsumer<CampaignCreatedStatConsumer>();
                 c.AddConsumer<UniqueVisitorRegisteredConsumer>();
                 c.AddConsumer<VisitorRegisteredConsumer>();
-                c.AddConsumer<CampaignDeletedConsumer>();
+                c.AddConsumer<CampaignDeletedStatConsumer>();
             });
 
             builder.Services.AddAuthentication(options =>

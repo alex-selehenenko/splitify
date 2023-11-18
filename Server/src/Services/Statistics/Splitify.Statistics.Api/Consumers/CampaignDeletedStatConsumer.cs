@@ -4,12 +4,12 @@ using Splitify.Statistics.Api.Infrastructure;
 
 namespace Splitify.Statistics.Api.Consumers
 {
-    public class CampaignDeletedConsumer : IConsumer<CampaignDeletedStatMessage>
+    public class CampaignDeletedStatConsumer : IConsumer<CampaignDeletedStatMessage>
     {
         private readonly ApplicationDbContext _context;
-        private readonly ILogger<CampaignDeletedConsumer> _logger;
+        private readonly ILogger<CampaignDeletedStatConsumer> _logger;
 
-        public CampaignDeletedConsumer(ApplicationDbContext context, ILogger<CampaignDeletedConsumer> logger)
+        public CampaignDeletedStatConsumer(ApplicationDbContext context, ILogger<CampaignDeletedStatConsumer> logger)
         {
             _context = context;
             _logger = logger;
