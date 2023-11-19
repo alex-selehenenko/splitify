@@ -19,6 +19,7 @@ namespace Splitify.Campaign.Api.Consumers
         public async Task Consume(ConsumeContext<RedirectCreatedMessage> context)
         {
             _logger.LogInformation("Start consuming {name}. Redirect Id: {id}", nameof(RedirectCreatedMessage), context.Message.RedirectId);
+            await Task.Delay(1000);
             await _mediator.Send(new ActivateCampaignCommand(context.Message.RedirectId));
         }
     }
