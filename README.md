@@ -9,7 +9,7 @@ Splitify is a link builder and redirection service for A/B testing. It's designe
 * Equitably redirect traffic to one of the versions when the generated URL is accessed.
 
 ## Architecture & Technologies
-![splitify](https://github.com/alex-selehenenko/splitify/blob/main/Assets/splitify-architecture.png)
+![splitify](https://github.com/alex-selehenenko/splitify/blob/main/Assets/architecture.png)
 ### Backend
 - .Net 6
 - ASP .NET Web API
